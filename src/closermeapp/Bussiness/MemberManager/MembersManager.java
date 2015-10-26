@@ -17,8 +17,8 @@ import closermeapp.Data.Interfaces.FileManager;
 public class MembersManager implements MemberManager {
 
     @Override
-    public void addMember(String name, String phone, String adress, String celPhone) {
-        Member newMember = new Member(name, phone, adress, celPhone);
+    public void addMember(String name, String phone, String address, String cellPhone) {
+        Member newMember = new Member(name, phone, address, cellPhone);
 
         saveToFile(newMember);
 
@@ -26,8 +26,8 @@ public class MembersManager implements MemberManager {
 
 
     @Override
-    public void addMemberWithMemberhip(String name, String phone, String adress, String celPhone, String membershipType, double discount) {
-        Member newMember = new Member(name, phone, adress, celPhone);
+    public void addMemberWithMemberhip(String name, String phone, String address, String cellphone, String membershipType, double discount) {
+        Member newMember = new Member(name, phone, address, cellphone);
         newMember.setMembershipWithDiscount(membershipType, discount);
         saveToFile(newMember);
 
