@@ -32,19 +32,19 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         memberNameTextBox = new javax.swing.JTextField();
         memberPhoneLabel = new javax.swing.JLabel();
         memberPhoneTextBox = new javax.swing.JTextField();
-        memberCelPhoneLabel = new javax.swing.JLabel();
-        memberCelPhoneTextBox = new javax.swing.JTextField();
+        memberCellPhoneLabel = new javax.swing.JLabel();
+        memberCellPhoneTextBox = new javax.swing.JTextField();
         addressSubPanel = new javax.swing.JPanel();
-        memberAdressStreetLabel = new javax.swing.JLabel();
-        memberAdressStreetTextBox = new javax.swing.JTextField();
-        memberAdressNumberLabel = new javax.swing.JLabel();
-        memberAdressNumberTextBox = new javax.swing.JTextField();
-        memberAdressSidesLabel = new javax.swing.JLabel();
-        memberAdressFirstSideTextBox = new javax.swing.JTextField();
+        memberAddressStreetLabel = new javax.swing.JLabel();
+        memberAddressStreetTextBox = new javax.swing.JTextField();
+        memberAddressNumberLabel = new javax.swing.JLabel();
+        memberAddressNumberTextBox = new javax.swing.JTextField();
+        memberAddressSidesLabel = new javax.swing.JLabel();
+        memberAddressFirstSideTextBox = new javax.swing.JTextField();
         andWordLabel = new javax.swing.JLabel();
-        memberAdressSecondSideTextBox = new javax.swing.JTextField();
-        memberAdressNeightboorLabel = new javax.swing.JLabel();
-        memberAdressNeightboorTextBox = new javax.swing.JTextField();
+        memberAddressSecondSideTextBox = new javax.swing.JTextField();
+        memberAddressNeightboorLabel = new javax.swing.JLabel();
+        memberAddressNeightboorTextBox = new javax.swing.JTextField();
         membershipInformationPanel = new javax.swing.JPanel();
         membershipTypeLabel = new javax.swing.JLabel();
         membershipTypeComboBox = new javax.swing.JComboBox();
@@ -66,73 +66,73 @@ public class MemberRegistrationView extends javax.swing.JFrame {
 
         memberPhoneLabel.setText("Telefono: ");
 
-        memberCelPhoneLabel.setText("Celular:");
+        memberCellPhoneLabel.setText("Celular:");
 
         addressSubPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dirección"));
 
-        memberAdressStreetLabel.setText("Calle");
+        memberAddressStreetLabel.setText("Calle");
 
-        memberAdressNumberLabel.setText("Numero");
+        memberAddressNumberLabel.setText("Numero");
 
-        memberAdressNumberTextBox.addActionListener(new java.awt.event.ActionListener() {
+        memberAddressNumberTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                memberAdressNumberTextBoxActionPerformed(evt);
+                memberAddressNumberTextBoxActionPerformed(evt);
             }
         });
 
-        memberAdressSidesLabel.setText("Cruzamientos:");
+        memberAddressSidesLabel.setText("Cruzamientos:");
 
-        memberAdressFirstSideTextBox.addActionListener(new java.awt.event.ActionListener() {
+        memberAddressFirstSideTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                memberAdressFirstSideTextBoxActionPerformed(evt);
+                memberAddressFirstSideTextBoxActionPerformed(evt);
             }
         });
 
         andWordLabel.setText("y");
 
-        memberAdressNeightboorLabel.setText("Colonia:");
+        memberAddressNeightboorLabel.setText("Colonia:");
 
         javax.swing.GroupLayout addressSubPanelLayout = new javax.swing.GroupLayout(addressSubPanel);
         addressSubPanel.setLayout(addressSubPanelLayout);
         addressSubPanelLayout.setHorizontalGroup(
                 addressSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(addressSubPanelLayout.createSequentialGroup()
-                                .addComponent(memberAdressStreetLabel)
+                                .addComponent(memberAddressStreetLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressStreetTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(memberAddressStreetTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressNumberLabel)
+                                .addComponent(memberAddressNumberLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(memberAddressNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressSidesLabel)
+                                .addComponent(memberAddressSidesLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressFirstSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(memberAddressFirstSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(andWordLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressSecondSideTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                                .addComponent(memberAddressSecondSideTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
                         .addGroup(addressSubPanelLayout.createSequentialGroup()
-                                .addComponent(memberAdressNeightboorLabel)
+                                .addComponent(memberAddressNeightboorLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberAdressNeightboorTextBox))
+                                .addComponent(memberAddressNeightboorTextBox))
         );
         addressSubPanelLayout.setVerticalGroup(
                 addressSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(addressSubPanelLayout.createSequentialGroup()
                                 .addGroup(addressSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(memberAdressStreetLabel)
-                                        .addComponent(memberAdressStreetTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(memberAdressNumberLabel)
-                                        .addComponent(memberAdressNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(memberAdressSidesLabel)
-                                        .addComponent(memberAdressFirstSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(memberAddressStreetLabel)
+                                        .addComponent(memberAddressStreetTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(memberAddressNumberLabel)
+                                        .addComponent(memberAddressNumberTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(memberAddressSidesLabel)
+                                        .addComponent(memberAddressFirstSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(andWordLabel)
-                                        .addComponent(memberAdressSecondSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(memberAddressSecondSideTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(addressSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(memberAdressNeightboorLabel)
-                                        .addComponent(memberAdressNeightboorTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(memberAddressNeightboorLabel)
+                                        .addComponent(memberAddressNeightboorTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout memberGeneralDataPanelLayout = new javax.swing.GroupLayout(memberGeneralDataPanel);
@@ -151,9 +151,9 @@ public class MemberRegistrationView extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(memberPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(memberCelPhoneLabel)
+                                                .addComponent(memberCellPhoneLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(memberCelPhoneTextBox)))
+                                                .addComponent(memberCellPhoneTextBox)))
                                 .addContainerGap())
                         .addComponent(addressSubPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -167,8 +167,8 @@ public class MemberRegistrationView extends javax.swing.JFrame {
                                 .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(memberPhoneLabel)
                                         .addComponent(memberPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(memberCelPhoneLabel)
-                                        .addComponent(memberCelPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(memberCellPhoneLabel)
+                                        .addComponent(memberCellPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(addressSubPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -249,12 +249,12 @@ public class MemberRegistrationView extends javax.swing.JFrame {
     private void addMemberButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberButtonActionPerformed
         String name = this.memberNameTextBox.getText();
         String phone = this.memberPhoneTextBox.getText();
-        String adress = this.memberAdressStreetTextBox.getText() + " " +
-                this.memberAdressNumberTextBox.getText() + " " +
-                this.memberAdressFirstSideTextBox.getText() + " y " +
-                this.memberAdressSecondSideTextBox.getText() + " " +
-                this.memberAdressNeightboorTextBox.getText();
-        String celPhone = this.memberCelPhoneTextBox.getText();
+        String adress = this.memberAddressStreetTextBox.getText() + " " +
+                this.memberAddressNumberTextBox.getText() + " " +
+                this.memberAddressFirstSideTextBox.getText() + " y " +
+                this.memberAddressSecondSideTextBox.getText() + " " +
+                this.memberAddressNeightboorTextBox.getText();
+        String celPhone = this.memberCellPhoneTextBox.getText();
         String membershipType = "weekly";
         double discount = Double.parseDouble(this.membershipDiscountTextBox.getText());
 
@@ -267,13 +267,13 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_memberNameTextBoxActionPerformed
 
-    private void memberAdressNumberTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberAdressNumberTextBoxActionPerformed
+    private void memberAddressNumberTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberAddressNumberTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_memberAdressNumberTextBoxActionPerformed
+    }//GEN-LAST:event_memberAddressNumberTextBoxActionPerformed
 
-    private void memberAdressFirstSideTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberAdressFirstSideTextBoxActionPerformed
+    private void memberAddressFirstSideTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberAddressFirstSideTextBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_memberAdressFirstSideTextBoxActionPerformed
+    }//GEN-LAST:event_memberAddressFirstSideTextBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,7 +282,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -314,17 +314,17 @@ public class MemberRegistrationView extends javax.swing.JFrame {
     private javax.swing.JButton addMemberButton;
     private javax.swing.JPanel addressSubPanel;
     private javax.swing.JLabel andWordLabel;
-    private javax.swing.JTextField memberAdressFirstSideTextBox;
-    private javax.swing.JLabel memberAdressNeightboorLabel;
-    private javax.swing.JTextField memberAdressNeightboorTextBox;
-    private javax.swing.JLabel memberAdressNumberLabel;
-    private javax.swing.JTextField memberAdressNumberTextBox;
-    private javax.swing.JTextField memberAdressSecondSideTextBox;
-    private javax.swing.JLabel memberAdressSidesLabel;
-    private javax.swing.JLabel memberAdressStreetLabel;
-    private javax.swing.JTextField memberAdressStreetTextBox;
-    private javax.swing.JLabel memberCelPhoneLabel;
-    private javax.swing.JTextField memberCelPhoneTextBox;
+    private javax.swing.JTextField memberAddressFirstSideTextBox;
+    private javax.swing.JLabel memberAddressNeightboorLabel;
+    private javax.swing.JTextField memberAddressNeightboorTextBox;
+    private javax.swing.JLabel memberAddressNumberLabel;
+    private javax.swing.JTextField memberAddressNumberTextBox;
+    private javax.swing.JTextField memberAddressSecondSideTextBox;
+    private javax.swing.JLabel memberAddressSidesLabel;
+    private javax.swing.JLabel memberAddressStreetLabel;
+    private javax.swing.JTextField memberAddressStreetTextBox;
+    private javax.swing.JLabel memberCellPhoneLabel;
+    private javax.swing.JTextField memberCellPhoneTextBox;
     private javax.swing.JPanel memberGeneralDataPanel;
     private javax.swing.JLabel memberNameLabel;
     private javax.swing.JTextField memberNameTextBox;
