@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness.Entities;
+package closermeapp.Bussiness.Entities;
 
 /**
  * @author JoseJulio
  */
 public class Member extends Visitor {
 
-    private String adress;
-    private String celphone;
+    private String address;
+    private String cellphone;
     private Membership membership;
 
-    public Member(String name, String phone, String adress, String celphone) {
+    public Member(String name, String phone, String address, String celphone) {
         super(name, phone);
     }
 
@@ -26,12 +26,12 @@ public class Member extends Visitor {
         membership = new Membership(type, discount);
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public String getCelphone() {
-        return celphone;
+    public String getCellphone() {
+        return cellphone;
     }
 
     public Membership getMembership() {

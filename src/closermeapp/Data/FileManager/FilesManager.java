@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data.FileManager;
+package closermeapp.Data.FileManager;
 
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Data.Interfaces.FileManager;
@@ -24,8 +24,8 @@ public class FilesManager implements FileManager {
         String memberFormatString =
                 member.getName() + "|" +
                         member.getPhone() + "|" +
-                        member.getAdress() + "|" +
-                        member.getCelphone() + "|" +
+                        member.getAddress() + "|" +
+                        member.getCellphone() + "|" +
                         member.getMembership().getType() + "|" +
                         member.getMembership().getDiscount() + "|";
 

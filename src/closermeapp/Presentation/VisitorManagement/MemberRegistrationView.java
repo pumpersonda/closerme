@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentation.VisitorManagement;
+package closermeapp.Presentation.VisitorManagement;
 
 import closermeapp.Bussiness.Interfaces.MemberManager;
 import closermeapp.Bussiness.MemberManager.MembersManager;

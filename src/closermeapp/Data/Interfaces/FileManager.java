@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness.Entities;
+package closermeapp.Data.Interfaces;
 
-/**
- * @author JoseJulio
- */
-public class Employee {
 
+import closermeapp.Bussiness.Entities.Member;
+
+public interface FileManager {
+    void saveMemberIntoFile(Member member);
 }

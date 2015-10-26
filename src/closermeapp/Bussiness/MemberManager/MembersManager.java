@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness.MemberManager;
+package closermeapp.Bussiness.MemberManager;
 
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.Interfaces.MemberManager;
