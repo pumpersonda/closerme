@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
  * @author JoseJulio
  */
 public class Membership {
-    private String type;
+    private String typeMembership;
     private double discount;
     private LocalDateTime expireDate;
 
-    public Membership(String type, double discount) {
-        this.type = type;
+    public Membership(String typeMembership, double discount) {
+        this.typeMembership = typeMembership;
         this.discount = discount;
 
-        expireDate = LocalDateTime.now().plusDays(7);
+        getExpireDate();
     }
 
-    public String getType() {
-        return type;
+    public String getTypeMembership() {
+        return typeMembership;
     }
 
     public double getDiscount() {
@@ -31,7 +31,24 @@ public class Membership {
     }
 
     public LocalDateTime getExpireDate() {
+        switch (typeMembership) {
+            case "Semanal":
+                int diasSemana = 7;
+                expireDate = LocalDateTime.now().plusDays(diasSemana);
+                break;
+            case "Mensual":
+                int diasMes = 30;
+                expireDate = LocalDateTime.now().plusDays(diasMes);
+                break;
+            case "Anual":
+                int diasAnual = 365;
+                expireDate = LocalDateTime.now().plusDays(diasAnual);
+            default:
+                int diasExtras = 0;
+                expireDate = LocalDateTime.now().plusDays(diasExtras);
+        }
         return expireDate;
     }
+
 
 }

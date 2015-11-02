@@ -16,29 +16,31 @@ import closermeapp.Data.Interfaces.FileManager;
  */
 public class MembersManager implements MemberManager {
 
-    @Override
-    public void addMember(String name, String phone, String address, String cellPhone) {
-        Member newMember = new Member(name, phone, address, cellPhone);
 
-        saveToFile(newMember);
-
-    }
 
 
     @Override
-    public void addMemberWithMemberhip(String name, String phone, String address, String cellphone, String membershipType, double discount) {
+    public void addMember(
+            String name,
+            String phone,
+            String address,
+            String cellphone,
+            String membershipType,
+            double discount
+    ) {
         Member newMember = new Member(name, phone, address, cellphone);
-        newMember.setMembershipWithDiscount(membershipType, discount);
-        saveToFile(newMember);
+        newMember.setMembership(membershipType, discount);
+        saveMember(newMember);
 
     }
 
     @Override
     public void findMember(String name, String phone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    private void saveToFile(Member newMember) {
+    private void saveMember(Member newMember) {
         FileManager fileManager = new FilesManager();
         fileManager.saveMemberIntoFile(newMember);
     }

@@ -24,9 +24,9 @@ public class FilesManager implements FileManager {
         String memberFormatString =
                 member.getName() + "|" +
                         member.getPhone() + "|" +
-                        member.getAddress() + "|" +
                         member.getCellphone() + "|" +
-                        member.getMembership().getType() + "|" +
+                        member.getAddress() + "|" +
+                        member.getMembership().getTypeMembership() + "|" +
                         member.getMembership().getDiscount() + "|";
 
         saveToFile(memberFormatString);

@@ -10,9 +10,7 @@ package closermeapp.Bussiness.Interfaces;
  */
 public interface MemberManager {
 
-    void addMember(String name, String phone, String adress, String celPhone);
-
-    void addMemberWithMemberhip(String name, String phone, String adress, String celPhone, String membershipType, double discount);
+    void addMember(String name, String phone, String address, String cellphone, String membershipType, double discount);
 
     void findMember(String name, String phone);
 
