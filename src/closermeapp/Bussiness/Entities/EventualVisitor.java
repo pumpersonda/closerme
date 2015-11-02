@@ -8,6 +8,19 @@ package closermeapp.Bussiness.Entities;
 /**
  * @author JoseJulio
  */
-public class EventualVisitor {
+public class EventualVisitor extends Visitor {
+    private String email;
 
+    public EventualVisitor(String name, String phone, String email) {
+        super(name, phone);
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -8,6 +8,19 @@ package closermeapp.Bussiness.Entities;
 /**
  * @author JoseJulio
  */
-public class Employee {
+public class Employee extends Visitor {
+    private String role;
 
+    public Employee(String name, String phone, String role) {
+        super(name, phone);
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
