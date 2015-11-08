@@ -5,10 +5,10 @@
  */
 package closermeapp.Presentation.VisitorManagement;
 
-import closermeapp.Bussiness.Interfaces.MemberManager;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class MemberRegistrationView extends javax.swing.JFrame {
 
@@ -64,7 +64,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         memberNameLabel.setText("Nombre:");
 
         memberNameTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 memberNameTextBoxActionPerformed(evt);
             }
         });
@@ -80,7 +80,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         memberAddressNumberLabel.setText("Numero");
 
         memberAddressNumberTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 memberAddressNumberTextBoxActionPerformed(evt);
             }
         });
@@ -88,7 +88,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         memberAddressSidesLabel.setText("Cruzamientos:");
 
         memberAddressFirstSideTextBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 memberAddressFirstSideTextBoxActionPerformed(evt);
             }
         });
@@ -184,7 +184,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
 
         membershipTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Semanal", "Mensual", "Anual"}));
         membershipTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 membershipTypeComboBoxActionPerformed(evt);
             }
         });
@@ -222,14 +222,14 @@ public class MemberRegistrationView extends javax.swing.JFrame {
 
         addMemberButton.setText("Agregar");
         addMemberButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMemberButtonActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                addMemberButton(evt);
             }
         });
 
         CancelButton.setText("Cancelar");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 CancelButtonActionPerformed(evt);
             }
         });
@@ -265,9 +265,10 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }
 
-    private void addMemberButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
+    private void addMemberButton(ActionEvent actionEvent) {
 
         String name = this.memberNameTextBox.getText();
         String phone = this.memberPhoneTextBox.getText();
@@ -282,33 +283,38 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         String membershipType = (String) membershipTypeComboBox.getSelectedItem();
         double discount = Double.parseDouble(this.membershipDiscountTextBox.getText());
 
-        boolean validateEmptyFields = isEmptyField(name, phone, cellphone, address);
+        if (!isEmptyField(name, phone, cellphone, address)) {
 
-        if (validateEmptyFields) {
-            MemberManager memberManager = new MembersManager();
-            memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
-
+            sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
         }
+
+
+    }
+
+    private void sendMemberDataToManager(String name, String phone, String cellphone, String address, String membershipType, Double discount) {
+        MembersManager memberManager = MembersManager.getInstance();
+            memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
         showSuccessMessage();
+        resetFields();
     }
 
-    private void memberNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void memberNameTextBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void memberAddressNumberTextBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+    private void memberAddressNumberTextBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void memberAddressFirstSideTextBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                              
+    private void memberAddressFirstSideTextBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void membershipTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+    private void membershipTypeComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void CancelButtonActionPerformed(ActionEvent evt) {
         this.dispose();
     }
 
@@ -326,24 +332,34 @@ public class MemberRegistrationView extends javax.swing.JFrame {
                 address.equals("")
                 ) {
 
-            JOptionPane.showMessageDialog(
-                    null, "Por favor rellene todos los campos",
-                    "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return false;
-        } else
-
+            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
             return true;
+        } else {
+
+
+            return false;
+        }
     }
 
     private void showSuccessMessage() {
         JOptionPane.showMessageDialog(null, "Miembro agregado correctamente", "Agregado", JOptionPane.PLAIN_MESSAGE);
     }
 
+    private void resetFields() {
+        this.memberAddressFirstSideTextBox.setText("");
+        this.memberAddressNeightboorTextBox.setText("");
+        this.memberAddressNumberTextBox.setText("");
+        this.memberAddressSecondSideTextBox.setText("");
+        this.memberAddressStreetTextBox.setText("");
+        this.memberCellPhoneTextBox.setText("");
+        this.memberNameTextBox.setText("");
+        this.memberPhoneTextBox.setText("");
+        this.membershipDiscountTextBox.setText("");
 
-    /**
-     * @param args the command line arguments
-     */
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -376,7 +392,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton addMemberButton;
     private javax.swing.JPanel addressSubPanel;

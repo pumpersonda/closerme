@@ -5,14 +5,15 @@
  */
 package closermeapp.Bussiness.Entities;
 
-/**
- * @author JoseJulio
- */
-public class Member extends Visitor {
+import java.io.Serializable;
 
+
+public class Member extends Visitor implements Serializable {
+    private int id;
     private String address;
     private String cellphone;
     private Membership membership;
+
 
     public Member(String name, String phone, String address, String cellphone) {
         super(name, phone);
@@ -20,9 +21,15 @@ public class Member extends Visitor {
         this.cellphone = cellphone;
     }
 
-    public void setMembership(String membershipType, double discount) {
-        membership = new Membership(membershipType, discount);
+    public Member() {
     }
+
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
 
     public String getAddress() {
         return address;
@@ -32,8 +39,29 @@ public class Member extends Visitor {
         return cellphone;
     }
 
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
     public Membership getMembership() {
         return membership;
     }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+    public void setOneMembership(String membershipType, double discount) {
+        this.membership = new Membership(membershipType, discount);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 }

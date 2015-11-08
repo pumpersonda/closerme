@@ -18,6 +18,17 @@ public class Visitor {
         this.phone = phone;
     }
 
+    public Visitor() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getName() {
         return name;
     }

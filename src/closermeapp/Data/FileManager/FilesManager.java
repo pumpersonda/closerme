@@ -35,7 +35,7 @@ public class FilesManager implements FileManager {
 
     private void saveToFile(String data) {
         try {
-            // PrintWriter output = new PrintWriter(new FileWriter("data.txt"),false);
+
             FileWriter outputFile = new FileWriter("data.txt", true);
             PrintWriter output = new PrintWriter(new BufferedWriter(outputFile));
             output.println(data);
