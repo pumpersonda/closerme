@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class MembershipDAO {
     private Session sesion;
-    private Transaction tx;
+    private Transaction transaction;
     private static MembershipDAO instance = null;
 
     private MembershipDAO() {
@@ -33,7 +33,7 @@ public class MembershipDAO {
     private void initOperation() throws HibernateException {
         HibernateUtil util = new HibernateUtil();
         sesion = HibernateUtil.getSessionFactory().openSession();
-        tx = sesion.beginTransaction();
+        transaction = sesion.beginTransaction();
     }
 
     /**
@@ -41,7 +41,7 @@ public class MembershipDAO {
      * @throws HibernateException
      */
     private void ExceptionManagment(HibernateException hibernateException) throws HibernateException {
-        tx.rollback();
+        transaction.rollback();
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
 
@@ -56,7 +56,7 @@ public class MembershipDAO {
             initOperation();
             id = (int) sesion.save(membership);
 
-            tx.commit();
+            transaction.commit();
         } catch (HibernateException he) {
             ExceptionManagment(he);
             throw he;
@@ -74,7 +74,7 @@ public class MembershipDAO {
         try {
             initOperation();
             sesion.update(membership);
-            tx.commit();
+            transaction.commit();
         } catch (HibernateException he) {
             ExceptionManagment(he);
             throw he;
@@ -92,7 +92,7 @@ public class MembershipDAO {
         try {
             initOperation();
             sesion.delete(membership);
-            tx.commit();
+            transaction.commit();
         } catch (HibernateException he) {
             ExceptionManagment(he);
             throw he;

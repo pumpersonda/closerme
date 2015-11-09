@@ -9,10 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * @author JoseJulio
- */
-
 public class Membership implements Serializable {
     private int membershipNumber;
     private String membershipType;
@@ -27,7 +23,6 @@ public class Membership implements Serializable {
         setStartDate(today);
         setNewExpireDate();
     }
-
 
     public Membership() {
     }
@@ -56,26 +51,6 @@ public class Membership implements Serializable {
         return startDate;
     }
 
-    public void setNewExpireDate() {
-
-        switch (membershipType) {
-            case "Semanal":
-                int diasSemana = 7;
-                this.expireDate = LocalDateTime.now().plusDays(diasSemana).format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-                break;
-            case "Mensual":
-                int diasMes = 30;
-                this.expireDate = LocalDateTime.now().plusDays(diasMes).format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-                break;
-            case "Anual":
-                int diasAnual = 365;
-                this.expireDate = LocalDateTime.now().plusDays(diasAnual).format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-            default:
-                int diasExtras = 0;
-                this.expireDate = LocalDateTime.now().plusDays(diasExtras).format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-        }
-    }
-
     private void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
@@ -90,6 +65,27 @@ public class Membership implements Serializable {
 
     public void setMembershipNumber(int membershipNumber) {
         this.membershipNumber = membershipNumber;
+    }
+
+    private void setNewExpireDate() {
+        int membershipDays = 0;
+
+        switch (membershipType) {
+            case "Semanal":
+                membershipDays = 7;
+                break;
+            case "Mensual":
+                membershipDays = 30;
+                break;
+            case "Anual":
+                membershipDays = 365;
+        }
+        getFormattedDate(membershipDays);
+    }
+
+    private void getFormattedDate(int membershipType) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        this.expireDate = LocalDateTime.now().plusDays(membershipType).format(formatter);
     }
 
 }

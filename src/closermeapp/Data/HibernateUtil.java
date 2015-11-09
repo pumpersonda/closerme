@@ -11,9 +11,9 @@ public class HibernateUtil {
     static {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (HibernateException he) {
-            System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
-            throw new ExceptionInInitializerError(he);
+        } catch (HibernateException hibernateExcepcion) {
+            System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + hibernateExcepcion);
+            throw new ExceptionInInitializerError(hibernateExcepcion);
         }
     }
 
