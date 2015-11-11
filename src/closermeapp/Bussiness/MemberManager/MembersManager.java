@@ -49,9 +49,8 @@ public class MembersManager {
     }
 
     private void addMembership(Member newMember, String membershipType, double discount) {
-        newMember.setOneMembership(membershipType, discount);
+        newMember.setNewMembership(membershipType, discount);
     }
-
 
     private void saveMember(Member newMember) {
         MembershipDAO membershipDAO = MembershipDAO.getInstance();

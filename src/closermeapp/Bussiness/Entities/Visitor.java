@@ -5,9 +5,6 @@
  */
 package closermeapp.Bussiness.Entities;
 
-/**
- * @author JoseJulio
- */
 public class Visitor {
 
     private String name;

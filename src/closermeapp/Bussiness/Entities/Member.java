@@ -24,12 +24,9 @@ public class Member extends Visitor implements Serializable {
     public Member() {
     }
 
-
     public void setAddress(String address) {
         this.address = address;
     }
-
-
 
     public String getAddress() {
         return address;
@@ -47,12 +44,9 @@ public class Member extends Visitor implements Serializable {
         return membership;
     }
 
-    public void setMembership(Membership membership) {
-        this.membership = membership;
-    }
-
-    public void setOneMembership(String membershipType, double discount) {
-        this.membership = new Membership(membershipType, discount);
+    public void setNewMembership(String membershipType, double discount) {
+        Membership membership = new Membership(membershipType, discount);
+        setMembership(membership);
     }
 
     public int getId() {
@@ -61,6 +55,10 @@ public class Member extends Visitor implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    private void setMembership(Membership membership) {
+        this.membership = membership;
     }
 
 

@@ -1,7 +1,7 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Membership;
-import closermeapp.Data.HibernateUtil;
+import closermeapp.Data.ManagementDatabase;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by André on 05/11/2015.
  */
 public class MembershipDAO {
-    private Session sesion;
+    private Session session;
     private Transaction transaction;
     private static MembershipDAO instance = null;
 
@@ -27,110 +27,85 @@ public class MembershipDAO {
         return instance;
     }
 
-    /**
-     * @throws HibernateException
-     */
+
     private void initOperation() throws HibernateException {
-        HibernateUtil util = new HibernateUtil();
-        sesion = HibernateUtil.getSessionFactory().openSession();
-        transaction = sesion.beginTransaction();
+        session = ManagementDatabase.getSessionFactory().openSession();
+        transaction = session.beginTransaction();
     }
 
-    /**
-     * @param hibernateException
-     * @throws HibernateException
-     */
-    private void ExceptionManagment(HibernateException hibernateException) throws HibernateException {
+
+    private void ExceptionManagement(HibernateException hibernateException) throws HibernateException {
         transaction.rollback();
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
 
-    /**
-     * @param membership
-     * @return
-     */
+
     public int saveMembership(Membership membership) {
         int id = 0;
 
         try {
             initOperation();
-            id = (int) sesion.save(membership);
+            id = (int) session.save(membership);
 
             transaction.commit();
-        } catch (HibernateException he) {
-            ExceptionManagment(he);
-            throw he;
+        } catch (HibernateException hibernateException) {
+            ExceptionManagement(hibernateException);
+            throw hibernateException;
         } finally {
-            sesion.close();
+            session.close();
         }
         return id;
     }
 
-    /**
-     * @param membership
-     * @throws HibernateException
-     */
+
     public void updateMembership(Membership membership) throws HibernateException {
         try {
             initOperation();
-            sesion.update(membership);
+            session.update(membership);
             transaction.commit();
-        } catch (HibernateException he) {
-            ExceptionManagment(he);
-            throw he;
+        } catch (HibernateException hibernateException) {
+            ExceptionManagement(hibernateException);
+            throw hibernateException;
         } finally {
-            sesion.close();
+            session.close();
         }
     }
 
 
-    /**
-     * @param membership
-     * @throws HibernateException
-     */
     public void deleteMembership(Membership membership) throws HibernateException {
         try {
             initOperation();
-            sesion.delete(membership);
+            session.delete(membership);
             transaction.commit();
-        } catch (HibernateException he) {
-            ExceptionManagment(he);
-            throw he;
+        } catch (HibernateException hibernateException) {
+            ExceptionManagement(hibernateException);
+            throw hibernateException;
         } finally {
-            sesion.close();
+            session.close();
         }
     }
 
-    /**
-     * @param id
-     * @return
-     * @throws HibernateException
-     */
     public Membership getMembership(int id) throws HibernateException {
         Membership member = null;
 
         try {
             initOperation();
-            member = (Membership) sesion.get(Membership.class, id);
+            member = (Membership) session.get(Membership.class, id);
         } finally {
-            sesion.close();
+            session.close();
         }
         return member;
     }
 
-    /**
-     * @return
-     * @throws HibernateException
-     */
     public List<Membership> MembershipList() throws HibernateException {
         List membershipList = null;
 
         try {
             initOperation();
 
-            membershipList = sesion.createQuery("FROM membership").list();
+            membershipList = session.createQuery("FROM Membership").list();
         } finally {
-            sesion.close();
+            session.close();
         }
 
         return membershipList;
