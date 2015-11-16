@@ -15,7 +15,12 @@ public class Member extends Visitor implements Serializable {
     private Membership membership;
 
 
-    public Member(String name, String phone, String address, String cellphone) {
+    public Member(
+            String name,
+            String phone,
+            String address,
+            String cellphone
+    ) {
         super(name, phone);
         this.address = address;
         this.cellphone = cellphone;

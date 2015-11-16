@@ -5,9 +5,7 @@
  */
 package closermeapp.Bussiness.Entities;
 
-/**
- * @author JoseJulio
- */
+
 public class Employee extends Visitor {
     private String role;
 

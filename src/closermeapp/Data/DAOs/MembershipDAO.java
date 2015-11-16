@@ -1,7 +1,7 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Membership;
-import closermeapp.Data.ManagementDatabase;
+import closermeapp.Data.SessionGenerator;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,7 +29,7 @@ public class MembershipDAO {
 
 
     private void initOperation() throws HibernateException {
-        session = ManagementDatabase.getSessionFactory().openSession();
+        session = SessionGenerator.getSessionFactory().openSession();
         transaction = session.beginTransaction();
     }
 

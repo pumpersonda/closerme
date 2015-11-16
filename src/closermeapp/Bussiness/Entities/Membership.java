@@ -15,6 +15,7 @@ public class Membership implements Serializable {
     private double discount;
     private String startDate;
     private String expireDate;
+    private double costs = 100.0;
 
     public Membership(String typeMembership, double discount) {
         this.membershipType = typeMembership;
@@ -67,6 +68,15 @@ public class Membership implements Serializable {
         this.membershipNumber = membershipNumber;
     }
 
+
+    public double getCosts() {
+        return costs;
+    }
+
+    public void setCosts(double costs) {
+        this.costs = costs;
+    }
+
     private void setNewExpireDate() {
         int membershipDays = 0;
 
@@ -82,7 +92,6 @@ public class Membership implements Serializable {
         }
         getFormattedDate(membershipDays);
     }
-
     private void getFormattedDate(int membershipType) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         this.expireDate = LocalDateTime.now().plusDays(membershipType).format(formatter);

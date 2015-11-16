@@ -13,5 +13,6 @@
         <property name="discount"/>
         <property name="startDate"/>
         <property name="expireDate"/>
+        <property name="costs"/>
     </class>
 </hibernate-mapping>

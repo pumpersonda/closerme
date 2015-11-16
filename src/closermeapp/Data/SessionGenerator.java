@@ -5,7 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ManagementDatabase {
+public class SessionGenerator {
     private static final SessionFactory sessionFactory;
 
     static {

@@ -8,12 +8,15 @@ package closermeapp.Presentation.VisitorManagement;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
 
+import static java.awt.EventQueue.invokeLater;
+import static java.util.logging.Logger.getLogger;
 import static javax.swing.BorderFactory.createTitledBorder;
 import static javax.swing.GroupLayout.*;
 import static javax.swing.LayoutStyle.ComponentPlacement;
+import static javax.swing.UIManager.*;
 
 public class MemberRegistrationView extends JFrame {
     private JLabel andWordLabel;
@@ -262,6 +265,8 @@ public class MemberRegistrationView extends JFrame {
             if (!areEmptyFields(name, phone, cellphone, address)) {
 
                 sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
+            } else {
+                showWarningMessage();
             }
         } catch (NumberFormatException ex) {
             showErrorMessage();
@@ -295,21 +300,8 @@ public class MemberRegistrationView extends JFrame {
     }
 
     private boolean areEmptyFields(String name, String phone, String cellphone, String address) {
-
-        if (name.equals("") ||
-                phone.equals("") ||
-                cellphone.equals("") ||
-                address.equals("")
-                ) {
-
-            JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-
-            return true;
-        } else {
-
-
-            return false;
-        }
+        return (name.isEmpty() || phone.isEmpty() ||
+                cellphone.isEmpty() || address.isEmpty());
     }
 
     private void showSuccessMessage() {
@@ -319,6 +311,10 @@ public class MemberRegistrationView extends JFrame {
     private void showErrorMessage() {
         JOptionPane.showMessageDialog(null, "Ingrese un descuento valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
 
+    }
+
+    private void showWarningMessage() {
+        JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }
 
     private void resetFields() {
@@ -338,8 +334,18 @@ public class MemberRegistrationView extends JFrame {
     }
 
     public static void main(String args[]) {
-        /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
+        try {
+            for (LookAndFeelInfo info : getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException ex) {
+            getLogger(MemberRegistrationView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        invokeLater(new Runnable() {
             public void run() {
                 new MemberRegistrationView().setVisible(true);
             }
