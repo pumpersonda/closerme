@@ -293,15 +293,14 @@ public class MemberRegistrationView extends JFrame {
             String membershipType,
             Double discount
     ) {
-        MembersManager memberManager = MembersManager.getInstance();
+        MembersManager memberManager = MembersManager.getMembersManager();
         memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
         showSuccessMessage();
         resetFields();
     }
 
     private boolean areEmptyFields(String name, String phone, String cellphone, String address) {
-        return (name.isEmpty() || phone.isEmpty() ||
-                cellphone.isEmpty() || address.isEmpty());
+        return (name.isEmpty() || phone.isEmpty() || cellphone.isEmpty() || address.isEmpty());
     }
 
     private void showSuccessMessage() {

@@ -49,7 +49,7 @@ public class Member extends Visitor implements Serializable {
         return membership;
     }
 
-    public void setNewMembership(String membershipType, double discount) {
+    public void createMembership(String membershipType, double discount) {
         Membership membership = new Membership(membershipType, discount);
         setMembership(membership);
     }

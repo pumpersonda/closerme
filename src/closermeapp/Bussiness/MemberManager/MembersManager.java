@@ -15,17 +15,19 @@ import closermeapp.Data.DAOs.MembershipDAO;
  */
 
 public class MembersManager {
-    private static MembersManager instance;
+    private MembersDAO membersDAO = MembersDAO.getMembersDAO();
+    private MembershipDAO membershipDAO = MembershipDAO.getMembershipDAO();
+    private static MembersManager membersManager;
 
     private MembersManager() {
         // Exists only to defeat instantiation.
     }
 
-    public static MembersManager getInstance() {
-        if (instance == null) {
-            instance = new MembersManager();
+    public static MembersManager getMembersManager() {
+        if (membersManager == null) {
+            membersManager = new MembersManager();
         }
-        return instance;
+        return membersManager;
     }
 
 
@@ -49,14 +51,12 @@ public class MembersManager {
     }
 
     private void addMembership(Member newMember, String membershipType, double discount) {
-        newMember.setNewMembership(membershipType, discount);
+        newMember.createMembership(membershipType, discount);
     }
 
     private void saveMember(Member newMember) {
-        MembershipDAO membershipDAO = MembershipDAO.getInstance();
-        membershipDAO.saveMembership(newMember.getMembership());
-        MembersDAO membersDAO = MembersDAO.getInstance();
-        membersDAO.saveMember(newMember);
+        this.membershipDAO.saveMembership(newMember.getMembership());
+        this.membersDAO.saveMember(newMember);
     }
 
 }

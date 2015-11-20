@@ -14,17 +14,17 @@ import java.util.List;
 public class MembershipDAO {
     private Session session;
     private Transaction transaction;
-    private static MembershipDAO instance = null;
+    private static MembershipDAO membershipDAO;
 
     private MembershipDAO() {
 
     }
 
-    public static MembershipDAO getInstance() {
-        if (instance == null) {
-            instance = new MembershipDAO();
+    public static MembershipDAO getMembershipDAO() {
+        if (membershipDAO == null) {
+            membershipDAO = new MembershipDAO();
         }
-        return instance;
+        return membershipDAO;
     }
 
 
