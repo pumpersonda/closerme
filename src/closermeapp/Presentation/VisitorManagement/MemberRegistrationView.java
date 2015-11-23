@@ -5,18 +5,11 @@
  */
 package closermeapp.Presentation.VisitorManagement;
 
-import closermeapp.Bussiness.MemberManager.MembersManager;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.util.logging.Level;
 
-import static java.awt.EventQueue.invokeLater;
-import static java.util.logging.Logger.getLogger;
 import static javax.swing.BorderFactory.createTitledBorder;
 import static javax.swing.GroupLayout.*;
 import static javax.swing.LayoutStyle.ComponentPlacement;
-import static javax.swing.UIManager.*;
 
 public class MemberRegistrationView extends JFrame {
     private JLabel andWordLabel;
@@ -30,12 +23,11 @@ public class MemberRegistrationView extends JFrame {
     private JTextField memberPhoneTextBox;
     private JTextField membershipDiscountTextBox;
     private JComboBox<String> membershipTypeComboBox;
+    private JButton registerMemberButton = new JButton();
+    private JButton cancelButton = new JButton();
 
     public MemberRegistrationView() {
         initComponents();
-        this.membershipDiscountTextBox.setText("0");
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
     }
 
     private void initComponents() {
@@ -52,8 +44,7 @@ public class MemberRegistrationView extends JFrame {
         JLabel memberAddressNumberLabel = new JLabel();
         JLabel membershipTypeLabel = new JLabel();
         JLabel membershipDiscountLabel = new JLabel();
-        JButton addMemberButton = new JButton();
-        JButton cancelButton = new JButton();
+
 
         this.memberNameTextBox = new JTextField();
         this.membershipDiscountTextBox = new JTextField();
@@ -67,7 +58,10 @@ public class MemberRegistrationView extends JFrame {
         this.memberCellPhoneTextBox = new JTextField();
         this.memberPhoneTextBox = new JTextField();
 
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        this.getMembershipDiscountTextBox().setText("0");
 
         memberGeneralDataPanel.setBorder(createTitledBorder("Datos Generales"));
 
@@ -207,19 +201,11 @@ public class MemberRegistrationView extends JFrame {
                                         .addComponent(membershipDiscountTextBox, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)))
         );
 
-        addMemberButton.setText("Agregar");
-        addMemberButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                addMember(evt);
-            }
-        });
+        registerMemberButton.setText("Agregar");
+
 
         cancelButton.setText("Cancelar");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CancelButton(evt);
-            }
-        });
+
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,7 +217,7 @@ public class MemberRegistrationView extends JFrame {
                                         .addComponent(memberGeneralDataPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(membershipInformationPanel, Alignment.TRAILING, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(addMemberButton)
+                                                .addComponent(registerMemberButton)
                                                 .addPreferredGap(ComponentPlacement.RELATED, DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(cancelButton)
                                                 .addGap(50, 50, 50)))
@@ -246,7 +232,7 @@ public class MemberRegistrationView extends JFrame {
                                 .addComponent(membershipInformationPanel, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(addMemberButton)
+                                        .addComponent(registerMemberButton)
                                         .addComponent(cancelButton))
                                 .addGap(6, 6, 6))
         );
@@ -254,101 +240,57 @@ public class MemberRegistrationView extends JFrame {
         pack();
     }
 
-    private void addMember(ActionEvent actionEvent) {
-        String name = this.memberNameTextBox.getText();
-        String phone = this.memberPhoneTextBox.getText();
-        String cellphone = this.memberCellPhoneTextBox.getText();
-        String address = getFormattedAddress();
-        String membershipType = (String) membershipTypeComboBox.getSelectedItem();
-        try {
-            double discount = Double.parseDouble(this.membershipDiscountTextBox.getText());
-            if (!areEmptyFields(name, phone, cellphone, address)) {
-
-                sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
-            } else {
-                showWarningMessage();
-            }
-        } catch (NumberFormatException ex) {
-            showErrorMessage();
-        }
+    public JLabel getAndWordLabel() {
+        return andWordLabel;
     }
 
-
-    private String getFormattedAddress() {
-        String address
-                = this.memberAddressStreetTextBox.getText() + " "
-                + this.memberAddressNumberTextBox.getText() + " "
-                + this.memberAddressFirstSideTextBox.getText() + ""
-                + this.andWordLabel.getText() + ""
-                + this.memberAddressSecondSideTextBox.getText() + " "
-                + this.memberAddressNeighborTextBox.getText();
-        return address;
+    public JTextField getMemberAddressFirstSideTextBox() {
+        return memberAddressFirstSideTextBox;
     }
 
-    private void sendMemberDataToManager(
-            String name,
-            String phone,
-            String cellphone,
-            String address,
-            String membershipType,
-            Double discount
-    ) {
-        MembersManager memberManager = MembersManager.getMembersManager();
-        memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
-        showSuccessMessage();
-        resetFields();
+    public JTextField getMemberAddressNeighborTextBox() {
+        return memberAddressNeighborTextBox;
     }
 
-    private boolean areEmptyFields(String name, String phone, String cellphone, String address) {
-        return (name.isEmpty() || phone.isEmpty() || cellphone.isEmpty() || address.isEmpty());
+    public JTextField getMemberAddressNumberTextBox() {
+        return memberAddressNumberTextBox;
     }
 
-    private void showSuccessMessage() {
-        JOptionPane.showMessageDialog(null, "Miembro agregado correctamente", "Agregado", JOptionPane.PLAIN_MESSAGE);
+    public JTextField getMemberAddressSecondSideTextBox() {
+        return memberAddressSecondSideTextBox;
     }
 
-    private void showErrorMessage() {
-        JOptionPane.showMessageDialog(null, "Ingrese un descuento valido", "Advertencia", JOptionPane.WARNING_MESSAGE);
-
+    public JTextField getMemberAddressStreetTextBox() {
+        return memberAddressStreetTextBox;
     }
 
-    private void showWarningMessage() {
-        JOptionPane.showMessageDialog(null, "Por favor rellene todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    public JTextField getMemberCellPhoneTextBox() {
+        return memberCellPhoneTextBox;
     }
 
-    private void resetFields() {
-        this.memberAddressFirstSideTextBox.setText("");
-        this.memberAddressNeighborTextBox.setText("");
-        this.memberAddressNumberTextBox.setText("");
-        this.memberAddressSecondSideTextBox.setText("");
-        this.memberAddressStreetTextBox.setText("");
-        this.memberCellPhoneTextBox.setText("");
-        this.memberNameTextBox.setText("");
-        this.memberPhoneTextBox.setText("");
-        this.membershipDiscountTextBox.setText("0");
+    public JTextField getMemberNameTextBox() {
+        return memberNameTextBox;
     }
 
-    private void CancelButton(ActionEvent evt) {
-        this.dispose();
+    public JTextField getMemberPhoneTextBox() {
+        return memberPhoneTextBox;
     }
 
-    public static void main(String args[]) {
-        try {
-            for (LookAndFeelInfo info : getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException ex) {
-            getLogger(MemberRegistrationView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        invokeLater(new Runnable() {
-            public void run() {
-                new MemberRegistrationView().setVisible(true);
-            }
-        });
+    public JTextField getMembershipDiscountTextBox() {
+        return membershipDiscountTextBox;
     }
+
+    public JComboBox<String> getMembershipTypeComboBox() {
+        return membershipTypeComboBox;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public JButton getRegisterMemberButton() {
+        return registerMemberButton;
+    }
+
 
 }

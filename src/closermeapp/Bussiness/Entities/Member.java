@@ -7,7 +7,6 @@ package closermeapp.Bussiness.Entities;
 
 import java.io.Serializable;
 
-
 public class Member extends Visitor implements Serializable {
     private int id;
     private String address;
@@ -29,8 +28,24 @@ public class Member extends Visitor implements Serializable {
     public Member() {
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getAddress() {
@@ -41,30 +56,8 @@ public class Member extends Visitor implements Serializable {
         return cellphone;
     }
 
-    public void setCellphone(String cellphone) {
-        this.cellphone = cellphone;
-    }
-
     public Membership getMembership() {
         return membership;
     }
-
-    public void createMembership(String membershipType, double discount) {
-        Membership membership = new Membership(membershipType, discount);
-        setMembership(membership);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    private void setMembership(Membership membership) {
-        this.membership = membership;
-    }
-
 
 }

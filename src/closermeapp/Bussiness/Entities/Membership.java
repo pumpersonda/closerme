@@ -28,53 +28,52 @@ public class Membership implements Serializable {
     public Membership() {
     }
 
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
+    public void setMembershipNumber(int membershipNumber) {
+        this.membershipNumber = membershipNumber;
     }
 
-    public String getMembershipType() {
-        return membershipType;
+    public void setMembershipType(String membershipType) {
+        this.membershipType = membershipType;
     }
 
     public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    public double getDiscount() {
-        return discount;
-    }
-
     private void setStartDate(String startDate) {
         this.startDate = startDate;
-    }
-
-    public String getStartDate() {
-        return startDate;
     }
 
     private void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
 
-    public String getExpireDate() {
-        return expireDate;
+    public void setCosts(double costs) {
+        this.costs = costs;
     }
 
     public int getMembershipNumber() {
         return membershipNumber;
     }
 
-    public void setMembershipNumber(int membershipNumber) {
-        this.membershipNumber = membershipNumber;
+    public String getMembershipType() {
+        return membershipType;
     }
 
+    public double getDiscount() {
+        return discount;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
 
     public double getCosts() {
         return costs;
-    }
-
-    public void setCosts(double costs) {
-        this.costs = costs;
     }
 
     private void setNewExpireDate() {
@@ -90,11 +89,14 @@ public class Membership implements Serializable {
             case "Anual":
                 membershipDays = 365;
         }
-        getFormattedDate(membershipDays);
+        setExpireDate(getFormattedDate(membershipDays));
+
     }
-    private void getFormattedDate(int membershipType) {
+
+    private String getFormattedDate(int membershipType) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        this.expireDate = LocalDateTime.now().plusDays(membershipType).format(formatter);
+        String expire = LocalDateTime.now().plusDays(membershipType).format(formatter);
+        return expire;
     }
 
 }

@@ -6,13 +6,9 @@
 package closermeapp.Bussiness.MemberManager;
 
 import closermeapp.Bussiness.Entities.Member;
+import closermeapp.Bussiness.Entities.Membership;
 import closermeapp.Data.DAOs.MembersDAO;
 import closermeapp.Data.DAOs.MembershipDAO;
-
-
-/**
- * @author JoseJulio
- */
 
 public class MembersManager {
     private MembersDAO membersDAO = MembersDAO.getMembersDAO();
@@ -51,12 +47,13 @@ public class MembersManager {
     }
 
     private void addMembership(Member newMember, String membershipType, double discount) {
-        newMember.createMembership(membershipType, discount);
+        Membership membership = new Membership(membershipType, discount);
+        newMember.setMembership(membership);
     }
 
     private void saveMember(Member newMember) {
-        this.membershipDAO.saveMembership(newMember.getMembership());
-        this.membersDAO.saveMember(newMember);
+        this.membershipDAO.add(newMember.getMembership());
+        this.membersDAO.add(newMember);
     }
 
 }

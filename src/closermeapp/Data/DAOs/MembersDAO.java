@@ -1,19 +1,14 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Member;
-import closermeapp.Data.SessionGenerator;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
 /**
  * Created by André on 02/11/2015.
  */
-public class MembersDAO {
-    private Session session;
-    private Transaction transaction;
+public class MembersDAO extends AbstractDAO {
     private static MembersDAO membersDAO;
 
     private MembersDAO() {
@@ -27,39 +22,12 @@ public class MembersDAO {
         return membersDAO;
     }
 
-
-    private void initOperation() throws HibernateException {
-        session = SessionGenerator.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-    }
-
-    private void ExceptionManagement(HibernateException hibernateException) throws HibernateException {
-        transaction.rollback();
-        throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
-    }
-
-
-    public int saveMember(Member member) {
-        int id = 0;
-
+    @Override
+    public void add(Object object) {
         try {
             initOperation();
-            id = (int) session.save(member);
+            session.save(object);
 
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            ExceptionManagement(hibernateException);
-            throw hibernateException;
-        } finally {
-            session.close();
-        }
-        return id;
-    }
-
-    public void updateMember(Member member) throws HibernateException {
-        try {
-            initOperation();
-            session.update(member);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             ExceptionManagement(hibernateException);
@@ -69,12 +37,11 @@ public class MembersDAO {
         }
     }
 
-
-
-    public void deleteMember(Member member) throws HibernateException {
+    @Override
+    public void delete(Object object) {
         try {
             initOperation();
-            session.delete(member);
+            session.delete(object);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             ExceptionManagement(hibernateException);
@@ -84,20 +51,38 @@ public class MembersDAO {
         }
     }
 
+    @Override
+    public void update(Object object) {
+        try {
+            initOperation();
+            session.update(object);
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            ExceptionManagement(hibernateException);
+            throw hibernateException;
+        } finally {
+            session.close();
+        }
+    }
 
-    public Member getMember(int id) throws HibernateException {
+    @Override
+    public Object get(int objectId) {
+
         Member member = null;
 
         try {
             initOperation();
-            member = (Member) session.get(Member.class, id);
+
+            member = (Member) session.get(Member.class, objectId);
         } finally {
             session.close();
         }
         return member;
     }
 
-    public List<Member> MemberList() throws HibernateException {
+    @Override
+    public List getList() {
+
         List memberList = null;
 
         try {
@@ -110,6 +95,4 @@ public class MembersDAO {
 
         return memberList;
     }
-
-
 }

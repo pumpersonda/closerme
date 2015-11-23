@@ -1,19 +1,15 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Membership;
-import closermeapp.Data.SessionGenerator;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
 /**
  * Created by André on 05/11/2015.
  */
-public class MembershipDAO {
-    private Session session;
-    private Transaction transaction;
+public class MembershipDAO extends AbstractDAO {
+
     private static MembershipDAO membershipDAO;
 
     private MembershipDAO() {
@@ -27,41 +23,12 @@ public class MembershipDAO {
         return membershipDAO;
     }
 
-
-    private void initOperation() throws HibernateException {
-        session = SessionGenerator.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-    }
-
-
-    private void ExceptionManagement(HibernateException hibernateException) throws HibernateException {
-        transaction.rollback();
-        throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
-    }
-
-
-    public int saveMembership(Membership membership) {
-        int id = 0;
-
+    @Override
+    public void add(Object object) {
         try {
             initOperation();
-            id = (int) session.save(membership);
+            session.save(object);
 
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            ExceptionManagement(hibernateException);
-            throw hibernateException;
-        } finally {
-            session.close();
-        }
-        return id;
-    }
-
-
-    public void updateMembership(Membership membership) throws HibernateException {
-        try {
-            initOperation();
-            session.update(membership);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             ExceptionManagement(hibernateException);
@@ -71,11 +38,11 @@ public class MembershipDAO {
         }
     }
 
-
-    public void deleteMembership(Membership membership) throws HibernateException {
+    @Override
+    public void delete(Object object) {
         try {
             initOperation();
-            session.delete(membership);
+            session.delete(object);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             ExceptionManagement(hibernateException);
@@ -85,19 +52,35 @@ public class MembershipDAO {
         }
     }
 
-    public Membership getMembership(int id) throws HibernateException {
+    @Override
+    public void update(Object object) {
+        try {
+            initOperation();
+            session.update(object);
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            ExceptionManagement(hibernateException);
+            throw hibernateException;
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Object get(int objectId) {
         Membership member = null;
 
         try {
             initOperation();
-            member = (Membership) session.get(Membership.class, id);
+            member = (Membership) session.get(Membership.class, objectId);
         } finally {
             session.close();
         }
         return member;
     }
 
-    public List<Membership> MembershipList() throws HibernateException {
+    @Override
+    public List getList() {
         List membershipList = null;
 
         try {
