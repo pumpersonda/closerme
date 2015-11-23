@@ -3,7 +3,7 @@ package closermeapp.Data.DAOs;
 import closermeapp.Bussiness.Entities.Membership;
 import org.hibernate.HibernateException;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by André on 05/11/2015.
@@ -31,7 +31,7 @@ public class MembershipDAO extends AbstractDAO {
 
             transaction.commit();
         } catch (HibernateException hibernateException) {
-            ExceptionManagement(hibernateException);
+            exceptionManagement(hibernateException);
             throw hibernateException;
         } finally {
             session.close();
@@ -45,7 +45,7 @@ public class MembershipDAO extends AbstractDAO {
             session.delete(object);
             transaction.commit();
         } catch (HibernateException hibernateException) {
-            ExceptionManagement(hibernateException);
+            exceptionManagement(hibernateException);
             throw hibernateException;
         } finally {
             session.close();
@@ -59,7 +59,7 @@ public class MembershipDAO extends AbstractDAO {
             session.update(object);
             transaction.commit();
         } catch (HibernateException hibernateException) {
-            ExceptionManagement(hibernateException);
+            exceptionManagement(hibernateException);
             throw hibernateException;
         } finally {
             session.close();
@@ -80,13 +80,13 @@ public class MembershipDAO extends AbstractDAO {
     }
 
     @Override
-    public List getList() {
-        List membershipList = null;
+    public ArrayList getList() {
+        ArrayList membershipList = null;
 
         try {
             initOperation();
 
-            membershipList = session.createQuery("FROM Membership").list();
+            membershipList = (ArrayList) session.createQuery("FROM Membership").list();
         } finally {
             session.close();
         }

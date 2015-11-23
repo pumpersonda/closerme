@@ -10,6 +10,8 @@ import closermeapp.Bussiness.Entities.Membership;
 import closermeapp.Data.DAOs.MembersDAO;
 import closermeapp.Data.DAOs.MembershipDAO;
 
+import java.util.ArrayList;
+
 public class MembersManager {
     private MembersDAO membersDAO = MembersDAO.getMembersDAO();
     private MembershipDAO membershipDAO = MembershipDAO.getMembershipDAO();
@@ -54,6 +56,13 @@ public class MembersManager {
     private void saveMember(Member newMember) {
         this.membershipDAO.add(newMember.getMembership());
         this.membersDAO.add(newMember);
+    }
+
+    public ArrayList getMemberList() {
+        ArrayList<Member> memberList;
+        memberList = this.membersDAO.getList();
+
+        return memberList;
     }
 
 }

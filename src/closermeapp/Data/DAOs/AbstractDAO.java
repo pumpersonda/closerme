@@ -5,7 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by André on 20/11/2015.
@@ -19,7 +19,7 @@ public abstract class AbstractDAO {
         transaction = session.beginTransaction();
     }
 
-    protected void ExceptionManagement(HibernateException hibernateException) throws HibernateException {
+    protected void exceptionManagement(HibernateException hibernateException) throws HibernateException {
         transaction.rollback();
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
@@ -32,7 +32,7 @@ public abstract class AbstractDAO {
 
     public abstract Object get(int objectId);
 
-    public abstract List getList();
+    public abstract ArrayList getList();
 
 
 }

@@ -3,30 +3,22 @@ package closermeapp.Presentation.VisitorManagement;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 import closermeapp.Presentation.Util.NotificationMessage;
 
-import java.awt.event.ActionEvent;
-
 public class MemberRegistrationController {
     private MemberRegistrationView memberRegistrationView;
+    private MembersMenuController membersMenuController;
     private NotificationMessage notification;
 
-    public MemberRegistrationController() {
+    public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
         this.notification = new NotificationMessage();
+        this.membersMenuController = membersMenuController;
+
 
         memberRegistrationView.setLocationRelativeTo(null);
         memberRegistrationView.setResizable(false);
         memberRegistrationView.setVisible(true);
 
-        memberRegistrationView.getRegisterMemberButton().addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                registerMember();
-            }
-        });
-        memberRegistrationView.getCancelButton().addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                CancelButton();
-            }
-        });
+        createEvents();
     }
 
     private void registerMember() {
@@ -48,7 +40,6 @@ public class MemberRegistrationController {
             notification.showFailMessage("Advertencia", "Ingrese un descuento valido");
         }
     }
-
 
     private String getFormattedAddress() {
         String whiteSpace = " ";
@@ -77,7 +68,7 @@ public class MemberRegistrationController {
         MembersManager memberManager = MembersManager.getMembersManager();
         memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
         notification.showSuccessMessage("Agregado", "Miembro agregado correctamente");
-        resetFields();
+        windowsUpdate();
     }
 
     private void resetFields() {
@@ -96,5 +87,16 @@ public class MemberRegistrationController {
 
     private void CancelButton() {
         memberRegistrationView.dispose();
+    }
+
+    private void createEvents() {
+        memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMember());
+        memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
+    }
+
+    private void windowsUpdate() {
+        resetFields();
+        membersMenuController.resetTable();
+        membersMenuController.loadMembersToTable();
     }
 }

@@ -26,6 +26,7 @@ public class MemberRegistrationView extends JFrame {
     private JButton registerMemberButton = new JButton();
     private JButton cancelButton = new JButton();
 
+
     public MemberRegistrationView() {
         initComponents();
     }

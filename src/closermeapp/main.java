@@ -1,6 +1,6 @@
 package closermeapp;
 
-import closermeapp.Presentation.VisitorManagement.MemberRegistrationController;
+import closermeapp.Presentation.VisitorManagement.MembersMenuController;
 
 import javax.swing.*;
 
@@ -15,7 +15,7 @@ public class main {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
 
-            createMemberRegistrationView();
+            createMenuMembers();
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -23,9 +23,8 @@ public class main {
     }
 
 
-    public static void createMemberRegistrationView() {
-        MemberRegistrationController memberRegistrationView = new MemberRegistrationController();
-
+    public static void createMenuMembers() {
+        MembersMenuController membersMenuController = new MembersMenuController();
     }
 }
 
