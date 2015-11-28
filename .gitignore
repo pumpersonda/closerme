@@ -1,0 +1,9 @@
+build.xml
+build/
+nbproject/
+*.mf
+*.class
+dist/
+.idea/
+out/
+ClosermeApp.iml
