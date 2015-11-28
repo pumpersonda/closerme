@@ -20,7 +20,7 @@ public class Membership implements Serializable {
     public Membership(String typeMembership, double discount) {
         this.membershipType = typeMembership;
         this.discount = discount;
-        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         setStartDate(today);
         setNewExpireDate();
     }
@@ -94,7 +94,7 @@ public class Membership implements Serializable {
     }
 
     private String getFormattedDate(int membershipType) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String expire = LocalDateTime.now().plusDays(membershipType).format(formatter);
         return expire;
     }

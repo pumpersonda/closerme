@@ -29,6 +29,11 @@ public class VisitorController extends AbstractController {
 
     }
 
+    @Override
+    protected void openWindow() {
+
+    }
+
     private void addVisitor() {
 
     }

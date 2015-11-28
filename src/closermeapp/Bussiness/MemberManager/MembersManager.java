@@ -63,10 +63,7 @@ public class MembersManager {
         newMember.setMembership(membership);
     }
 
-    private void saveMember(Member newMember) {
-        this.membershipDAO.add(newMember.getMembership());
-        this.membersDAO.add(newMember);
-    }
+
 
     public ArrayList getMemberList() {
         ArrayList<Member> memberList;
@@ -75,4 +72,8 @@ public class MembersManager {
         return memberList;
     }
 
+    private void saveMember(Member newMember) {
+        this.membershipDAO.add(newMember.getMembership());
+        this.membersDAO.add(newMember);
+    }
 }

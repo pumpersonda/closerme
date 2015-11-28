@@ -1,0 +1,40 @@
+package closermeapp.Presentation.Controllers;
+
+import closermeapp.Presentation.VisitorManagement.MembersChargeView;
+
+import javax.swing.*;
+
+import static java.lang.String.valueOf;
+
+/**
+ * Created by André on 28/11/2015.
+ */
+public class MembersChargeController {
+    private MembersChargeView membersChargeView;
+
+    public MembersChargeController() {
+        this.membersChargeView = new MembersChargeView();
+
+        membersChargeView.getTotalTextField().setEditable(false);
+        membersChargeView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        membersChargeView.setLocationRelativeTo(null);
+        membersChargeView.setResizable(false);
+
+
+    }
+
+
+    public void openWindow() {
+        membersChargeView.setVisible(true);
+    }
+
+    private void setTotalChargeMessage(int totalCharge) {
+        String totalChargeText = getTotalChargeText(totalCharge);
+        membersChargeView.getTotalTextField().setText(totalChargeText);
+    }
+
+    private String getTotalChargeText(int totalCharge) {
+        String totalChargeText = valueOf(totalCharge);
+        return totalChargeText;
+    }
+}

@@ -9,12 +9,14 @@ import javax.swing.*;
 public class MemberRegistrationController {
     private MemberRegistrationView memberRegistrationView;
     private MembersMenuController membersMenuController;
+    private MembersChargeController membersChargeController;
     private Notifier notification;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
         this.notification = new Notifier();
         this.membersMenuController = membersMenuController;
+        this.membersChargeController = new MembersChargeController();
 
         memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         memberRegistrationView.setLocationRelativeTo(null);
@@ -77,7 +79,9 @@ public class MemberRegistrationController {
         MembersManager memberManager = MembersManager.getMembersManager();
         memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
         notification.showSuccessMessage("Agregado", "Miembro agregado correctamente");
+        showChargeView();
         windowsUpdate();
+
     }
 
     private void resetFields() {
@@ -101,11 +105,20 @@ public class MemberRegistrationController {
     private void createEvents() {
         memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMemberData());
         memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
+
     }
 
     private void windowsUpdate() {
         resetFields();
         membersMenuController.addMemberToTable();
+    }
+
+    private void getTotalCharge() {
+
+    }
+
+    private void showChargeView() {
+        membersChargeController.openWindow();
     }
 
     private void closeWindow() {

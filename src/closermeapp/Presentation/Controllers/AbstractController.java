@@ -10,4 +10,6 @@ public abstract class AbstractController {
 
     protected abstract void setEvents();
 
+    protected abstract void openWindow();
+
 }
