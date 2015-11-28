@@ -17,12 +17,11 @@ public class Membership implements Serializable {
     private String expireDate;
     private double costs = 100.0;
 
-    public Membership(String typeMembership, double discount) {
-        this.membershipType = typeMembership;
+    public Membership(MembershipType membershipType, double discount) {
+        this.membershipType = membershipType.getMembershipName();
         this.discount = discount;
-        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        setStartDate(today);
-        setNewExpireDate();
+        setMembershipData(membershipType);
+
     }
 
     public Membership() {
@@ -48,7 +47,7 @@ public class Membership implements Serializable {
         this.expireDate = expireDate;
     }
 
-    public void setCosts(double costs) {
+    private void setCosts(double costs) {
         this.costs = costs;
     }
 
@@ -76,27 +75,22 @@ public class Membership implements Serializable {
         return costs;
     }
 
-    private void setNewExpireDate() {
-        int membershipDays = 0;
-
-        switch (membershipType) {
-            case "Semanal":
-                membershipDays = 7;
-                break;
-            case "Mensual":
-                membershipDays = 30;
-                break;
-            case "Anual":
-                membershipDays = 365;
-        }
-        setExpireDate(getFormattedDate(membershipDays));
-
-    }
-
     private String getFormattedDate(int membershipType) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         String expire = LocalDateTime.now().plusDays(membershipType).format(formatter);
         return expire;
+    }
+
+    private void setMembershipData(MembershipType membershipType) {
+        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        setStartDate(today);
+
+        double membershipCost = membershipType.getMembershipCost();
+        setCosts(membershipCost);
+
+        int membershipDays = membershipType.getCurrentDays();
+        String expireDate = getFormattedDate(membershipDays);
+        setExpireDate(expireDate);
     }
 
 }

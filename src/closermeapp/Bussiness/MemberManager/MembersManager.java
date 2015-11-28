@@ -7,6 +7,7 @@ package closermeapp.Bussiness.MemberManager;
 
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.Entities.Membership;
+import closermeapp.Bussiness.Entities.MembershipType;
 import closermeapp.Data.DAOs.MembersDAO;
 import closermeapp.Data.DAOs.MembershipDAO;
 
@@ -35,11 +36,11 @@ public class MembersManager {
             String phone,
             String address,
             String cellphone,
-            String membershipType,
+            String membershipNameType,
             double discount
     ) {
         Member newMember = new Member(name, phone, address, cellphone);
-        addMembership(newMember, membershipType, discount);
+        addMembership(newMember, membershipNameType, discount);
         saveMember(newMember);
     }
 
@@ -58,12 +59,29 @@ public class MembersManager {
         return member;
     }
 
-    private void addMembership(Member newMember, String membershipType, double discount) {
+    private void addMembership(Member newMember, String membershipNameType, double discount) {
+        MembershipType membershipType = getMembershipType(membershipNameType);
+
         Membership membership = new Membership(membershipType, discount);
         newMember.setMembership(membership);
     }
 
+    private MembershipType getMembershipType(String membershipNameType) {
+        MembershipType membershipType1 = null;
+        switch (membershipNameType) {
+            case "Semanal":
+                membershipType1 = MembershipType.SEMANAL;
+                break;
+            case "Mensual":
+                membershipType1 = MembershipType.MENSUAL;
+                break;
+            case "Anual":
+                membershipType1 = MembershipType.ANUAL;
+                break;
 
+        }
+        return membershipType1;
+    }
 
     public ArrayList getMemberList() {
         ArrayList<Member> memberList;
