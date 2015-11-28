@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by André on 02/11/2015.
  */
-public class MembersDAO extends AbstractDAO {
+public class MembersDAO extends AbstractDAO<Member> {
     private static MembersDAO membersDAO;
 
     private MembersDAO() {
@@ -23,10 +23,10 @@ public class MembersDAO extends AbstractDAO {
     }
 
     @Override
-    public void add(Object object) {
+    public void add(Member member) {
         try {
             initOperation();
-            session.save(object);
+            session.save(member);
 
             transaction.commit();
         } catch (HibernateException hibernateException) {
@@ -38,10 +38,10 @@ public class MembersDAO extends AbstractDAO {
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete(Member member) {
         try {
             initOperation();
-            session.delete(object);
+            session.delete(member);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             exceptionManagement(hibernateException);
@@ -52,10 +52,10 @@ public class MembersDAO extends AbstractDAO {
     }
 
     @Override
-    public void update(Object object) {
+    public void update(Member member) {
         try {
             initOperation();
-            session.update(object);
+            session.update(member);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             exceptionManagement(hibernateException);
@@ -81,7 +81,7 @@ public class MembersDAO extends AbstractDAO {
     }
 
     @Override
-    public ArrayList getList() {
+    public ArrayList<Member> getList() {
 
         ArrayList memberList = null;
 

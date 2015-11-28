@@ -13,12 +13,13 @@ import closermeapp.Data.DAOs.MembershipDAO;
 import java.util.ArrayList;
 
 public class MembersManager {
-    private MembersDAO membersDAO = MembersDAO.getMembersDAO();
-    private MembershipDAO membershipDAO = MembershipDAO.getMembershipDAO();
+    private MembersDAO membersDAO;
+    private MembershipDAO membershipDAO;
     private static MembersManager membersManager;
 
     private MembersManager() {
-        // Exists only to defeat instantiation.
+        membersDAO = MembersDAO.getMembersDAO();
+        membershipDAO = MembershipDAO.getMembershipDAO();
     }
 
     public static MembersManager getMembersManager() {
@@ -45,7 +46,16 @@ public class MembersManager {
 
     public void findMember(String name, String phone) {
         //To change body of generated methods, choose Tools | Templates.
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void deleteMember(Member member) {
+        membersDAO.delete(member);
+    }
+
+    public Member getMember(int memberId) {
+        Member member = (Member) this.membersDAO.get(memberId);
+        return member;
     }
 
     private void addMembership(Member newMember, String membershipType, double discount) {

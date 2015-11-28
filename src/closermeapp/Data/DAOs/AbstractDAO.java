@@ -8,9 +8,9 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 
 /**
- * Created by André on 20/11/2015.
+ * Created by Andrï¿½ on 20/11/2015.
  */
-public abstract class AbstractDAO {
+public abstract class AbstractDAO<Entity> {
     protected Session session;
     protected Transaction transaction;
 
@@ -24,15 +24,15 @@ public abstract class AbstractDAO {
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
 
-    public abstract void add(Object object);
+    public abstract void add(Entity entity);
 
-    public abstract void delete(Object object);
+    public abstract void delete(Entity entity);
 
-    public abstract void update(Object object);
+    public abstract void update(Entity entity);
 
     public abstract Object get(int objectId);
 
-    public abstract ArrayList getList();
+    public abstract ArrayList<?> getList();
 
 
 }

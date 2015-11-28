@@ -1,27 +1,33 @@
-package closermeapp.Presentation.VisitorManagement;
+package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.MemberManager.MembersManager;
-import closermeapp.Presentation.Util.NotificationMessage;
+import closermeapp.Presentation.Util.Notifier;
+import closermeapp.Presentation.VisitorManagement.MemberRegistrationView;
+
+import javax.swing.*;
 
 public class MemberRegistrationController {
     private MemberRegistrationView memberRegistrationView;
     private MembersMenuController membersMenuController;
-    private NotificationMessage notification;
+    private Notifier notification;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
-        this.notification = new NotificationMessage();
+        this.notification = new Notifier();
         this.membersMenuController = membersMenuController;
 
-
+        memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         memberRegistrationView.setLocationRelativeTo(null);
         memberRegistrationView.setResizable(false);
-        memberRegistrationView.setVisible(true);
 
         createEvents();
     }
 
-    private void registerMember() {
+    public void openWindow() {
+        memberRegistrationView.setVisible(true);
+    }
+
+    private void registerMemberData() {
         String name = memberRegistrationView.getMemberNameTextBox().getText();
         String phone = memberRegistrationView.getMemberPhoneTextBox().getText();
         String cellphone = memberRegistrationView.getMemberCellPhoneTextBox().getText();
@@ -30,13 +36,16 @@ public class MemberRegistrationController {
 
         try {
             double discount = Double.parseDouble(memberRegistrationView.getMembershipDiscountTextBox().getText());
-            if (!isEmptyFields(name, phone, cellphone, address)) {
+
+            if (isEmptyFields(name, phone, cellphone, address)) {
+
+                notification.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+            } else {
 
                 sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
-            } else {
-                notification.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+                
             }
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException numberFormatException) {
             notification.showFailMessage("Advertencia", "Ingrese un descuento valido");
         }
     }
@@ -86,17 +95,21 @@ public class MemberRegistrationController {
     }
 
     private void CancelButton() {
-        memberRegistrationView.dispose();
+        closeWindow();
     }
 
     private void createEvents() {
-        memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMember());
+        memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMemberData());
         memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
     }
 
     private void windowsUpdate() {
         resetFields();
-        membersMenuController.resetTable();
-        membersMenuController.loadMembersToTable();
+        membersMenuController.addMemberToTable();
     }
+
+    private void closeWindow() {
+        memberRegistrationView.dispose();
+    }
+
 }
