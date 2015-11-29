@@ -10,7 +10,6 @@
 
         </id>
         <property name="membershipType" type="java.lang.String" column="membershipType"/>
-        <property name="discount"/>
         <property name="startDate"/>
         <property name="expireDate"/>
         <property name="costs"/>

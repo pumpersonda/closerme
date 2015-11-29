@@ -9,7 +9,6 @@ public abstract class AbstractController {
     protected Notifier notification;
 
     protected abstract void setEvents();
-
     protected abstract void openWindow();
 
 }

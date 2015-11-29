@@ -28,12 +28,12 @@ public class MembersChargeController {
         membersChargeView.setVisible(true);
     }
 
-    private void setTotalChargeMessage(int totalCharge) {
+    public void setTotalChargeMessage(double totalCharge) {
         String totalChargeText = getTotalChargeText(totalCharge);
         membersChargeView.getTotalTextField().setText(totalChargeText);
     }
 
-    private String getTotalChargeText(int totalCharge) {
+    private String getTotalChargeText(double totalCharge) {
         String totalChargeText = valueOf(totalCharge);
         return totalChargeText;
     }

@@ -6,21 +6,19 @@
 package closermeapp.Bussiness.MemberManager;
 
 import closermeapp.Bussiness.Entities.Member;
-import closermeapp.Bussiness.Entities.Membership;
-import closermeapp.Bussiness.Entities.MembershipType;
 import closermeapp.Data.DAOs.MembersDAO;
-import closermeapp.Data.DAOs.MembershipDAO;
 
 import java.util.ArrayList;
 
 public class MembersManager {
+    private Member member;
+    private MembershipManager membershipManager;
     private MembersDAO membersDAO;
-    private MembershipDAO membershipDAO;
     private static MembersManager membersManager;
 
     private MembersManager() {
+        membershipManager = MembershipManager.getMembersManager();
         membersDAO = MembersDAO.getMembersDAO();
-        membershipDAO = MembershipDAO.getMembershipDAO();
     }
 
     public static MembersManager getMembersManager() {
@@ -30,7 +28,6 @@ public class MembersManager {
         return membersManager;
     }
 
-
     public void addMember(
             String name,
             String phone,
@@ -39,15 +36,9 @@ public class MembersManager {
             String membershipNameType,
             double discount
     ) {
-        Member newMember = new Member(name, phone, address, cellphone);
-        addMembership(newMember, membershipNameType, discount);
-        saveMember(newMember);
-    }
-
-
-    public void findMember(String name, String phone) {
-        //To change body of generated methods, choose Tools | Templates.
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.member = new Member(name, phone, address, cellphone);
+        this.membershipManager.addMembership(member, membershipNameType, discount);
+        saveMember(member);
     }
 
     public void deleteMember(Member member) {
@@ -59,30 +50,6 @@ public class MembersManager {
         return member;
     }
 
-    private void addMembership(Member newMember, String membershipNameType, double discount) {
-        MembershipType membershipType = getMembershipType(membershipNameType);
-
-        Membership membership = new Membership(membershipType, discount);
-        newMember.setMembership(membership);
-    }
-
-    private MembershipType getMembershipType(String membershipNameType) {
-        MembershipType membershipType1 = null;
-        switch (membershipNameType) {
-            case "Semanal":
-                membershipType1 = MembershipType.SEMANAL;
-                break;
-            case "Mensual":
-                membershipType1 = MembershipType.MENSUAL;
-                break;
-            case "Anual":
-                membershipType1 = MembershipType.ANUAL;
-                break;
-
-        }
-        return membershipType1;
-    }
-
     public ArrayList getMemberList() {
         ArrayList<Member> memberList;
         memberList = this.membersDAO.getList();
@@ -90,8 +57,9 @@ public class MembersManager {
         return memberList;
     }
 
-    private void saveMember(Member newMember) {
-        this.membershipDAO.add(newMember.getMembership());
-        this.membersDAO.add(newMember);
+    private void saveMember(Member member) {
+        this.membersDAO.add(member);
     }
+
+
 }

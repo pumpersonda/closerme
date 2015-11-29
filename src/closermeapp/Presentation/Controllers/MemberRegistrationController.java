@@ -11,12 +11,14 @@ public class MemberRegistrationController {
     private MembersMenuController membersMenuController;
     private MembersChargeController membersChargeController;
     private Notifier notification;
+    private MembersManager membersManager;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
         this.notification = new Notifier();
         this.membersMenuController = membersMenuController;
         this.membersChargeController = new MembersChargeController();
+        this.membersManager = MembersManager.getMembersManager();
 
         memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         memberRegistrationView.setLocationRelativeTo(null);
@@ -76,10 +78,11 @@ public class MemberRegistrationController {
             String membershipType,
             Double discount
     ) {
-        MembersManager memberManager = MembersManager.getMembersManager();
-        memberManager.addMember(name, phone, address, cellphone, membershipType, discount);
+
+        membersManager.addMember(name, phone, address, cellphone, membershipType, discount);
         notification.showSuccessMessage("Agregado", "Miembro agregado correctamente");
         showChargeView();
+        getTotalCharge();
         windowsUpdate();
 
     }
@@ -114,7 +117,8 @@ public class MemberRegistrationController {
     }
 
     private void getTotalCharge() {
-
+        // double totalMembershuipCost = membersManager.getTotalMembershipCost();
+        // membersChargeController.setTotalChargeMessage(totalMembershuipCost);
     }
 
     private void showChargeView() {

@@ -12,16 +12,13 @@ import java.time.format.DateTimeFormatter;
 public class Membership implements Serializable {
     private int membershipNumber;
     private String membershipType;
-    private double discount;
     private String startDate;
     private String expireDate;
-    private double costs = 100.0;
+    private double costs;
 
-    public Membership(MembershipType membershipType, double discount) {
+    public Membership(MembershipType membershipType) {
         this.membershipType = membershipType.getMembershipName();
-        this.discount = discount;
         setMembershipData(membershipType);
-
     }
 
     public Membership() {
@@ -35,10 +32,6 @@ public class Membership implements Serializable {
         this.membershipType = membershipType;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
     private void setStartDate(String startDate) {
         this.startDate = startDate;
     }
@@ -47,7 +40,7 @@ public class Membership implements Serializable {
         this.expireDate = expireDate;
     }
 
-    private void setCosts(double costs) {
+    public void setCosts(double costs) {
         this.costs = costs;
     }
 
@@ -57,10 +50,6 @@ public class Membership implements Serializable {
 
     public String getMembershipType() {
         return membershipType;
-    }
-
-    public double getDiscount() {
-        return discount;
     }
 
     public String getStartDate() {
@@ -82,11 +71,11 @@ public class Membership implements Serializable {
     }
 
     private void setMembershipData(MembershipType membershipType) {
-        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        setStartDate(today);
-
         double membershipCost = membershipType.getMembershipCost();
         setCosts(membershipCost);
+
+        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        setStartDate(today);
 
         int membershipDays = membershipType.getCurrentDays();
         String expireDate = getFormattedDate(membershipDays);
