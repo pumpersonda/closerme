@@ -4,9 +4,9 @@ package closermeapp.Bussiness.Entities;
  * Created by André on 28/11/2015.
  */
 public enum MembershipType {
-    SEMANAL("Semanal", 7, 100),
-    MENSUAL("Mensual", 30, 200),
-    ANUAL("Anual", 365, 300);
+    WEEKLY("Semanal", 7, 100),
+    MONTHLY("Mensual", 30, 200),
+    ANNUAL("Anual", 365, 300);
 
 
     private final String membershipName;

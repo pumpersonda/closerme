@@ -14,11 +14,10 @@ public class MembershipManager {
     private Member member;
 
     private MembershipManager() {
-
         membershipDAO = MembershipDAO.getMembershipDAO();
     }
 
-    public static MembershipManager getMembersManager() {
+    public static MembershipManager getMembershipManager() {
         if (membershipManager == null) {
             membershipManager = new MembershipManager();
         }
@@ -26,17 +25,22 @@ public class MembershipManager {
     }
 
     public void addMembership(Member member, String membershipNameType, double discount) {
+        setMember(member);
+
         MembershipType membershipType = getMembershipType(membershipNameType);
         Membership membership = new Membership(membershipType);
 
-        member.setMembership(membership);
-
-        setMembershipDiscount(membership, discount);
+        assignMembershipToMember(membership, discount);
         saveMembership(member);
     }
 
+    private void assignMembershipToMember(Membership membership, double discount) {
+        setMembershipDiscount(membership, discount);
+        getMember().setMembership(membership);
+    }
+
     public double getTotalMembershipCost() {
-        int membershipId = this.member.getId();
+        int membershipId = this.getMember().getId();
         Membership membership = (Membership) membershipDAO.get(membershipId);
 
         return membership.getCosts();
@@ -46,13 +50,13 @@ public class MembershipManager {
         MembershipType membershipType = null;
         switch (membershipNameType) {
             case "Semanal":
-                membershipType = MembershipType.SEMANAL;
+                membershipType = MembershipType.WEEKLY;
                 break;
             case "Mensual":
-                membershipType = MembershipType.MENSUAL;
+                membershipType = MembershipType.MONTHLY;
                 break;
             case "Anual":
-                membershipType = MembershipType.ANUAL;
+                membershipType = MembershipType.ANNUAL;
                 break;
         }
         return membershipType;
@@ -60,7 +64,6 @@ public class MembershipManager {
 
     private void setMembershipDiscount(Membership membership, double discount) {
         double membershipCost = membership.getCosts() - discount;
-
         membership.setCosts(membershipCost);
     }
 
@@ -68,5 +71,11 @@ public class MembershipManager {
         this.membershipDAO.add(member.getMembership());
     }
 
+    private Member getMember() {
+        return member;
+    }
 
+    private void setMember(Member member) {
+        this.member = member;
+    }
 }

@@ -1,6 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Presentation.VisitorManagement.VisitorView;
+import closermeapp.Presentation.Views.VisitorManagement.VisitorView;
 
 import javax.swing.*;
 

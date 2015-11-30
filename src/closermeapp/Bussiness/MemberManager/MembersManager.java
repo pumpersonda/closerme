@@ -11,13 +11,12 @@ import closermeapp.Data.DAOs.MembersDAO;
 import java.util.ArrayList;
 
 public class MembersManager {
-    private Member member;
     private MembershipManager membershipManager;
     private MembersDAO membersDAO;
     private static MembersManager membersManager;
 
     private MembersManager() {
-        membershipManager = MembershipManager.getMembersManager();
+        membershipManager = MembershipManager.getMembershipManager();
         membersDAO = MembersDAO.getMembersDAO();
     }
 
@@ -36,7 +35,7 @@ public class MembersManager {
             String membershipNameType,
             double discount
     ) {
-        this.member = new Member(name, phone, address, cellphone);
+        Member member = new Member(name, phone, address, cellphone);
         this.membershipManager.addMembership(member, membershipNameType, discount);
         saveMember(member);
     }

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package closermeapp.Presentation.VisitorManagement;
+package closermeapp.Presentation.Views.VisitorManagement;
 
 import javax.swing.*;
 
 /**
+ *
  * @author André
  */
 public class MembersChargeView extends javax.swing.JFrame {
@@ -32,26 +33,30 @@ public class MembersChargeView extends javax.swing.JFrame {
         TotalPanel = new javax.swing.JPanel();
         totalLabel = new javax.swing.JLabel();
         totalTextField = new javax.swing.JTextField();
+        simbolLabel = new javax.swing.JLabel();
         titlePanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
         chargeButton = new javax.swing.JButton();
-        continueButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         totalLabel.setText("Total");
+
+        simbolLabel.setText("$");
 
         javax.swing.GroupLayout TotalPanelLayout = new javax.swing.GroupLayout(TotalPanel);
         TotalPanel.setLayout(TotalPanelLayout);
         TotalPanelLayout.setHorizontalGroup(
                 TotalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(TotalPanelLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
+                                .addContainerGap()
                                 .addComponent(totalLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(simbolLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(31, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         TotalPanelLayout.setVerticalGroup(
                 TotalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,7 +64,8 @@ public class MembersChargeView extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(TotalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(totalLabel)
-                                        .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(totalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(simbolLabel))
                                 .addGap(18, 18, 18))
         );
 
@@ -85,8 +91,6 @@ public class MembersChargeView extends javax.swing.JFrame {
 
         chargeButton.setText("Cobrar");
 
-        continueButton.setText("Continuar");
-
         javax.swing.GroupLayout buttonsPanelLayout = new javax.swing.GroupLayout(buttonsPanel);
         buttonsPanel.setLayout(buttonsPanelLayout);
         buttonsPanelLayout.setHorizontalGroup(
@@ -94,17 +98,13 @@ public class MembersChargeView extends javax.swing.JFrame {
                         .addGroup(buttonsPanelLayout.createSequentialGroup()
                                 .addGap(62, 62, 62)
                                 .addComponent(chargeButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
-                                .addComponent(continueButton)
-                                .addGap(51, 51, 51))
+                                .addContainerGap(130, Short.MAX_VALUE))
         );
         buttonsPanelLayout.setVerticalGroup(
                 buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(buttonsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(chargeButton)
-                                        .addComponent(continueButton))
+                                .addComponent(chargeButton)
                                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -120,11 +120,11 @@ public class MembersChargeView extends javax.swing.JFrame {
                                         .addGroup(windowPanelLayout.createSequentialGroup()
                                                 .addGap(123, 123, 123)
                                                 .addComponent(TotalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(windowPanelLayout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(0, 139, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, windowPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(25, Short.MAX_VALUE))
+                                .addGap(55, 55, 55))
         );
         windowPanelLayout.setVerticalGroup(
                 windowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +132,9 @@ public class MembersChargeView extends javax.swing.JFrame {
                                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32)
                                 .addComponent(TotalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
+                                .addGap(18, 18, 18)
                                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,7 +143,7 @@ public class MembersChargeView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(windowPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 3, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +202,8 @@ public class MembersChargeView extends javax.swing.JFrame {
         return chargeButton;
     }
 
-    public JButton getContinueButton() {
-        return continueButton;
+    public JLabel getSimbolLabel() {
+        return simbolLabel;
     }
 
     public JLabel getTitleLabel() {
@@ -226,11 +226,12 @@ public class MembersChargeView extends javax.swing.JFrame {
         return windowPanel;
     }
 
+
     // Variables declaration - do not modify
     private javax.swing.JPanel TotalPanel;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton chargeButton;
-    private javax.swing.JButton continueButton;
+    private javax.swing.JLabel simbolLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel totalLabel;

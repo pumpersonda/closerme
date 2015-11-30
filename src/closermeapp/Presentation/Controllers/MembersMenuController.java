@@ -4,16 +4,18 @@ import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Util.TableModel;
-import closermeapp.Presentation.VisitorManagement.MembersMenuView;
+import closermeapp.Presentation.Views.VisitorManagement.MembersMenuView;
 
 import java.util.ArrayList;
+
+import static java.lang.String.valueOf;
 
 
 public class MembersMenuController {
     private MembersMenuView membersMenu;
     private MemberRegistrationController memberRegistrationController;
     private MembersManager membersManager;
-    private Notifier notification;
+    private Notifier notifier;
     private ArrayList<Member> memberList;
     private TableModel tableModel;
 
@@ -21,7 +23,7 @@ public class MembersMenuController {
         membersMenu = new MembersMenuView();
         memberRegistrationController = new MemberRegistrationController(this);
         membersManager = MembersManager.getMembersManager();
-        notification = new Notifier();
+        notifier = new Notifier();
         updateListMember();
 
         initTable();
@@ -42,7 +44,7 @@ public class MembersMenuController {
 
         Member member = membersManager.getMember(lastElementId);
 
-        ArrayList memberDataList = createMemberListData(member);
+        ArrayList memberDataList = createMemberListData(member, lasElementOfList);
         addRow(memberDataList);
     }
 
@@ -52,8 +54,9 @@ public class MembersMenuController {
 
     private void loadMembersToTable() {
         resetTable();
-        for (Member aMemberList : memberList) {
-            ArrayList memberDataList = createMemberListData(aMemberList);
+        for (int indexList = 0; indexList < memberList.size(); indexList++) {
+            Member aMemberList = memberList.get(indexList);
+            ArrayList memberDataList = createMemberListData(aMemberList, indexList);
             addRow(memberDataList);
         }
     }
@@ -68,10 +71,11 @@ public class MembersMenuController {
 
     private void searchMember(String memberName) {
         int foundMembers = 0;
-        for (Member aMemberList : memberList) {
+        for (int indexList = 0; indexList < memberList.size(); indexList++) {
+            Member aMemberList = memberList.get(indexList);
             if ((aMemberList.getName().toLowerCase()).contains(memberName.toLowerCase())) {
                 foundMembers++;
-                showSearchResult(aMemberList);
+                showSearchResult(aMemberList, indexList);
             }
         }
         showFoundMembersMessage(foundMembers);
@@ -80,7 +84,7 @@ public class MembersMenuController {
     private void showFoundMembersMessage(int foundMembers) {
         String title = "Miembros encontrados";
         String message = getFoundMembersMessage(foundMembers);
-        notification.showSuccessMessage(title, message);
+        notifier.showSuccessMessage(title, message);
     }
 
     private String getFoundMembersMessage(int foundMembers) {
@@ -112,7 +116,7 @@ public class MembersMenuController {
     private void setEvents() {
         membersMenu.getAddButton().addActionListener(actionEvent -> openRegisterWindow());
         membersMenu.getSearchButton().addActionListener(actionEvent -> updateTable());
-        membersMenu.getDeleteButton().addActionListener(actionEvent -> deleteMember());
+        membersMenu.getDeleteButton().addActionListener(actionEvent -> confirmDelete());
     }
 
     private void updateListMember() {
@@ -120,20 +124,21 @@ public class MembersMenuController {
     }
 
     private void initTable() {
-        String[] headers = {"Name", "Cellphone", "Phone", "Membership"};
+        String[] headers = {"", "Name", "Cellphone", "Phone", "Membership"};
         tableModel = new TableModel(headers);
         membersMenu.getMembersTable().setModel(tableModel);
         membersMenu.getMembersTable().getTableHeader().setReorderingAllowed(false);
     }
 
-    private void showSearchResult(Member member) {
-        ArrayList memberListData = createMemberListData(member);
+    private void showSearchResult(Member member, int index) {
+        ArrayList memberListData = createMemberListData(member, index);
         addRow(memberListData);
     }
 
-    private ArrayList<String> createMemberListData(Member member) {
+    private ArrayList<String> createMemberListData(Member member, int index) {
         ArrayList<String> memberDataList = new ArrayList();
 
+        memberDataList.add(valueOf(index));
         memberDataList.add(member.getName());
         memberDataList.add(member.getCellphone());
         memberDataList.add(member.getPhone());
@@ -142,17 +147,36 @@ public class MembersMenuController {
         return memberDataList;
     }
 
-    private void deleteMember() {
-        int numberRow = membersMenu.getMembersTable().getSelectedRow();
-        boolean validIndex = numberRow >= 0;
+    private void deleteMemberToTable() {
 
-        if (validIndex) {
-            tableModel.deleteRow(numberRow);
-            membersManager.deleteMember(memberList.get(numberRow));
-            updateListMember();
+        int numberRowSelected = membersMenu.getMembersTable().getSelectedRow();
+        int columnId = 0;
+        int rowId = Integer.parseInt((String) membersMenu.getMembersTable().getValueAt(numberRowSelected, columnId));
 
+        boolean isValidIndex = rowId >= 0;
+
+        if (isValidIndex) {
+            tableModel.deleteRow(numberRowSelected);
+            deleteMember(rowId);
         }
+    }
 
+    private void deleteMember(int rowId) {
+
+        membersManager.deleteMember(memberList.get(rowId));
+        updateListMember();
+    }
+
+    private void confirmDelete() {
+        String messageConfirm = "Estas seguro que deseas eliminar a este miembro";
+        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
+
+        if (confirmDialog == notifier.getYES_OPTION()) {
+            deleteMemberToTable();
+            String title = "Eliminado";
+            String message = "Se ha eliminado con exito";
+            notifier.showSuccessMessage(title, message);
+        }
 
     }
 

@@ -1,8 +1,9 @@
 package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.MemberManager.MembersManager;
+import closermeapp.Bussiness.MemberManager.MembershipManager;
 import closermeapp.Presentation.Util.Notifier;
-import closermeapp.Presentation.VisitorManagement.MemberRegistrationView;
+import closermeapp.Presentation.Views.VisitorManagement.MemberRegistrationView;
 
 import javax.swing.*;
 
@@ -12,6 +13,7 @@ public class MemberRegistrationController {
     private MembersChargeController membersChargeController;
     private Notifier notification;
     private MembersManager membersManager;
+    private MembershipManager membershipManager;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
@@ -19,12 +21,13 @@ public class MemberRegistrationController {
         this.membersMenuController = membersMenuController;
         this.membersChargeController = new MembersChargeController();
         this.membersManager = MembersManager.getMembersManager();
+        this.membershipManager = MembershipManager.getMembershipManager();
 
         memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         memberRegistrationView.setLocationRelativeTo(null);
         memberRegistrationView.setResizable(false);
 
-        createEvents();
+        setEvents();
     }
 
     public void openWindow() {
@@ -105,7 +108,7 @@ public class MemberRegistrationController {
         closeWindow();
     }
 
-    private void createEvents() {
+    private void setEvents() {
         memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMemberData());
         memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
 
@@ -117,8 +120,8 @@ public class MemberRegistrationController {
     }
 
     private void getTotalCharge() {
-        // double totalMembershuipCost = membersManager.getTotalMembershipCost();
-        // membersChargeController.setTotalChargeMessage(totalMembershuipCost);
+        double totalMembershipCost = membershipManager.getTotalMembershipCost();
+        membersChargeController.setTotalChargeMessage(totalMembershipCost);
     }
 
     private void showChargeView() {

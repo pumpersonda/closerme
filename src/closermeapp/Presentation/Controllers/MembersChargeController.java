@@ -1,6 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Presentation.VisitorManagement.MembersChargeView;
+import closermeapp.Presentation.Views.VisitorManagement.MembersChargeView;
 
 import javax.swing.*;
 
@@ -20,7 +20,7 @@ public class MembersChargeController {
         membersChargeView.setLocationRelativeTo(null);
         membersChargeView.setResizable(false);
 
-
+        setEvents();
     }
 
 
@@ -36,5 +36,13 @@ public class MembersChargeController {
     private String getTotalChargeText(double totalCharge) {
         String totalChargeText = valueOf(totalCharge);
         return totalChargeText;
+    }
+
+    private void charge() {
+        membersChargeView.dispose();
+    }
+
+    private void setEvents() {
+        membersChargeView.getChargeButton().addActionListener(actionEvent -> charge());
     }
 }

@@ -7,27 +7,51 @@ import javax.swing.*;
  */
 public class Notifier {
 
+    private int YES_OPTION = JOptionPane.YES_OPTION;
+    private int NO_OPTION = JOptionPane.NO_OPTION;
+
     public Notifier() {
     }
 
     public void showSuccessMessage(String title, String message) {
         int PLAIN_MESSAGE = JOptionPane.PLAIN_MESSAGE;
-        displayMessage(title, message, PLAIN_MESSAGE);
+        showMessageDialog(title, message, PLAIN_MESSAGE);
     }
 
     public void showFailMessage(String title, String message) {
         int ERROR_MESSAGE = JOptionPane.ERROR_MESSAGE;
-        displayMessage(title, message, ERROR_MESSAGE);
+        showMessageDialog(title, message, ERROR_MESSAGE);
     }
 
     public void showWarningMessage(String title, String message) {
         int WARNING_MESSAGE = JOptionPane.WARNING_MESSAGE;
-        displayMessage(title, message, WARNING_MESSAGE);
+        showMessageDialog(title, message, WARNING_MESSAGE);
     }
 
-    public void displayMessage(String title, String message, int messageType) {
+    public int showConfirmDialog(String message) {
+        int confirmDialog = JOptionPane.showConfirmDialog(null, message);
+        return confirmDialog;
+    }
+
+    private void showMessageDialog(String title, String message, int messageType) {
         JOptionPane.showMessageDialog(null, message, title, messageType);
     }
 
+
+    public void setNO_OPTION(int NO_OPTION) {
+        this.NO_OPTION = NO_OPTION;
+    }
+
+    public void setYES_OPTION(int YES_OPTION) {
+        this.YES_OPTION = YES_OPTION;
+    }
+
+    public int getNO_OPTION() {
+        return NO_OPTION;
+    }
+
+    public int getYES_OPTION() {
+        return YES_OPTION;
+    }
 
 }
