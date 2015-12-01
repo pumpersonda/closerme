@@ -14,7 +14,7 @@ public abstract class AbstractDAO<Entity> {
     protected Session session;
     protected Transaction transaction;
 
-    protected void initOperation() throws HibernateException {
+    protected void openSession() throws HibernateException {
         session = SessionGenerator.getSessionFactory().openSession();
         transaction = session.beginTransaction();
     }
@@ -24,15 +24,40 @@ public abstract class AbstractDAO<Entity> {
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
 
-    public abstract void add(Entity entity);
+    protected abstract void add(Entity entity);
 
-    public abstract void delete(Entity entity);
+    protected abstract void delete(Entity entity);
 
-    public abstract void update(Entity entity);
+    protected abstract void update(Entity entity);
 
-    public abstract Object get(int objectId);
+    protected abstract Object get(int objectId);
 
-    public abstract ArrayList<?> getList();
+    protected abstract ArrayList<?> getList();
+
+    protected void enquire(String queryId, Entity entity) {
+        try {
+            openSession();
+
+            switch (queryId) {
+                case "add":
+                    session.save(entity);
+                    break;
+                case "delete":
+                    session.delete(entity);
+                    break;
+                case "update":
+                    session.update(entity);
+                    break;
+            }
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            exceptionManagement(hibernateException);
+            throw hibernateException;
+        } finally {
+            session.close();
+        }
+    }
+
 
 
 }

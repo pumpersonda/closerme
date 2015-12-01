@@ -23,6 +23,8 @@ public class MemberRegistrationController {
         this.membersManager = MembersManager.getMembersManager();
         this.membershipManager = MembershipManager.getMembershipManager();
 
+        String defaultDiscount = "0";
+        memberRegistrationView.getMembershipDiscountTextBox().setText(defaultDiscount);
         memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         memberRegistrationView.setLocationRelativeTo(null);
         memberRegistrationView.setResizable(false);

@@ -21,5 +21,7 @@
         <!-- Archivos de mapeo -->
         <mapping resource="closermeapp/Data/Mapping/Member.hbm.xml"/>
         <mapping resource="closermeapp/Data/Mapping/Membership.hbm.xml"/>
+        <mapping resource="closermeapp/Data/Mapping/CallLog.hbm.xml"/>
+
     </session-factory>
 </hibernate-configuration>

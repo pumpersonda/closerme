@@ -1,12 +1,11 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Membership;
-import org.hibernate.HibernateException;
 
 import java.util.ArrayList;
 
 /**
- * Created by André on 05/11/2015.
+ * Created by Andrï¿½ on 05/11/2015.
  */
 public class MembershipDAO extends AbstractDAO<Membership> {
 
@@ -25,45 +24,20 @@ public class MembershipDAO extends AbstractDAO<Membership> {
 
     @Override
     public void add(Membership membership) {
-        try {
-            initOperation();
-            session.save(membership);
-
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            exceptionManagement(hibernateException);
-            throw hibernateException;
-        } finally {
-            session.close();
-        }
+        String query = "add";
+        enquire(query, membership);
     }
 
     @Override
     public void delete(Membership membership) {
-        try {
-            initOperation();
-            session.delete(membership);
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            exceptionManagement(hibernateException);
-            throw hibernateException;
-        } finally {
-            session.close();
-        }
+        String query = "delete";
+        enquire(query, membership);
     }
 
     @Override
     public void update(Membership membership) {
-        try {
-            initOperation();
-            session.update(membership);
-            transaction.commit();
-        } catch (HibernateException hibernateException) {
-            exceptionManagement(hibernateException);
-            throw hibernateException;
-        } finally {
-            session.close();
-        }
+        String query = "update";
+        enquire(query, membership);
     }
 
     @Override
@@ -71,7 +45,7 @@ public class MembershipDAO extends AbstractDAO<Membership> {
         Membership member = null;
 
         try {
-            initOperation();
+            openSession();
             member = (Membership) session.get(Membership.class, objectId);
         } finally {
             session.close();
@@ -84,7 +58,7 @@ public class MembershipDAO extends AbstractDAO<Membership> {
         ArrayList membershipList = null;
 
         try {
-            initOperation();
+            openSession();
 
             membershipList = (ArrayList) session.createQuery("FROM Membership").list();
         } finally {

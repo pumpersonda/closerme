@@ -18,7 +18,7 @@ public class main {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
 
-            //createMenuMembers();
+            createMenuMembers();
             createRegisterMenu();
             //createVisitor();
 

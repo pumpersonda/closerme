@@ -24,21 +24,21 @@ public class MembersMenuController {
         memberRegistrationController = new MemberRegistrationController(this);
         membersManager = MembersManager.getMembersManager();
         notifier = new Notifier();
-        updateListMember();
-
-        initTable();
 
         membersMenu.setLocationRelativeTo(null);
         membersMenu.setResizable(false);
         membersMenu.pack();
         membersMenu.setLocationRelativeTo(null);
         membersMenu.setVisible(true);
+
+        initTable();
         setEvents();
+        updateMemberList();
         loadMembersToTable();
     }
 
     public void addMemberToTable() {
-        updateListMember();
+        updateMemberList();
         int lasElementOfList = memberList.size() - 1;
         int lastElementId = memberList.get(lasElementOfList).getId();
 
@@ -48,52 +48,86 @@ public class MembersMenuController {
         addRow(memberDataList);
     }
 
-    public void resetTable() {
-        tableModel.resetTable();
+    private void updateMemberList() {
+        memberList = membersManager.getMemberList();
     }
 
     private void loadMembersToTable() {
         resetTable();
-        for (int indexList = 0; indexList < memberList.size(); indexList++) {
-            Member aMemberList = memberList.get(indexList);
-            ArrayList memberDataList = createMemberListData(aMemberList, indexList);
+        for (int listIndex = 0; listIndex < memberList.size(); listIndex++) {
+            Member aMemberList = memberList.get(listIndex);
+            ArrayList memberDataList = createMemberListData(aMemberList, listIndex);
             addRow(memberDataList);
         }
+    }
+
+    private void resetTable() {
+        tableModel.resetTable();
+    }
+
+    private ArrayList<String> createMemberListData(Member member, int listIndex) {
+        ArrayList<String> memberDataList = new ArrayList();
+
+        memberDataList.add(valueOf(listIndex));
+        memberDataList.add(member.getName());
+        memberDataList.add(member.getCellphone());
+        memberDataList.add(member.getPhone());
+        memberDataList.add(member.getMembership().getMembershipType());
+
+        return memberDataList;
     }
 
     private void addRow(ArrayList list) {
         tableModel.addRow(list);
     }
 
-    private void openRegisterWindow() {
-        memberRegistrationController.openWindow();
+    private void updateTable() {
+        resetTable();
+        String memberNameToSearch;
+        memberNameToSearch = membersMenu.getSearchTextField().getText();
+
+        if (memberNameToSearch.isEmpty()) {
+            loadMembersToTable();
+        } else {
+            searchMember(memberNameToSearch);
+        }
     }
 
-    private void searchMember(String memberName) {
-        int foundMembers = 0;
-        for (int indexList = 0; indexList < memberList.size(); indexList++) {
-            Member aMemberList = memberList.get(indexList);
-            if ((aMemberList.getName().toLowerCase()).contains(memberName.toLowerCase())) {
-                foundMembers++;
-                showSearchResult(aMemberList, indexList);
+    private void searchMember(String memberNameToSearch) {
+        int foundMembersNumber = 0;
+
+        for (int listIndex = 0; listIndex < memberList.size(); listIndex++) {
+
+            Member foundMember = memberList.get(listIndex);
+            String foundMemberName = foundMember.getName().toLowerCase();
+            memberNameToSearch = memberNameToSearch.toLowerCase();
+
+            if ((foundMemberName).contains(memberNameToSearch)) {
+                foundMembersNumber++;
+                showSearchResult(foundMember, listIndex);
             }
         }
-        showFoundMembersMessage(foundMembers);
+        showMembersFoundMessage(foundMembersNumber);
     }
 
-    private void showFoundMembersMessage(int foundMembers) {
+    private void showSearchResult(Member member, int listIndex) {
+        ArrayList memberListData = createMemberListData(member, listIndex);
+        addRow(memberListData);
+    }
+
+    private void showMembersFoundMessage(int foundMembers) {
         String title = "Miembros encontrados";
-        String message = getFoundMembersMessage(foundMembers);
+        String message = getMembersFoundMessage(foundMembers);
         notifier.showSuccessMessage(title, message);
     }
 
-    private String getFoundMembersMessage(int foundMembers) {
+    private String getMembersFoundMessage(int foundMembersNumber) {
 
-        if (foundMembers == 1) {
+        if (foundMembersNumber == 1) {
             return "Se ha encontrado 1 miembro";
 
-        } else if (foundMembers > 1) {
-            return "Se han encontrado " + foundMembers + " miembros";
+        } else if (foundMembersNumber > 1) {
+            return "Se han encontrado " + foundMembersNumber + " miembros";
 
         } else {
             return "No se encontraron miembros";
@@ -101,50 +135,18 @@ public class MembersMenuController {
         }
     }
 
-    private void updateTable() {
-        resetTable();
-        String memberName;
-        memberName = membersMenu.getSearchTextField().getText();
+    private void confirmDelete() {
+        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
 
-        if (memberName.isEmpty()) {
-            loadMembersToTable();
-        } else {
-            searchMember(memberName);
+        if (confirmDialog == notifier.getYES_OPTION()) {
+            deleteMemberToTable();
+
+            String title = "Eliminado";
+            String message = "Se ha eliminado con exito";
+            notifier.showSuccessMessage(title, message);
         }
-    }
 
-    private void setEvents() {
-        membersMenu.getAddButton().addActionListener(actionEvent -> openRegisterWindow());
-        membersMenu.getSearchButton().addActionListener(actionEvent -> updateTable());
-        membersMenu.getDeleteButton().addActionListener(actionEvent -> confirmDelete());
-    }
-
-    private void updateListMember() {
-        memberList = membersManager.getMemberList();
-    }
-
-    private void initTable() {
-        String[] headers = {"", "Name", "Cellphone", "Phone", "Membership"};
-        tableModel = new TableModel(headers);
-        membersMenu.getMembersTable().setModel(tableModel);
-        membersMenu.getMembersTable().getTableHeader().setReorderingAllowed(false);
-    }
-
-    private void showSearchResult(Member member, int index) {
-        ArrayList memberListData = createMemberListData(member, index);
-        addRow(memberListData);
-    }
-
-    private ArrayList<String> createMemberListData(Member member, int index) {
-        ArrayList<String> memberDataList = new ArrayList();
-
-        memberDataList.add(valueOf(index));
-        memberDataList.add(member.getName());
-        memberDataList.add(member.getCellphone());
-        memberDataList.add(member.getPhone());
-        memberDataList.add(member.getMembership().getMembershipType());
-
-        return memberDataList;
     }
 
     private void deleteMemberToTable() {
@@ -156,28 +158,32 @@ public class MembersMenuController {
         boolean isValidIndex = rowId >= 0;
 
         if (isValidIndex) {
-            tableModel.deleteRow(numberRowSelected);
             deleteMember(rowId);
         }
+        loadMembersToTable();
     }
 
     private void deleteMember(int rowId) {
 
         membersManager.deleteMember(memberList.get(rowId));
-        updateListMember();
+        updateMemberList();
     }
 
-    private void confirmDelete() {
-        String messageConfirm = "Estas seguro que deseas eliminar a este miembro";
-        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
+    private void openRegisterWindow() {
+        memberRegistrationController.openWindow();
+    }
 
-        if (confirmDialog == notifier.getYES_OPTION()) {
-            deleteMemberToTable();
-            String title = "Eliminado";
-            String message = "Se ha eliminado con exito";
-            notifier.showSuccessMessage(title, message);
-        }
+    private void initTable() {
+        String[] headers = {"", "Name", "Cellphone", "Phone", "Membership"};
+        tableModel = new TableModel(headers);
+        membersMenu.getMembersTable().setModel(tableModel);
+        membersMenu.getMembersTable().getTableHeader().setReorderingAllowed(false);
+    }
 
+    private void setEvents() {
+        membersMenu.getAddButton().addActionListener(actionEvent -> openRegisterWindow());
+        membersMenu.getSearchButton().addActionListener(actionEvent -> updateTable());
+        membersMenu.getDeleteButton().addActionListener(actionEvent -> confirmDelete());
     }
 
 }

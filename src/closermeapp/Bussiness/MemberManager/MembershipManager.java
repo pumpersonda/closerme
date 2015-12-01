@@ -34,16 +34,16 @@ public class MembershipManager {
         saveMembership(member);
     }
 
-    private void assignMembershipToMember(Membership membership, double discount) {
-        setMembershipDiscount(membership, discount);
-        getMember().setMembership(membership);
-    }
-
     public double getTotalMembershipCost() {
         int membershipId = this.getMember().getId();
         Membership membership = (Membership) membershipDAO.get(membershipId);
 
         return membership.getCosts();
+    }
+
+    private void assignMembershipToMember(Membership membership, double discount) {
+        setMembershipDiscount(membership, discount);
+        getMember().setMembership(membership);
     }
 
     private MembershipType getMembershipType(String membershipNameType) {

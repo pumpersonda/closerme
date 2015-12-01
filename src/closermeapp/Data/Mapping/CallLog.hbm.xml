@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="closermeapp.Bussiness.Entities.CallLog" table="callLog">
+        <id name="registerId" column="registerId">
+            <generator class="identity"/>
+
+        </id>
+        <property name="memberName" type="java.lang.String" column="memberName"/>
+        <property name="date" type="java.lang.String" column="date"/>
+        <property name="numberPhone"/>
+        <property name="duration"/>
+    </class>
+</hibernate-mapping>
