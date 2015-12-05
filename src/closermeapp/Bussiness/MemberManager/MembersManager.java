@@ -27,7 +27,7 @@ public class MembersManager {
         return membersManager;
     }
 
-    public void addMember(
+    public Member createMember(
             String name,
             String phone,
             String address,
@@ -37,8 +37,13 @@ public class MembersManager {
     ) {
         Member member = new Member(name, phone, address, cellphone);
         this.membershipManager.addMembership(member, membershipNameType, discount);
+        return member;
+    }
+
+    public void addMember(Member member) {
         saveMember(member);
     }
+
 
     public void deleteMember(Member member) {
         membersDAO.delete(member);

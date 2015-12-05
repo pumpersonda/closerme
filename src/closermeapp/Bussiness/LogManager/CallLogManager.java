@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class CallLogManager {
     private static CallLogManager callLogManager;
     private CallLogDAO callLogDAO;
-    private CallLog callLog;
+
 
     private CallLogManager() {
         callLogDAO = CallLogDAO.getCallLogDAO();
@@ -26,9 +26,13 @@ public class CallLogManager {
         return callLogManager;
     }
 
-    public void addLog(String memberName, String numberPhone, String duration) {
-        callLog = new CallLog(memberName, numberPhone, duration);
-        setDateCallLog();
+    public CallLog createCalloLog(String memberName, String numberPhone, String duration) {
+        CallLog callLog = new CallLog(memberName, numberPhone, duration);
+        return callLog;
+    }
+
+    public void addLog(CallLog callLog) {
+        setDate(callLog);
         saveLog(callLog);
     }
 
@@ -48,7 +52,7 @@ public class CallLogManager {
         return callLogList;
     }
 
-    private void setDateCallLog() {
+    private void setDate(CallLog callLog) {
         String today = getTodayDate();
         callLog.setDate(today);
     }

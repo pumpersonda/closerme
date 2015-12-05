@@ -1,5 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.Entities.CallLog;
 import closermeapp.Bussiness.LogManager.CallLogManager;
 import closermeapp.Presentation.Views.CallLog.CallLogDataView;
 
@@ -15,6 +16,7 @@ public class CallLogDataController {
         this.callLogDataView = new CallLogDataView();
         this.callLogController = callLogController;
         callLogManager = CallLogManager.getCallLogManager();
+        configureWindow();
         setEvents();
     }
 
@@ -26,8 +28,11 @@ public class CallLogDataController {
         String memberName = callLogDataView.getMemberNameTextBox().getText();
         String numberPhone = callLogDataView.getNumberTextField().getText();
         String duration = getFormattedDuration();
-        windowUpdate();
-        callLogManager.addLog(memberName, numberPhone, duration);
+        CallLog callLog = callLogManager.createCalloLog(memberName, numberPhone, duration);
+        callLogManager.addLog(callLog);
+
+        windowUpdate(callLog);
+
     }
 
     private String getFormattedDuration() {
@@ -39,11 +44,21 @@ public class CallLogDataController {
         return duration;
     }
 
-    private void windowUpdate() {
-        callLogController.addMemberToTable();
+    private void windowUpdate(CallLog callLog) {
+        callLogController.addMemberToTable(callLog);
     }
+
+
+    private void configureWindow() {
+        callLogDataView.setLocationRelativeTo(null);
+        callLogDataView.setResizable(false);
+        callLogDataView.pack();
+        callLogDataView.setLocationRelativeTo(null);
+    }
+
 
     private void setEvents() {
         callLogDataView.getRegisterButton().addActionListener(actionEvent -> registerCall());
+
     }
 }

@@ -1,5 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 import closermeapp.Bussiness.MemberManager.MembershipManager;
 import closermeapp.Presentation.Util.Notifier;
@@ -84,11 +85,12 @@ public class MemberRegistrationController {
             Double discount
     ) {
 
-        membersManager.addMember(name, phone, address, cellphone, membershipType, discount);
+        Member member = membersManager.createMember(name, phone, address, cellphone, membershipType, discount);
+        membersManager.addMember(member);
         notification.showSuccessMessage("Agregado", "Miembro agregado correctamente");
         showChargeView();
         getTotalCharge();
-        windowsUpdate();
+        windowsUpdate(member);
 
     }
 
@@ -116,9 +118,9 @@ public class MemberRegistrationController {
 
     }
 
-    private void windowsUpdate() {
+    private void windowsUpdate(Member member) {
         resetFields();
-        membersMenuController.addMemberToTable();
+        membersMenuController.addMemberToTable(member);
     }
 
     private void getTotalCharge() {

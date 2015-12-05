@@ -8,7 +8,6 @@ import closermeapp.Presentation.Views.CallLog.CallLogView;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import static java.lang.String.valueOf;
@@ -16,7 +15,7 @@ import static java.lang.String.valueOf;
 /**
  * Created by André on 29/11/2015.
  */
-public class CallLogController implements Serializable {
+public class CallLogController {
     private CallLogView callLogView;
     private CallLogDataController callLogDataController;
     private CallLogManager callLogManager;
@@ -29,29 +28,16 @@ public class CallLogController implements Serializable {
         callLogDataController = new CallLogDataController(this);
         callLogManager = CallLogManager.getCallLogManager();
         notifier = new Notifier();
-
-        initTable();
-        callLogView.setLocationRelativeTo(null);
-        callLogView.setResizable(false);
-        callLogView.pack();
-        callLogView.setLocationRelativeTo(null);
-
-        updateCallLogList();
-        loadCallLogsToTable();
-        setEvents();
-
+        configureWindow();
     }
 
     public void openWindow() {
         this.callLogView.setVisible(true);
     }
 
-    public void addMemberToTable() {
-        updateCallLogList();
+    public void addMemberToTable(CallLog callLog) {
+        callLogList.add(callLog);
         int lasElementOfList = callLogList.size() - 1;
-        int lastElementId = callLogList.get(lasElementOfList).getRegisterId();
-
-        CallLog callLog = callLogManager.getCallLog(lastElementId);
 
         ArrayList memberDataList = createMemberListData(callLog, lasElementOfList);
         addRow(memberDataList);
@@ -64,7 +50,6 @@ public class CallLogController implements Serializable {
     private void openCallLogDataView() {
         callLogDataController.opeWindow();
     }
-
 
     private void initTable() {
         String[] headers = {"", "Fecha", "Miembro", "Numero", "Duración"};
@@ -80,10 +65,11 @@ public class CallLogController implements Serializable {
         columnModel.getColumn(firstColumn).setPreferredWidth(sizeColumn);
     }
 
-    private ArrayList<String> createMemberListData(CallLog callLog, int index) {
+    private ArrayList<String> createMemberListData(CallLog callLog, int listIndex) {
         ArrayList<String> memberDataList = new ArrayList();
 
-        memberDataList.add(valueOf(index));
+        int tablePosition = listIndex + 1;
+        memberDataList.add(valueOf(tablePosition));
         memberDataList.add(callLog.getDate());
         memberDataList.add(callLog.getMemberName());
         memberDataList.add(callLog.getNumberPhone());
@@ -105,12 +91,13 @@ public class CallLogController implements Serializable {
         tableModel.resetTable();
     }
 
-    private void confirmDelete() {
+    private void confirmDelete(CallLog callLog, int tablePosition) {
         String messageConfirm = "¿Estas seguro que deseas eliminar a este registro?";
         int confirmDialog = notifier.showConfirmDialog(messageConfirm);
 
         if (confirmDialog == notifier.getYES_OPTION()) {
-            deleteCallLog();
+
+            deleteCallLog(callLog, tablePosition);
 
             String title = "Eliminado";
             String message = "Se ha eliminado con exito";
@@ -119,32 +106,48 @@ public class CallLogController implements Serializable {
 
     }
 
-    private void deleteCallLog() {
+    private void deleteCallLogToTable() {
+        JTable callLogsTable = callLogView.getRegisterTable();
 
-        int numberRowSelected = callLogView.getRegisterTable().getSelectedRow();
-        int columnId = 0;
-        int rowId = Integer.parseInt((String) callLogView.getRegisterTable().getValueAt(numberRowSelected, columnId));
+        int numberRowSelected = callLogsTable.getSelectedRow();
+        boolean isValidRow = numberRowSelected >= 0;
 
-        boolean isValidIndex = rowId >= 0;
-
-        if (isValidIndex) {
-            tableModel.deleteRow(numberRowSelected);
-            deleteMember(rowId);
+        if (isValidRow) {
+            final int columnId = 0;
+            int tablePosition = Integer.parseInt((String) callLogsTable.getValueAt(numberRowSelected, columnId)) - 1;
+            CallLog callLog = callLogList.get(tablePosition);
+            confirmDelete(callLog, tablePosition);
+            loadCallLogsToTable();
         }
-        loadCallLogsToTable();
+
     }
 
-    private void deleteMember(int rowId) {
-        callLogManager.deleteLog(callLogList.get(rowId));
-        updateCallLogList();
+    private void deleteCallLog(CallLog callLog, int rowId) {
+        callLogManager.deleteLog(callLog);
+        callLogList.remove(rowId);
     }
 
     private void updateCallLogList() {
         callLogList = callLogManager.getMemberList();
     }
 
+    private void initializeView() {
+        initTable();
+        updateCallLogList();
+        loadCallLogsToTable();
+        setEvents();
+    }
+
+    private void configureWindow() {
+        callLogView.setLocationRelativeTo(null);
+        callLogView.setResizable(false);
+        callLogView.pack();
+        callLogView.setLocationRelativeTo(null);
+        initializeView();
+    }
+
     private void setEvents() {
         callLogView.getNewRegisterButton().addActionListener(actionEvent -> openCallLogDataView());
-        callLogView.getDeleteButton().addActionListener(actionEvent -> confirmDelete());
+        callLogView.getDeleteButton().addActionListener(actionEvent -> deleteCallLogToTable());
     }
 }
