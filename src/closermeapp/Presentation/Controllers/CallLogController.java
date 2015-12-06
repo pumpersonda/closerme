@@ -91,40 +91,53 @@ public class CallLogController {
         tableModel.resetTable();
     }
 
-    private void confirmDelete(CallLog callLog, int tablePosition) {
-        String messageConfirm = "¿Estas seguro que deseas eliminar a este registro?";
-        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
+    private void deleteSelectedCallLog() {
+        JTable registerTable = callLogView.getRegisterTable();
+        int numberRowSelected = registerTable.getSelectedRow();
+        boolean validRow = numberRowSelected >= 0;
 
-        if (confirmDialog == notifier.getYES_OPTION()) {
+        if (validRow && isDeletionConfirmed()) {
+            final int columnId = 0;
+            String tablePosition = (String) registerTable.getValueAt(numberRowSelected, columnId);
+            int callLogListPosition = Integer.parseInt(tablePosition) - 1;
 
-            deleteCallLog(callLog, tablePosition);
+            CallLog callLog = callLogList.get(callLogListPosition);
+            deleteCallLog(callLog);
+            deleteCallLogList(callLogListPosition);
 
-            String title = "Eliminado";
-            String message = "Se ha eliminado con exito";
+            String title = "Miembro borrado";
+            String message = "Se ha borrado con exito";
             notifier.showSuccessMessage(title, message);
+            loadCallLogsToTable();
         }
-
     }
 
-    private void deleteCallLogToTable() {
-        JTable callLogsTable = callLogView.getRegisterTable();
+    private void deleteAllCallLogs() {
+        if (isDeletionConfirmed()) {
+            int listSize = callLogList.size() - 1;
+            for (int listIndex = listSize; listIndex >= 0; listIndex--) {
 
-        int numberRowSelected = callLogsTable.getSelectedRow();
-        boolean isValidRow = numberRowSelected >= 0;
-
-        if (isValidRow) {
-            final int columnId = 0;
-            int tablePosition = Integer.parseInt((String) callLogsTable.getValueAt(numberRowSelected, columnId)) - 1;
-            CallLog callLog = callLogList.get(tablePosition);
-            confirmDelete(callLog, tablePosition);
+                CallLog callLog = callLogList.get(listIndex);
+                deleteCallLog(callLog);
+                deleteCallLogList(listIndex);
+            }
             loadCallLogsToTable();
         }
 
     }
 
-    private void deleteCallLog(CallLog callLog, int rowId) {
+    private boolean isDeletionConfirmed() {
+        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        int optionSelected = notifier.showConfirmDialog(messageConfirm);
+        return optionSelected == notifier.getYES_OPTION();
+    }
+
+    private void deleteCallLog(CallLog callLog) {
         callLogManager.deleteLog(callLog);
-        callLogList.remove(rowId);
+    }
+
+    private void deleteCallLogList(int listIndex) {
+        callLogList.remove(listIndex);
     }
 
     private void updateCallLogList() {
@@ -142,12 +155,14 @@ public class CallLogController {
         callLogView.setLocationRelativeTo(null);
         callLogView.setResizable(false);
         callLogView.pack();
+        callLogView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         callLogView.setLocationRelativeTo(null);
         initializeView();
     }
 
     private void setEvents() {
         callLogView.getNewRegisterButton().addActionListener(actionEvent -> openCallLogDataView());
-        callLogView.getDeleteButton().addActionListener(actionEvent -> deleteCallLogToTable());
+        callLogView.getDeleteButton().addActionListener(actionEvent -> deleteSelectedCallLog());
+        callLogView.getDeleteAllButton().addActionListener(actionEvent -> deleteAllCallLogs());
     }
 }

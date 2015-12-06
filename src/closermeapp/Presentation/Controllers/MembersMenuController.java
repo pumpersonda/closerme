@@ -10,7 +10,6 @@ import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 import java.util.ArrayList;
 
-import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
 
 
@@ -137,44 +136,34 @@ public class MembersMenuController {
         }
     }
 
-    private void confirmDelete(Member member, int tablePosition) {
-        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
-        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
-
-        if (confirmDialog == notifier.getYES_OPTION()) {
-
-            deleteMember(member, tablePosition);
-
-            String title = "Eliminado";
-            String message = "Se ha eliminado con exito";
-            notifier.showSuccessMessage(title, message);
-
-        }
-
-    }
-
-    private void deleteMemberToTable() {
+    private void deleteMember() {
         JTable membersTable = membersMenuView.getMembersTable();
-
         int numberRowSelected = membersTable.getSelectedRow();
-        boolean isValidRow = numberRowSelected >= 0;
+        boolean validRow = numberRowSelected >= 0;
 
-        if (isValidRow) {
+        if (validRow && isDeletionConfirmed()) {
+
             final int columnId = 0;
-            int tablePosition = parseInt((String) membersTable.getValueAt(numberRowSelected, columnId)) - 1;
+            String tablePosition = (String) membersTable.getValueAt(numberRowSelected, columnId);
+            int memberListPosition = Integer.parseInt(tablePosition) - 1;
 
-            Member member = memberList.get(tablePosition);
-            confirmDelete(member, tablePosition);
+            Member member = memberList.get(memberListPosition);
+            membersManager.deleteMember(member);
+            memberList.remove(tablePosition);
+
+            String title = "Miembro borrado";
+            String message = "Se ha borrado con exito";
+            notifier.showSuccessMessage(title, message);
             loadMembersToTable();
         }
     }
 
 
-    private void deleteMember(Member member, int tablePosition) {
-        membersManager.deleteMember(member);
-        memberList.remove(tablePosition);
+    private boolean isDeletionConfirmed() {
+        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        int optionSelected = notifier.showConfirmDialog(messageConfirm);
+        return optionSelected == notifier.getYES_OPTION();
     }
-
     private void openRegisterWindow() {
         memberRegistrationController.openWindow();
     }
@@ -195,7 +184,7 @@ public class MembersMenuController {
     private void setEvents() {
         membersMenuView.getAddButton().addActionListener(actionEvent -> openRegisterWindow());
         membersMenuView.getSearchButton().addActionListener(actionEvent -> updateTable());
-        membersMenuView.getDeleteButton().addActionListener(actionEvent -> deleteMemberToTable());
+        membersMenuView.getDeleteButton().addActionListener(actionEvent -> deleteMember());
     }
 
 }
