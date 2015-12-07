@@ -7,7 +7,7 @@ package closermeapp.Bussiness.Entities;
 
 import java.io.Serializable;
 
-public class Member extends Visitor implements Serializable {
+public class Member extends Client implements Serializable {
     private int id;
     private String address;
     private String cellphone;

@@ -8,10 +8,10 @@ package closermeapp.Bussiness.Entities;
 /**
  * @author JoseJulio
  */
-public class EventualVisitor extends Visitor {
+public class EventualClient extends Client {
     private String email;
 
-    public EventualVisitor(String name, String phone, String email) {
+    public EventualClient(String name, String phone, String email) {
         super(name, phone);
         this.email = email;
     }

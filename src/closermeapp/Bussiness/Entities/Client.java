@@ -5,17 +5,17 @@
  */
 package closermeapp.Bussiness.Entities;
 
-public class Visitor {
+public class Client {
 
     private String name;
     private String phone;
 
-    public Visitor(String name, String phone) {
+    public Client(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
 
-    public Visitor() {
+    public Client() {
     }
 
     public void setName(String name) {

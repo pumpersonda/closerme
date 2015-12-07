@@ -7,7 +7,7 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
-import closermeapp.Presentation.EventManagement.EventRegistrationView;
+import closermeapp.Presentation.Views.EventManagement.EventRegistrationView;
 import javax.swing.WindowConstants;
 
 /**
@@ -15,29 +15,16 @@ import javax.swing.WindowConstants;
  * @author JoseJulio
  */
 public class EventRegistrationController extends AbstractController {
-     EventRegistrationView eventRegistrationView;
-     
-     public EventRegistrationController() {
+     private EventRegistrationView eventRegistrationView;
+     private EventViewerController eventViewerController;
+
+     public EventRegistrationController(EventViewerController eventViewerController) {
             initializeView();
+            this.eventViewerController = eventViewerController;
      }
      
      public void registerEvent(Event newEvent){
          EventManager.getEventManager().addEvent(newEvent);
-     }
-     
-     public void sendEventToEventView(
-             String name, 
-             String startDate,
-             String startTime, 
-             String endDate,
-             String endTime, 
-             String clientName,
-             String clientPhone
-     ){
-         Event newEvent = EventManager.getEventManager().createEvent(name, startDate, startTime, endDate, endTime, clientName, clientPhone);
-         
-         //...
-         
      }
      
      private void initializeView(){
@@ -46,7 +33,7 @@ public class EventRegistrationController extends AbstractController {
      }
 
     private void configureWindow() {
-        this.eventRegistrationView = new EventRegistrationView(this);
+        this.eventRegistrationView = new EventRegistrationView();
         this.eventRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.eventRegistrationView.setResizable(false);
         this.eventRegistrationView.setLocationRelativeTo(null);
@@ -80,4 +67,7 @@ public class EventRegistrationController extends AbstractController {
     protected void openWindow() {
         this.eventRegistrationView.setVisible(true);
     }
+
+
+
 }

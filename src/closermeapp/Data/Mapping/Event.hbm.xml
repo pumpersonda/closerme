@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="closermeapp.Bussiness.Entities.Event" table="event">
+        <id name="id" column="eventID">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="java.lang.String" column="eventName"/>
+        <property name="startDate" type="java.lang.String" column="startDate"/>
+        <property name="endDate" type="java.lang.String" column="endDate"/>
+        <property name="client">
+            <column name="clientName"></column>
+            <column name="clientPhone"></column>
+        </property>
+    </class>
+</hibernate-mapping>

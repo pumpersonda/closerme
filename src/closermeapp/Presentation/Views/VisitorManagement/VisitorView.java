@@ -13,7 +13,7 @@ import javax.swing.*;
 public class VisitorView extends javax.swing.JFrame {
 
     /**
-     * Creates new form Visitor
+     * Creates new form Client
      */
     public VisitorView() {
         initComponents();

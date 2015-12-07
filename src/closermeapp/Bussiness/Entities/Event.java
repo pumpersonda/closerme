@@ -5,18 +5,17 @@
  */
 package closermeapp.Bussiness.Entities;
 
-import java.time.LocalDateTime;
-
 /**
  *
  * @author JoseJulio
  */
 public class Event {
-    
+
+    private int id;
     private String name;
     private String startDate;
     private String endDate;
-    private Visitor visitor;
+    private Client client;
     
     public Event(
             String name, 
@@ -28,7 +27,7 @@ public class Event {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        visitor = new Visitor(visitorName, visitorPhone);  
+        client = new Client(visitorName, visitorPhone);
     }
 
     public String getName() {
@@ -55,13 +54,21 @@ public class Event {
         this.endDate = endDate;
     }
     
-    public Visitor getVisitor(){
-       return this.visitor;
+    public Client getClient(){
+       return this.client;
     }
     
     public void setVisitor(String name, String phone){
-        this.visitor.setName(name);
-        this.visitor.setPhone(phone);
+        this.client.setName(name);
+        this.client.setPhone(phone);
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setID(int id){
+        this.id = id;
     }
     
 }

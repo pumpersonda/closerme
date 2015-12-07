@@ -6,7 +6,7 @@
 package closermeapp.Bussiness.Entities;
 
 
-public class Employee extends Visitor {
+public class Employee extends Client {
     private String role;
 
     public Employee(String name, String phone, String role) {
