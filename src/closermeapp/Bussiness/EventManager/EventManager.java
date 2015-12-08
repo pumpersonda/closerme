@@ -9,6 +9,8 @@ import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Data.DAOs.EventDAO;
 import closermeapp.Presentation.Controllers.EventViewerController;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,8 @@ import java.util.ArrayList;
  * @author JoseJulio
  */
 public class EventManager {
+
+    private final float COST_PER_HOUR = 20; // pesos
 
     private EventViewerController eventViewerController;
 
@@ -37,31 +41,21 @@ public class EventManager {
          return newEvent;
     }
 
-    public void addEvent(Event event){
+    public void reserveEvent(Event event){
         EventDAO.getEventDAO().add(event);
         eventViewerController.updateView();
     }
 
-    public void deleteEvent(Event event){
+    public void cancelEvent(Event event){
         EventDAO.getEventDAO().delete(event);
         eventViewerController.updateView();
     }
 
-    /*
-    public void changeEventStartDate(int EventID, String newStartDate, String newStartTime){
-        Event event =  (Event)EventDAO.getEventDAO().get(EventID);
-        String starDateFormated = newStartDate + newStartTime;
-        event.setStartDate(newStartDate);
-        EventDAO.getEventDAO().update(event);
+    public void chargeForEvent(Event event){
+        double finalCost = calculateEventCost(event.getStartDate(), event.getEndDate());
+        //chargeManager.chargeForEvent(finalCost);
+        cancelEvent(event);
     }
-
-    public void changeEventEndDate(int EventID, String newEndDate, String newEndTime){
-        String endDateFormated = newEndDate + newEndTime;
-        Event event = (Event)EventDAO.getEventDAO().get(EventID);
-        event.setEndDate(endDateFormated);
-        EventDAO.getEventDAO().update(event);
-    }
-    */
 
     public void updateEvent(Event event){
         EventDAO.getEventDAO().update(event);
@@ -69,6 +63,17 @@ public class EventManager {
 
     public ArrayList<Event> getAllEvents(){
         return EventDAO.getEventDAO().getList();
+    }
+
+    private double calculateEventCost(String startDate, String endDate){
+        LocalDateTime startDateTime = LocalDateTime.parse(startDate);
+        LocalDateTime endDateTime = LocalDateTime.parse(endDate);
+
+        long hours = ChronoUnit.HOURS.between(startDateTime, endDateTime);
+
+        double totalCost = (float)hours * COST_PER_HOUR;
+
+        return totalCost;
     }
 
 }   

@@ -24,7 +24,7 @@ public class EventRegistrationController extends AbstractController {
      }
      
      public void registerEvent(Event newEvent){
-         EventManager.getEventManager().addEvent(newEvent);
+         EventManager.getEventManager().reserveEvent(newEvent);
      }
      
      private void initializeView(){
