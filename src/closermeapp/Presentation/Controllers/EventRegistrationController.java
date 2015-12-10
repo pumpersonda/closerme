@@ -7,6 +7,7 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.EventManagement.EventRegistrationView;
 import javax.swing.WindowConstants;
 
@@ -58,16 +59,33 @@ public class EventRegistrationController extends AbstractController {
         String clientName = eventRegistrationView.getClientNameTextBox().getText();
         String clientPhone = eventRegistrationView.getClientPhoneTextBox().getText();
 
-        Event newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+        boolean isValid = isValid(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+        if(isValid) {
+            Event newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+            registerEvent(newEvent);
+            closeWindow();
+        }
+        else{
+            Notifier notifier = new Notifier();
+            notifier.showFailMessage("Error","Los campos ingresados no son validos");
+        }
+    }
 
-        registerEvent(newEvent);
+    private boolean isValid(String eventName, String eventStartDate, String eventStartTime, String eventEndDate, String eventEndTime, String clientName, String clientPhone) {
+        boolean valid = eventName!="" &&
+                eventStartDate!="" &&
+                eventStartTime!="" &&
+                eventEndDate!="" &&
+                eventEndTime!="" &&
+                clientName!="" &&
+                clientPhone!="";
+        return  valid;
     }
 
     @Override
     protected void openWindow() {
         this.eventRegistrationView.setVisible(true);
     }
-
 
 
 }

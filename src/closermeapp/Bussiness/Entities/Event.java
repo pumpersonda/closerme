@@ -11,12 +11,15 @@ package closermeapp.Bussiness.Entities;
  */
 public class Event {
 
-    private int id;
+    private int eventID;
     private String name;
     private String startDate;
     private String endDate;
-    private Client client;
-    
+    private String clientName;
+    private String clientPhone;
+
+    public Event(){}
+
     public Event(
             String name, 
             String startDate, 
@@ -27,7 +30,8 @@ public class Event {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        client = new Client(visitorName, visitorPhone);
+        this.clientName = clientName;
+        this.clientPhone = clientPhone;
     }
 
     public String getName() {
@@ -53,22 +57,29 @@ public class Event {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-    
-    public Client getClient(){
-       return this.client;
-    }
-    
-    public void setVisitor(String name, String phone){
-        this.client.setName(name);
-        this.client.setPhone(phone);
+
+    public String getClientName() {
+        return clientName;
     }
 
-    public int getId(){
-        return id;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public void setID(int id){
-        this.id = id;
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
+
+    public int getEventID(){
+        return eventID;
+    }
+
+    public void setEventID(int eventID){
+        this.eventID = eventID;
     }
     
 }

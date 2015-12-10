@@ -56,9 +56,9 @@ public class EventDAO extends AbstractDAO<Event> {
         ArrayList eventList = null;
 
         try{
-           openSession();
+            openSession();
 
-            eventList = (ArrayList<Event>)session.createQuery("FROM event").list();
+            eventList = (ArrayList<Event>)session.createQuery("FROM Event").list();
 
         }finally {
             session.close();

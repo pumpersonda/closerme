@@ -5,15 +5,13 @@
 
 <hibernate-mapping>
     <class name="closermeapp.Bussiness.Entities.Event" table="event">
-        <id name="id" column="eventID">
+        <id name="eventID" column="eventID">
             <generator class="identity"/>
         </id>
-        <property name="name" type="java.lang.String" column="eventName"/>
+        <property name="name" type="java.lang.String" column="name"/>
         <property name="startDate" type="java.lang.String" column="startDate"/>
         <property name="endDate" type="java.lang.String" column="endDate"/>
-        <property name="client">
-            <column name="clientName"></column>
-            <column name="clientPhone"></column>
-        </property>
+        <property name="clientName" type="java.lang.String" column="clientName"></property>
+        <property name="clientPhone" type="java.lang.String" column="clientPhone"></property>
     </class>
 </hibernate-mapping>

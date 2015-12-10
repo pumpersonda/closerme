@@ -5,11 +5,14 @@
  */
 package closermeapp.Bussiness.EventManager;
 
+import closermeapp.Bussiness.ChargeManager.ChargeManager;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Data.DAOs.EventDAO;
 import closermeapp.Presentation.Controllers.EventViewerController;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -35,8 +38,8 @@ public class EventManager {
     }
 
     public Event createEvent(String name, String startDate,String startTime, String endDate,String endTime, String clientName, String clientPhone){
-         String startDateFormated = startDate+startTime;
-         String endDateFormated = endDate+endTime;
+         String startDateFormated = startDate+"|"+startTime;
+         String endDateFormated = endDate+"|"+endTime;
          Event newEvent = new Event(name, startDateFormated, endDateFormated, clientName, clientPhone);
          return newEvent;
     }
@@ -53,7 +56,9 @@ public class EventManager {
 
     public void chargeForEvent(Event event){
         double finalCost = calculateEventCost(event.getStartDate(), event.getEndDate());
-        //chargeManager.chargeForEvent(finalCost);
+
+        ChargeManager.getChargeManager().charge("Evento: "+event.getName(), finalCost);
+
         cancelEvent(event);
     }
 
@@ -65,9 +70,17 @@ public class EventManager {
         return EventDAO.getEventDAO().getList();
     }
 
-    private double calculateEventCost(String startDate, String endDate){
-        LocalDateTime startDateTime = LocalDateTime.parse(startDate);
-        LocalDateTime endDateTime = LocalDateTime.parse(endDate);
+    private double calculateEventCost(String start, String end){
+
+        String[] splitedStart = start.split("|");
+        LocalDate startDate = LocalDate.parse(splitedStart[0]);
+        LocalTime startTime = LocalTime.parse(splitedStart[1]);
+        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+
+        String[] splitedEnd = end.split("|");
+        LocalDate endDate = LocalDate.parse(splitedEnd[0]);
+        LocalTime endTime = LocalTime.parse(splitedEnd[1]);
+        LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
 
         long hours = ChronoUnit.HOURS.between(startDateTime, endDateTime);
 

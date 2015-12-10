@@ -21,7 +21,7 @@ public class EventViewerController extends  AbstractController {
 
     public EventViewerController(){
 
-        eventRegistrationController = new EventRegistrationController();
+        eventRegistrationController = new EventRegistrationController(this);
 
         eventViewer = new EventViewer();
         loadAllEvents();
@@ -90,7 +90,7 @@ public class EventViewerController extends  AbstractController {
         row.add(currentEvent.getName());
         row.add(currentEvent.getStartDate());
         row.add(currentEvent.getEndDate());
-        row.add(currentEvent.getClient().getName());
+        row.add(currentEvent.getClientName());
         return row;
     }
 
