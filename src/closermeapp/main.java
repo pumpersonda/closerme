@@ -2,8 +2,9 @@ package closermeapp;
 
 import ch.randelshofer.quaqua.QuaquaManager;
 import closermeapp.Presentation.Controllers.CallLogController;
+import closermeapp.Presentation.Controllers.EmployeeRegistrationController;
 import closermeapp.Presentation.Controllers.MembersMenuController;
-import closermeapp.Presentation.Controllers.VisitorController;
+import closermeapp.Presentation.Controllers.VisitorViewController;
 
 import javax.swing.*;
 
@@ -18,17 +19,17 @@ public class main {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
 
-            createMenuMembers();
-            createRegisterMenu();
+            //createMenuMembers();
+            // createRegisterMenu();
             //createVisitor();
-
+            createEmployeeMenu();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
     public static void createVisitor() {
-        VisitorController visitorController = new VisitorController();
+        VisitorViewController visitorController = new VisitorViewController();
     }
 
     public static void createMenuMembers() {
@@ -38,6 +39,11 @@ public class main {
     public static void createRegisterMenu() {
         CallLogController callLogController = new CallLogController();
         callLogController.openWindow();
+    }
+
+    public static void createEmployeeMenu() {
+        EmployeeRegistrationController employeeRegistrationController = new EmployeeRegistrationController();
+        employeeRegistrationController.openWindow();
     }
 }
 

@@ -15,7 +15,7 @@ import static java.lang.String.valueOf;
 /**
  * Created by André on 29/11/2015.
  */
-public class CallLogController {
+public class CallLogController extends AbstractViewController {
     private CallLogView callLogView;
     private CallLogDataController callLogDataController;
     private CallLogManager callLogManager;
@@ -28,9 +28,12 @@ public class CallLogController {
         callLogDataController = new CallLogDataController(this);
         callLogManager = CallLogManager.getCallLogManager();
         notifier = new Notifier();
-        configureWindow();
+
+        configureWindow(callLogView);
+        initializeView();
     }
 
+    @Override
     public void openWindow() {
         this.callLogView.setVisible(true);
     }
@@ -48,7 +51,7 @@ public class CallLogController {
     }
 
     private void openCallLogDataView() {
-        callLogDataController.opeWindow();
+        callLogDataController.openWindow();
     }
 
     private void initTable() {
@@ -151,16 +154,8 @@ public class CallLogController {
         setEvents();
     }
 
-    private void configureWindow() {
-        callLogView.setLocationRelativeTo(null);
-        callLogView.setResizable(false);
-        callLogView.pack();
-        callLogView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        callLogView.setLocationRelativeTo(null);
-        initializeView();
-    }
-
-    private void setEvents() {
+    @Override
+    protected void setEvents() {
         callLogView.getNewRegisterButton().addActionListener(actionEvent -> openCallLogDataView());
         callLogView.getDeleteButton().addActionListener(actionEvent -> deleteSelectedCallLog());
         callLogView.getDeleteAllButton().addActionListener(actionEvent -> deleteAllCallLogs());

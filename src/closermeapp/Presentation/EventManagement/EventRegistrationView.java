@@ -5,7 +5,7 @@
  */
 package closermeapp.Presentation.EventManagement;
 
-import closermeapp.Presentation.Controllers.EventRegistrationController;
+import closermeapp.Presentation.Controllers.EventRegistrationViewController;
 
 import javax.swing.*;
 
@@ -18,7 +18,7 @@ public class EventRegistrationView extends javax.swing.JFrame {
     /**
      * Creates new form EventRegistrationView
      */
-    public EventRegistrationView(EventRegistrationController helper) {
+    public EventRegistrationView(EventRegistrationViewController helper) {
         initComponents();
     }
 
@@ -404,7 +404,7 @@ public class EventRegistrationView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EventRegistrationView(new EventRegistrationController()).setVisible(true);
+                new EventRegistrationView(new EventRegistrationViewController()).setVisible(true);
             }
         });
     }

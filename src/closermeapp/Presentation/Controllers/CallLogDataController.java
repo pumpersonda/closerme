@@ -5,12 +5,10 @@ import closermeapp.Bussiness.LogManager.CallLogManager;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.CallLog.CallLogDataView;
 
-import javax.swing.*;
-
 /**
  * Created by André on 30/11/2015.
  */
-public class CallLogDataController {
+public class CallLogDataController extends AbstractViewController {
     private CallLogDataView callLogDataView;
     private CallLogController callLogController;
     private CallLogManager callLogManager;
@@ -19,13 +17,15 @@ public class CallLogDataController {
     public CallLogDataController(CallLogController callLogController) {
         this.callLogDataView = new CallLogDataView();
         this.callLogController = callLogController;
-        callLogManager = CallLogManager.getCallLogManager();
         notifier = new Notifier();
-        configureWindow();
+
+        callLogManager = CallLogManager.getCallLogManager();
+
+        configureWindow(callLogDataView);
         setEvents();
     }
 
-    public void opeWindow() {
+    public void openWindow() {
         callLogDataView.setVisible(true);
     }
 
@@ -91,15 +91,6 @@ public class CallLogDataController {
         resetFields();
     }
 
-
-    private void configureWindow() {
-        callLogDataView.setLocationRelativeTo(null);
-        callLogDataView.setResizable(false);
-        callLogDataView.pack();
-        callLogDataView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        callLogDataView.setLocationRelativeTo(null);
-    }
-
     private void resetFields() {
         String whiteSpace = "";
         callLogDataView.getMemberNameTextBox().setText(whiteSpace);
@@ -113,7 +104,8 @@ public class CallLogDataController {
     private void closeWindow() {
         callLogDataView.dispose();
     }
-    private void setEvents() {
+
+    protected void setEvents() {
         callLogDataView.getRegisterButton().addActionListener(actionEvent -> registerCall());
         callLogDataView.getCancelButton().addActionListener(actionEvent -> closeWindow());
     }

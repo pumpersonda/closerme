@@ -8,16 +8,17 @@ package closermeapp.Presentation.Controllers;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
 import closermeapp.Presentation.EventManagement.EventRegistrationView;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
 
 /**
  *
  * @author JoseJulio
  */
-public class EventRegistrationController extends AbstractController {
+public class EventRegistrationViewController extends AbstractViewController {
      EventRegistrationView eventRegistrationView;
-     
-     public EventRegistrationController() {
+
+    public EventRegistrationViewController() {
             initializeView();
      }
      
@@ -53,6 +54,11 @@ public class EventRegistrationController extends AbstractController {
     }
 
 
+    @Override
+    public void openWindow() {
+
+    }
+
     protected void setEvents(){
         eventRegistrationView.getCancelButton().addActionListener(actionEvent -> closeWindow());
         eventRegistrationView.getConfirmButton().addActionListener(acionEvent -> processEventCreation());
@@ -76,8 +82,5 @@ public class EventRegistrationController extends AbstractController {
         registerEvent(newEvent);
     }
 
-    @Override
-    protected void openWindow() {
-        this.eventRegistrationView.setVisible(true);
-    }
+
 }

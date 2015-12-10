@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="closermeapp.Bussiness.Entities.Enterprise" table="enterprise">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="java.lang.String" column="name"/>
+        <property name="address"/>
+        <property name="city"/>
+        <property name="phone"/>
+        <property name="email"/>
+
+        <list name="employeeList" cascade="all-delete-orphan">
+            <key column="id"/>
+            <index column="order_list"/>
+            <one-to-many class="closermeapp.Bussiness.Entities.Employee"/>
+        </list>
+    </class>
+</hibernate-mapping>

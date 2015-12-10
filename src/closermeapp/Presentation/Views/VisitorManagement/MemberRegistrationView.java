@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package closermeapp.Presentation.Views.VisitorManagement;
 
 
@@ -32,7 +27,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         memberNameTextBox = new javax.swing.JTextField();
         memberPhoneLabel = new javax.swing.JLabel();
         memberPhoneTextBox = new javax.swing.JTextField();
-        memberCelPhoneLabel = new javax.swing.JLabel();
+        memberCellPhoneLabel = new javax.swing.JLabel();
         memberCellPhoneTextBox = new javax.swing.JTextField();
         addressSubPanel = new javax.swing.JPanel();
         memberAddressStreetLabel = new javax.swing.JLabel();
@@ -61,7 +56,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
 
         memberPhoneLabel.setText("Telefono: ");
 
-        memberCelPhoneLabel.setText("Celular:");
+        memberCellPhoneLabel.setText("Celular:");
 
         addressSubPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dirección"));
 
@@ -134,7 +129,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(memberPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(memberCelPhoneLabel)
+                                                .addComponent(memberCellPhoneLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(memberCellPhoneTextBox)))
                                 .addContainerGap())
@@ -150,7 +145,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
                                 .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(memberPhoneLabel)
                                         .addComponent(memberPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(memberCelPhoneLabel)
+                                        .addComponent(memberCellPhoneLabel)
                                         .addComponent(memberCellPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(addressSubPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,8 +313,8 @@ public class MemberRegistrationView extends javax.swing.JFrame {
         return memberAddressStreetTextBox;
     }
 
-    public JLabel getMemberCelPhoneLabel() {
-        return memberCelPhoneLabel;
+    public JLabel getMemberCellPhoneLabel() {
+        return memberCellPhoneLabel;
     }
 
     public JTextField getMemberCellPhoneTextBox() {
@@ -381,7 +376,7 @@ public class MemberRegistrationView extends javax.swing.JFrame {
     private javax.swing.JLabel memberAddressSidesLabel;
     private javax.swing.JLabel memberAddressStreetLabel;
     private javax.swing.JTextField memberAddressStreetTextBox;
-    private javax.swing.JLabel memberCelPhoneLabel;
+    private javax.swing.JLabel memberCellPhoneLabel;
     private javax.swing.JTextField memberCellPhoneTextBox;
     private javax.swing.JPanel memberGeneralDataPanel;
     private javax.swing.JLabel memberNameLabel;

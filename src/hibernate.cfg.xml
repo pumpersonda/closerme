@@ -22,6 +22,8 @@
         <mapping resource="closermeapp/Data/Mapping/Member.hbm.xml"/>
         <mapping resource="closermeapp/Data/Mapping/Membership.hbm.xml"/>
         <mapping resource="closermeapp/Data/Mapping/CallLog.hbm.xml"/>
+        <mapping resource="closermeapp/Data/Mapping/Employee.hbm.xml"/>
+        <mapping resource="closermeapp/Data/Mapping/Enterprise.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

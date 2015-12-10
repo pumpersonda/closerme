@@ -6,7 +6,10 @@
 package closermeapp.Bussiness.Entities;
 
 
-public class Employee extends Visitor {
+import java.io.Serializable;
+
+public class Employee extends Visitor implements Serializable {
+    private int id;
     private String role;
 
     public Employee(String name, String phone, String role) {
@@ -14,11 +17,24 @@ public class Employee extends Visitor {
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
+    public Employee() {
     }
 
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
 }

@@ -7,14 +7,14 @@ import javax.swing.*;
 /**
  * Created by JoseJulio on 30/11/2015.
  */
-public class EventViewerController extends  AbstractController {
+public class EventViewerViewController extends AbstractViewController {
 
     EventViewer eventViewer;
-    EventRegistrationController eventRegistrationController;
+    EventRegistrationViewController eventRegistrationController;
 
-    public EventViewerController(){
+    public EventViewerViewController() {
 
-        eventRegistrationController = new EventRegistrationController();
+        eventRegistrationController = new EventRegistrationViewController();
 
         eventViewer = new EventViewer();
     }
@@ -37,7 +37,7 @@ public class EventViewerController extends  AbstractController {
     }
 
     @Override
-    protected void openWindow() {
+    public void openWindow() {
         eventViewer.setVisible(true);
     }
 
