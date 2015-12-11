@@ -54,7 +54,7 @@ public class MembersManager {
         return member;
     }
 
-    public ArrayList getMemberList() {
+    public ArrayList<Member> getMemberList() {
         ArrayList<Member> memberList;
         memberList = this.membersDAO.getList();
 

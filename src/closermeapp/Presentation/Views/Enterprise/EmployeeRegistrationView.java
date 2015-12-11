@@ -5,7 +5,6 @@ package closermeapp.Presentation.Views.Enterprise;
  * and open the template in the editor.
  */
 
-
 import javax.swing.*;
 
 /**
@@ -31,13 +30,15 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
     private void initComponents() {
 
         windowsPanel = new javax.swing.JPanel();
-        memberGeneralDataPanel = new javax.swing.JPanel();
-        memberNameLabel = new javax.swing.JLabel();
-        memberNameTextBox = new javax.swing.JTextField();
-        memberCellPhoneLabel = new javax.swing.JLabel();
-        memberCellPhoneTextBox = new javax.swing.JTextField();
+        employeeGeneralDataPanel = new javax.swing.JPanel();
+        employeeNameLabel = new javax.swing.JLabel();
+        employeeNameTextBox = new javax.swing.JTextField();
+        employeeCellPhoneLabel = new javax.swing.JLabel();
+        employeeRoleTextBox = new javax.swing.JTextField();
+        employeeRoleLabel = new javax.swing.JLabel();
+        employeeCellPhoneTextBox1 = new javax.swing.JTextField();
         buttonsPanel = new javax.swing.JPanel();
-        RegisterMemberButton = new javax.swing.JButton();
+        RegisterEmployeeButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         enterprisePanel = new javax.swing.JPanel();
         addEnterpriseButton = new javax.swing.JButton();
@@ -49,41 +50,53 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        memberGeneralDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
+        employeeGeneralDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
 
-        memberNameLabel.setText("Nombre:");
+        employeeNameLabel.setText("Nombre:");
 
-        memberCellPhoneLabel.setText("Telefono:");
+        employeeCellPhoneLabel.setText("Telefono:");
 
-        javax.swing.GroupLayout memberGeneralDataPanelLayout = new javax.swing.GroupLayout(memberGeneralDataPanel);
-        memberGeneralDataPanel.setLayout(memberGeneralDataPanelLayout);
-        memberGeneralDataPanelLayout.setHorizontalGroup(
-                memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(memberGeneralDataPanelLayout.createSequentialGroup()
+        employeeRoleLabel.setText("Puesto:");
+
+        javax.swing.GroupLayout employeeGeneralDataPanelLayout = new javax.swing.GroupLayout(employeeGeneralDataPanel);
+        employeeGeneralDataPanel.setLayout(employeeGeneralDataPanelLayout);
+        employeeGeneralDataPanelLayout.setHorizontalGroup(
+                employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(employeeGeneralDataPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(memberNameLabel)
-                                        .addComponent(memberCellPhoneLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(memberCellPhoneTextBox)
-                                        .addComponent(memberNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
+                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(employeeGeneralDataPanelLayout.createSequentialGroup()
+                                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(employeeNameLabel)
+                                                        .addComponent(employeeCellPhoneLabel))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(employeeNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                                                        .addComponent(employeeCellPhoneTextBox1)))
+                                        .addGroup(employeeGeneralDataPanelLayout.createSequentialGroup()
+                                                .addComponent(employeeRoleLabel)
+                                                .addGap(13, 13, 13)
+                                                .addComponent(employeeRoleTextBox)))
                                 .addContainerGap())
         );
-        memberGeneralDataPanelLayout.setVerticalGroup(
-                memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(memberGeneralDataPanelLayout.createSequentialGroup()
-                                .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(memberNameLabel)
-                                        .addComponent(memberNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        employeeGeneralDataPanelLayout.setVerticalGroup(
+                employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(employeeGeneralDataPanelLayout.createSequentialGroup()
+                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeNameLabel)
+                                        .addComponent(employeeNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(memberGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(memberCellPhoneLabel)
-                                        .addComponent(memberCellPhoneTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(employeeCellPhoneLabel)
+                                        .addComponent(employeeCellPhoneTextBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(employeeGeneralDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(employeeRoleLabel)
+                                        .addComponent(employeeRoleTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        RegisterMemberButton.setText("Registrar");
+        RegisterEmployeeButton.setText("Registrar");
 
         cancelButton.setText("Cancelar");
 
@@ -93,7 +106,7 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
                 buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(buttonsPanelLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(RegisterMemberButton)
+                                .addComponent(RegisterEmployeeButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelButton)
                                 .addGap(33, 33, 33))
@@ -103,7 +116,7 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsPanelLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(buttonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(RegisterMemberButton)
+                                        .addComponent(RegisterEmployeeButton)
                                         .addComponent(cancelButton))
                                 .addContainerGap())
         );
@@ -165,7 +178,7 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, windowsPanelLayout.createSequentialGroup()
                                                 .addGroup(windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(memberGeneralDataPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(employeeGeneralDataPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(enterprisePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(24, 24, 24))
                                         .addGroup(windowsPanelLayout.createSequentialGroup()
@@ -185,10 +198,10 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberGeneralDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(employeeGeneralDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29))
+                                .addGap(25, 25, 25))
         );
 
         getContentPane().add(windowsPanel);
@@ -231,11 +244,11 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
         });
     }
 
-    public JButton getRegisterMemberButton() {
-        return RegisterMemberButton;
+    public JButton getRegisterEmployeeButton() {
+        return RegisterEmployeeButton;
     }
 
-    public JButton getAddEnterpriseButton() {
+    public JButton getRegisterEnterpriseButton() {
         return addEnterpriseButton;
     }
 
@@ -259,24 +272,24 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
         return enterprisePanel;
     }
 
-    public JLabel getMemberCellPhoneLabel() {
-        return memberCellPhoneLabel;
+    public JLabel getEmployeeCellPhoneLabel() {
+        return employeeCellPhoneLabel;
     }
 
-    public JTextField getMemberCellPhoneTextBox() {
-        return memberCellPhoneTextBox;
+    public JTextField getEmployeeCellPhoneTextBox() {
+        return employeeRoleTextBox;
     }
 
-    public JPanel getMemberGeneralDataPanel() {
-        return memberGeneralDataPanel;
+    public JPanel getEmployeeGeneralDataPanel() {
+        return employeeGeneralDataPanel;
     }
 
-    public JLabel getMemberNameLabel() {
-        return memberNameLabel;
+    public JLabel getEmployeeNameLabel() {
+        return employeeNameLabel;
     }
 
-    public JTextField getMemberNameTextBox() {
-        return memberNameTextBox;
+    public JTextField getEmployeeNameTextBox() {
+        return employeeNameTextBox;
     }
 
     public JLabel getTitleLabel() {
@@ -291,25 +304,35 @@ public class EmployeeRegistrationView extends javax.swing.JFrame {
         return windowsPanel;
     }
 
+    public JTextField getEmployeeCellPhoneTextBox1() {
+        return employeeCellPhoneTextBox1;
+    }
+
+    public JTextField getEmployeeRoleTextBox() {
+        return employeeRoleTextBox;
+    }
+
+    public JLabel getEmployeeRoleLabel() {
+        return employeeRoleLabel;
+    }
 
     // Variables declaration - do not modify
-    private javax.swing.JButton RegisterMemberButton;
+    private javax.swing.JButton RegisterEmployeeButton;
     private javax.swing.JButton addEnterpriseButton;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel employeeCellPhoneLabel;
+    private javax.swing.JTextField employeeCellPhoneTextBox1;
+    private javax.swing.JPanel employeeGeneralDataPanel;
+    private javax.swing.JLabel employeeNameLabel;
+    private javax.swing.JTextField employeeNameTextBox;
+    private javax.swing.JLabel employeeRoleLabel;
+    private javax.swing.JTextField employeeRoleTextBox;
     private javax.swing.JComboBox enterpriseComboBox;
     private javax.swing.JLabel enterpriseNameLabel;
     private javax.swing.JPanel enterprisePanel;
-    private javax.swing.JLabel memberCellPhoneLabel;
-    private javax.swing.JTextField memberCellPhoneTextBox;
-    private javax.swing.JPanel memberGeneralDataPanel;
-    private javax.swing.JLabel memberNameLabel;
-    private javax.swing.JTextField memberNameTextBox;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JPanel windowsPanel;
     // End of variables declaration
 }
-
-
-

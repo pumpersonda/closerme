@@ -5,6 +5,8 @@ import closermeapp.Bussiness.Entities.Enterprise;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.Enterprise.EnterpriseRegistrationView;
 
+import java.util.HashMap;
+
 /**
  * Created by André on 06/12/2015.
  */
@@ -29,6 +31,7 @@ public class EnterpriseRegistrationController extends AbstractViewController {
     }
 
     private void registerEnterprise() {
+
         String name = enterpriseRegistrationView.getNameTextField().getText();
         String address = enterpriseRegistrationView.getAddressTextField().getText();
         String city = enterpriseRegistrationView.getCityTextField().getText();
@@ -37,12 +40,32 @@ public class EnterpriseRegistrationController extends AbstractViewController {
         boolean isValidField = !isEmptyFields(name, address, city, phone, email);
 
         if (isValidField) {
-            Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email);
-            enterpriseManager.addEnterprise(enterprise);
-            updateWindow(enterprise);
+
+            if (isValidEnterprise(name)) {
+
+                sendEnterpriseDataToManager(name, address, city, phone, email);
+                notifier.showSuccessMessage("Agregado", "Empresa registrada");
+
+            } else {
+                notifier.showWarningMessage("Advertencia", "Ya existe esta empresa");
+            }
+
         } else {
             notifier.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
         }
+    }
+
+
+    private void sendEnterpriseDataToManager(
+            String name,
+            String address,
+            String city,
+            String phone,
+            String email
+    ) {
+        Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email);
+        enterpriseManager.addEnterprise(enterprise);
+        updateWindow(enterprise);
     }
 
     private boolean isEmptyFields(
@@ -64,12 +87,16 @@ public class EnterpriseRegistrationController extends AbstractViewController {
         enterpriseRegistrationView.getEmailTextField().setText(whiteSpace);
     }
 
+    private boolean isValidEnterprise(String enterpriseName) {
+        HashMap enterpriseUnavailableList = employeeRegistrationController.getEnterpriseList();
+        return !enterpriseUnavailableList.containsKey(enterpriseName);
+    }
 
     private void updateWindow(Enterprise enterprise) {
+        employeeRegistrationController.addEnterpriseToListBox(enterprise);
         resetFields();
 
     }
-
 
     private void closeWindow() {
         enterpriseRegistrationView.dispose();

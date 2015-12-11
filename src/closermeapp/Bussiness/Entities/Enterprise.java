@@ -14,7 +14,7 @@ public class Enterprise implements Serializable {
     private String city;
     private String phone;
     private String email;
-    private List<Employee> employeeList = new ArrayList<Employee>();
+    private List<Employee> employeeList = new ArrayList<>();
 
     public Enterprise(
             String name,
@@ -90,6 +90,7 @@ public class Enterprise implements Serializable {
     }
 
     public void addEmployee(Employee employee) {
+
         this.employeeList.add(employee);
     }
 }

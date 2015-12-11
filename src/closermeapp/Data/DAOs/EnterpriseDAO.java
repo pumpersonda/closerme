@@ -1,6 +1,7 @@
 package closermeapp.Data.DAOs;
 
 import closermeapp.Bussiness.Entities.Enterprise;
+import org.hibernate.Hibernate;
 
 import java.util.ArrayList;
 
@@ -29,12 +30,14 @@ public class EnterpriseDAO extends AbstractDAO<Enterprise> {
 
     @Override
     public void delete(Enterprise enterprise) {
-
+        String query = "delete";
+        enquire(query, enterprise);
     }
 
     @Override
     public void update(Enterprise enterprise) {
-
+        String query = "update";
+        enquire(query, enterprise);
     }
 
     @Override
@@ -53,12 +56,16 @@ public class EnterpriseDAO extends AbstractDAO<Enterprise> {
 
     @Override
     public ArrayList<Enterprise> getList() {
-        ArrayList enterpriseList = null;
+        ArrayList<Enterprise> enterpriseList = null;
 
         try {
             openSession();
 
             enterpriseList = (ArrayList) session.createQuery("from Enterprise ").list();
+
+            for (Enterprise enterprise : enterpriseList) {
+                Hibernate.initialize(enterprise.getEmployeeList());
+            }
         } finally {
             session.close();
         }
