@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static java.lang.String.valueOf;
 
 
-public class MembersMenuController {
+public class MembersMenuController extends AbstractViewController {
     private MembersMenuView membersMenuView;
     private MemberRegistrationController memberRegistrationController;
     private MembersManager membersManager;
@@ -27,16 +27,12 @@ public class MembersMenuController {
         membersManager = MembersManager.getMembersManager();
         notifier = new Notifier();
 
-        membersMenuView.setLocationRelativeTo(null);
-        membersMenuView.setResizable(false);
-        membersMenuView.pack();
-        membersMenuView.setLocationRelativeTo(null);
-        membersMenuView.setVisible(true);
+        initializeView();
+    }
 
-        initTable();
-        setEvents();
-        updateMemberList();
-        loadMembersToTable();
+    @Override
+    public void openWindow() {
+        membersMenuView.setVisible(true);
     }
 
     public void addMemberToTable(Member member) {
@@ -149,7 +145,7 @@ public class MembersMenuController {
 
             Member member = memberList.get(memberListPosition);
             membersManager.deleteMember(member);
-            memberList.remove(tablePosition);
+            memberList.remove(memberListPosition);
 
             String title = "Miembro borrado";
             String message = "Se ha borrado con exito";
@@ -168,7 +164,7 @@ public class MembersMenuController {
         memberRegistrationController.openWindow();
     }
 
-    private void initTable() {
+    private void initializeTable() {
         String[] headers = {"", "Name", "Cellphone", "Phone", "Membership"};
         tableModel = new TableModel(headers);
         JTable membersTable = membersMenuView.getMembersTable();
@@ -181,7 +177,18 @@ public class MembersMenuController {
         columnModel.getColumn(firstColumn).setPreferredWidth(sizeColumn);
     }
 
-    private void setEvents() {
+
+    @Override
+    protected void initializeView() {
+        configureWindow(membersMenuView);
+        initializeTable();
+        setEvents();
+        updateMemberList();
+        loadMembersToTable();
+    }
+
+    @Override
+    protected void setEvents() {
         membersMenuView.getAddButton().addActionListener(actionEvent -> openRegisterWindow());
         membersMenuView.getSearchButton().addActionListener(actionEvent -> updateTable());
         membersMenuView.getDeleteButton().addActionListener(actionEvent -> deleteMember());

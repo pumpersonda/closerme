@@ -2,6 +2,7 @@ package closermeapp.Bussiness.Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by André on 05/12/2015.
@@ -13,7 +14,7 @@ public class Enterprise implements Serializable {
     private String city;
     private String phone;
     private String email;
-    private ArrayList<Employee> employeeList;
+    private List<Employee> employeeList = new ArrayList<Employee>();
 
     public Enterprise(
             String name,
@@ -52,10 +53,9 @@ public class Enterprise implements Serializable {
         this.phone = phone;
     }
 
-    public void setEmployeeList(ArrayList<Employee> employeeList) {
+    public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -85,7 +85,7 @@ public class Enterprise implements Serializable {
         return id;
     }
 
-    public ArrayList<Employee> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         return employeeList;
     }
 

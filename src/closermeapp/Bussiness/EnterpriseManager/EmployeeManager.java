@@ -1,4 +1,4 @@
-package closermeapp.Bussiness.Enterprise;
+package closermeapp.Bussiness.EnterpriseManager;
 
 /**
  * Created by André on 05/12/2015.

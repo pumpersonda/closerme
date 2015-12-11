@@ -29,7 +29,7 @@ public class CallLogController extends AbstractViewController {
         callLogManager = CallLogManager.getCallLogManager();
         notifier = new Notifier();
 
-        configureWindow(callLogView);
+
         initializeView();
     }
 
@@ -54,7 +54,7 @@ public class CallLogController extends AbstractViewController {
         callLogDataController.openWindow();
     }
 
-    private void initTable() {
+    private void initializeTable() {
         String[] headers = {"", "Fecha", "Miembro", "Numero", "Duración"};
         tableModel = new TableModel(headers);
 
@@ -143,13 +143,14 @@ public class CallLogController extends AbstractViewController {
         callLogList.remove(listIndex);
     }
 
-    private void updateCallLogList() {
+    private void loadCallLogList() {
         callLogList = callLogManager.getMemberList();
     }
 
-    private void initializeView() {
-        initTable();
-        updateCallLogList();
+    protected void initializeView() {
+        configureWindow(callLogView);
+        initializeTable();
+        loadCallLogList();
         loadCallLogsToTable();
         setEvents();
     }

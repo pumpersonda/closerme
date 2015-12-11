@@ -21,6 +21,8 @@ public abstract class AbstractViewController {
         window.setLocationRelativeTo(null);
     }
 
+    protected abstract void initializeView();
+
     protected abstract void setEvents();
 
 }

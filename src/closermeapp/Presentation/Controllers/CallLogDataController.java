@@ -21,8 +21,7 @@ public class CallLogDataController extends AbstractViewController {
 
         callLogManager = CallLogManager.getCallLogManager();
 
-        configureWindow(callLogDataView);
-        setEvents();
+
     }
 
     public void openWindow() {
@@ -104,6 +103,13 @@ public class CallLogDataController extends AbstractViewController {
     private void closeWindow() {
         callLogDataView.dispose();
     }
+
+    @Override
+    protected void initializeView() {
+        configureWindow(callLogDataView);
+        setEvents();
+    }
+
 
     protected void setEvents() {
         callLogDataView.getRegisterButton().addActionListener(actionEvent -> registerCall());

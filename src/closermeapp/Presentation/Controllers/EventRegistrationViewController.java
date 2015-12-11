@@ -40,8 +40,8 @@ public class EventRegistrationViewController extends AbstractViewController {
          //...
          
      }
-     
-     private void initializeView(){
+
+    protected void initializeView() {
          configureWindow();
          setEvents();
      }

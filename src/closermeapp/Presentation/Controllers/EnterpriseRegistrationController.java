@@ -1,6 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Bussiness.Enterprise.EnterpriseManager;
+import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Enterprise;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.Enterprise.EnterpriseRegistrationView;
@@ -11,18 +11,19 @@ import closermeapp.Presentation.Views.Enterprise.EnterpriseRegistrationView;
 public class EnterpriseRegistrationController extends AbstractViewController {
     private EnterpriseRegistrationView enterpriseRegistrationView;
     private EnterpriseManager enterpriseManager;
+    private EmployeeRegistrationController employeeRegistrationController;
     private Notifier notifier;
 
-    public EnterpriseRegistrationController() {
+    public EnterpriseRegistrationController(EmployeeRegistrationController employeeRegistrationController) {
         enterpriseRegistrationView = new EnterpriseRegistrationView();
         enterpriseManager = EnterpriseManager.getEnterpriseManager();
+        this.employeeRegistrationController = employeeRegistrationController;
         notifier = new Notifier();
 
-        configureWindow(enterpriseRegistrationView);
-        setEvents();
-
+        initializeView();
     }
 
+    @Override
     public void openWindow() {
         enterpriseRegistrationView.setVisible(true);
     }
@@ -35,11 +36,14 @@ public class EnterpriseRegistrationController extends AbstractViewController {
         String email = enterpriseRegistrationView.getEmailTextField().getText();
         boolean isValidField = !isEmptyFields(name, address, city, phone, email);
 
-        Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email);
-        enterpriseManager.addEnterprise(enterprise);
-
+        if (isValidField) {
+            Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email);
+            enterpriseManager.addEnterprise(enterprise);
+            updateWindow(enterprise);
+        } else {
+            notifier.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+        }
     }
-
 
     private boolean isEmptyFields(
             String name,
@@ -52,17 +56,31 @@ public class EnterpriseRegistrationController extends AbstractViewController {
     }
 
     private void resetFields() {
-
+        String whiteSpace = "";
+        enterpriseRegistrationView.getNameTextField().setText(whiteSpace);
+        enterpriseRegistrationView.getAddressTextField().setText(whiteSpace);
+        enterpriseRegistrationView.getCityTextField().setText(whiteSpace);
+        enterpriseRegistrationView.getPhoneTextField().setText(whiteSpace);
+        enterpriseRegistrationView.getEmailTextField().setText(whiteSpace);
     }
 
 
-    private void updateWindow() {
+    private void updateWindow(Enterprise enterprise) {
+        resetFields();
 
     }
+
 
     private void closeWindow() {
         enterpriseRegistrationView.dispose();
     }
+
+    @Override
+    protected void initializeView() {
+        configureWindow(enterpriseRegistrationView);
+        setEvents();
+    }
+
 
     protected void setEvents() {
         enterpriseRegistrationView.getCancelButton().addActionListener(actionEvent -> closeWindow());

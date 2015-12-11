@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Employee extends Visitor implements Serializable {
     private int id;
     private String role;
+    private Enterprise enterprise;
 
     public Employee(String name, String phone, String role) {
         super(name, phone);
@@ -24,8 +25,12 @@ public class Employee extends Visitor implements Serializable {
         this.role = role;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int employeeId) {
+        this.id = employeeId;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 
     public String getRole() {
@@ -36,5 +41,7 @@ public class Employee extends Visitor implements Serializable {
         return id;
     }
 
-
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
 }

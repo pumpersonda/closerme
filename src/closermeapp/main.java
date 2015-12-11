@@ -20,7 +20,7 @@ public class main {
 
 
             //createMenuMembers();
-            // createRegisterMenu();
+            //createRegisterMenu();
             //createVisitor();
             createEmployeeMenu();
         } catch (Exception exception) {
@@ -34,6 +34,7 @@ public class main {
 
     public static void createMenuMembers() {
         MembersMenuController membersMenuController = new MembersMenuController();
+        membersMenuController.openWindow();
     }
 
     public static void createRegisterMenu() {

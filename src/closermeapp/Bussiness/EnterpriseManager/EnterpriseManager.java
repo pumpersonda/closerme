@@ -1,4 +1,4 @@
-package closermeapp.Bussiness.Enterprise;
+package closermeapp.Bussiness.EnterpriseManager;
 
 import closermeapp.Bussiness.Entities.Enterprise;
 import closermeapp.Data.DAOs.EnterpriseDAO;
@@ -32,12 +32,15 @@ public class EnterpriseManager {
             String email
     ) {
         Enterprise enterprise = new Enterprise(name, address, city, phone, email);
+        //Employee employee1 = new Employee("a","b","c");
+        //enterprise.addEmployee(employee1);
+        //employee1.setEnterprise(enterprise);
         return enterprise;
 
     }
 
     public void addEnterprise(Enterprise enterprise) {
-
+        System.out.println(enterprise.getName());
         saveEnterprise(enterprise);
     }
 

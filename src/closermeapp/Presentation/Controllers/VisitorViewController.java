@@ -34,6 +34,11 @@ public class VisitorViewController extends AbstractViewController {
 
     }
 
+    @Override
+    protected void initializeView() {
+
+    }
+
     private void addVisitor() {
 
     }
