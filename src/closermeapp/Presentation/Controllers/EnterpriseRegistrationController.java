@@ -37,21 +37,28 @@ public class EnterpriseRegistrationController extends AbstractViewController {
         String city = enterpriseRegistrationView.getCityTextField().getText();
         String phone = enterpriseRegistrationView.getPhoneTextField().getText();
         String email = enterpriseRegistrationView.getEmailTextField().getText();
+        String membershipType = (String) enterpriseRegistrationView.getMembershipTypeComboBox().getSelectedItem();
         boolean isValidField = !isEmptyFields(name, address, city, phone, email);
 
+        String title;
+        String message;
         if (isValidField) {
 
             if (isValidEnterprise(name)) {
 
-                sendEnterpriseDataToManager(name, address, city, phone, email);
-                notifier.showSuccessMessage("Agregado", "Empresa registrada");
+                sendEnterpriseDataToManager(name, address, city, phone, email, membershipType);
+                title = "Agregado";
+                message = "Empresa registrada";
+                notifier.showSuccessMessage(title, message);
 
             } else {
-                notifier.showWarningMessage("Advertencia", "Ya existe esta empresa");
+                message = "Ya existe esta empresa";
+                notifier.showWarningMessage(message);
             }
 
         } else {
-            notifier.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+            message = "Por favor rellene todos los campos";
+            notifier.showWarningMessage(message);
         }
     }
 
@@ -61,9 +68,10 @@ public class EnterpriseRegistrationController extends AbstractViewController {
             String address,
             String city,
             String phone,
-            String email
+            String email,
+            String membershipType
     ) {
-        Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email);
+        Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email, membershipType);
         enterpriseManager.addEnterprise(enterprise);
         updateWindow(enterprise);
     }

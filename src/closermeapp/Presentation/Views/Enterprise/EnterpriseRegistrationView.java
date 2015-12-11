@@ -1,5 +1,4 @@
 package closermeapp.Presentation.Views.Enterprise;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +9,7 @@ package closermeapp.Presentation.Views.Enterprise;
 import javax.swing.*;
 
 /**
+ *
  * @author André
  */
 public class EnterpriseRegistrationView extends javax.swing.JFrame {
@@ -47,6 +47,9 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         titlePanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
+        membershipInformationPanel = new javax.swing.JPanel();
+        membershipTypeLabel = new javax.swing.JLabel();
+        membershipTypeComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -86,7 +89,7 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
                                                 .addComponent(phoneLabel)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(phoneTextField)))
-                                .addContainerGap(94, Short.MAX_VALUE))
+                                .addContainerGap(49, Short.MAX_VALUE))
         );
         generalDataPanelLayout.setVerticalGroup(
                 generalDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +128,7 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
                         .addGroup(buttonsPanelLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
                                 .addComponent(addEnterpriseButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                                 .addComponent(cancelButton)
                                 .addGap(77, 77, 77))
         );
@@ -146,15 +149,40 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
         titlePanelLayout.setHorizontalGroup(
                 titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(titlePanelLayout.createSequentialGroup()
-                                .addGap(174, 174, 174)
+                                .addGap(131, 131, 131)
                                 .addComponent(titleLabel)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         titlePanelLayout.setVerticalGroup(
                 titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(titlePanelLayout.createSequentialGroup()
-                                .addContainerGap()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(titleLabel)
+                                .addContainerGap())
+        );
+
+        membershipInformationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Membresia"));
+
+        membershipTypeLabel.setText("Tipo:");
+
+        membershipTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Semanal", "Mensual", "Anual"}));
+
+        javax.swing.GroupLayout membershipInformationPanelLayout = new javax.swing.GroupLayout(membershipInformationPanel);
+        membershipInformationPanel.setLayout(membershipInformationPanelLayout);
+        membershipInformationPanelLayout.setHorizontalGroup(
+                membershipInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(membershipInformationPanelLayout.createSequentialGroup()
+                                .addComponent(membershipTypeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(membershipTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        membershipInformationPanelLayout.setVerticalGroup(
+                membershipInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(membershipInformationPanelLayout.createSequentialGroup()
+                                .addGroup(membershipInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(membershipTypeLabel)
+                                        .addComponent(membershipTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -169,10 +197,16 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
                                                 .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(windowsPanelLayout.createSequentialGroup()
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(buttonsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(generalDataPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                                .addComponent(generalDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(23, 23, 23))
+                        .addGroup(windowsPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(membershipInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(windowsPanelLayout.createSequentialGroup()
+                                                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         windowsPanelLayout.setVerticalGroup(
                 windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +215,11 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
                                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(generalDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(membershipInformationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(9, 9, 9))
         );
 
         getContentPane().add(windowsPanel);
@@ -266,6 +302,18 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
         return generalDataPanel;
     }
 
+    public JPanel getMembershipInformationPanel() {
+        return membershipInformationPanel;
+    }
+
+    public JComboBox getMembershipTypeComboBox() {
+        return membershipTypeComboBox;
+    }
+
+    public JLabel getMembershipTypeLabel() {
+        return membershipTypeLabel;
+    }
+
     public JLabel getNameLabel() {
         return nameLabel;
     }
@@ -294,6 +342,7 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
         return windowsPanel;
     }
 
+
     // Variables declaration - do not modify
     private javax.swing.JButton addEnterpriseButton;
     private javax.swing.JLabel addressLabel;
@@ -305,6 +354,9 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JPanel generalDataPanel;
+    private javax.swing.JPanel membershipInformationPanel;
+    private javax.swing.JComboBox membershipTypeComboBox;
+    private javax.swing.JLabel membershipTypeLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel phoneLabel;
@@ -314,3 +366,4 @@ public class EnterpriseRegistrationView extends javax.swing.JFrame {
     private javax.swing.JPanel windowsPanel;
     // End of variables declaration
 }
+

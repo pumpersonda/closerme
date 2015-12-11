@@ -36,19 +36,21 @@ public class MemberRegistrationController extends AbstractViewController {
         String cellphone = memberRegistrationView.getMemberCellPhoneTextBox().getText();
         String address = getFormattedAddress();
         String membershipType = (String) memberRegistrationView.getMembershipTypeComboBox().getSelectedItem();
-
+        String message;
         try {
 
             double discount = Double.parseDouble(memberRegistrationView.getMembershipDiscountTextBox().getText());
 
             if (isEmptyFields(name, phone, cellphone, address)) {
-                notifier.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+                message = "Por favor rellene todos los campos";
+                notifier.showWarningMessage(message);
             } else {
                 sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
             }
 
         } catch (NumberFormatException numberFormatException) {
-            notifier.showFailMessage("Advertencia", "Ingrese un descuento valido");
+            message = "Ingrese un descuento valido";
+            notifier.showFailMessage(message);
         }
     }
 

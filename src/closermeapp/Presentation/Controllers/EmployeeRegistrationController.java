@@ -41,8 +41,14 @@ public class EmployeeRegistrationController extends AbstractViewController {
     }
 
     public void addEnterpriseToListBox(Enterprise enterprise) {
-        enterpriseList.put(enterprise.getName(), enterprise);
-        employeeRegistrationView.getEnterpriseComboBox().addItem(enterprise.getName());
+        String key = enterprise.getName();
+        enterpriseList.put(key, enterprise);
+        JComboBox enterpriseListBox = employeeRegistrationView.getEnterpriseComboBox();
+        enterpriseListBox.addItem(enterprise.getName());
+    }
+
+    public HashMap<String, Enterprise> getEnterpriseList() {
+        return enterpriseList;
     }
 
 
@@ -50,17 +56,28 @@ public class EmployeeRegistrationController extends AbstractViewController {
         String name = employeeRegistrationView.getEmployeeNameTextBox().getText();
         String phone = employeeRegistrationView.getEmployeeCellPhoneTextBox().getText();
         String role = employeeRegistrationView.getEmployeeRoleTextBox().getText();
-
         String enterpriseName = (String) employeeRegistrationView.getEnterpriseComboBox().getSelectedItem();
 
         boolean isValidField = !isEmptyFields(name, phone, role);
+        String message;
+
         if (isValidField) {
-            if (!enterpriseName.equals(INVALID_ENTERPRISE)) {
+
+            if (isValidEnterprise()) {
                 Enterprise enterprise = searchEnterprise(enterpriseName);
                 Employee employee = employeeManager.createEmployee(name, phone, role);
                 employeeManager.addEmployee(employee, enterprise);
-            }
 
+                String title = "Agregado";
+                message = "Empleado agregado correctamente";
+                notifier.showSuccessMessage(title, message);
+            } else {
+                message = "Seleccione una Empresa";
+                notifier.showWarningMessage(message);
+            }
+        } else {
+            message = "Rellene todos los campos";
+            notifier.showWarningMessage(message);
         }
 
     }
@@ -98,8 +115,9 @@ public class EmployeeRegistrationController extends AbstractViewController {
         }
     }
 
-    public HashMap<String, Enterprise> getEnterpriseList() {
-        return enterpriseList;
+    private boolean isValidEnterprise() {
+        String enterpriseName = (String) employeeRegistrationView.getEnterpriseComboBox().getSelectedItem();
+        return !enterpriseName.equals(INVALID_ENTERPRISE);
     }
 
     @Override

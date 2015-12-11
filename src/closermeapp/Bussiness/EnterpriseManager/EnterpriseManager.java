@@ -2,6 +2,7 @@ package closermeapp.Bussiness.EnterpriseManager;
 
 import closermeapp.Bussiness.Entities.Employee;
 import closermeapp.Bussiness.Entities.Enterprise;
+import closermeapp.Bussiness.MemberManager.MembershipManager;
 import closermeapp.Data.DAOs.EnterpriseDAO;
 
 import java.util.ArrayList;
@@ -11,13 +12,14 @@ import java.util.ArrayList;
  */
 public class EnterpriseManager {
     private static EnterpriseManager enterpriseManager;
+    private MembershipManager membershipManager;
     private EmployeeManager employeeManager;
     private EnterpriseDAO enterpriseDAO;
 
 
     private EnterpriseManager() {
-        enterpriseDAO = EnterpriseDAO.getEnterpriseDAO();
-
+        this.enterpriseDAO = EnterpriseDAO.getEnterpriseDAO();
+        this.membershipManager = MembershipManager.getMembershipManager();
     }
 
     public static EnterpriseManager getEnterpriseManager() {
@@ -32,12 +34,11 @@ public class EnterpriseManager {
             String address,
             String city,
             String phone,
-            String email
+            String email,
+            String membershipNameType
     ) {
         Enterprise enterprise = new Enterprise(name, address, city, phone, email);
-        // Employee employee1 = new Employee("a","b","c");
-        //employee1.setEnterprise(enterprise);
-        //enterprise.addEmployee(employee1);
+        membershipManager.addMembershipToEnterprise(enterprise, membershipNameType);
         return enterprise;
 
     }

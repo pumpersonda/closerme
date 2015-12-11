@@ -35,7 +35,7 @@ public class CallLogDataController extends AbstractViewController {
 
 
         boolean isValidFields = !isEmptyFields(memberName, numberPhone, duration);
-        String title = "Adveretencia";
+
         String message;
 
         if (isValidFields) {
@@ -46,12 +46,12 @@ public class CallLogDataController extends AbstractViewController {
                 windowUpdate(callLog);
             } else {
                 message = "Introduzca una duración valida";
-                notifier.showFailMessage(title, message);
+                notifier.showFailMessage(message);
             }
 
         } else {
             message = "Rellene todos los campos";
-            notifier.showFailMessage(title, message);
+            notifier.showFailMessage(message);
         }
     }
 

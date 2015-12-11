@@ -177,7 +177,6 @@ public class MembersMenuController extends AbstractViewController {
         columnModel.getColumn(firstColumn).setPreferredWidth(sizeColumn);
     }
 
-
     @Override
     protected void initializeView() {
         configureWindow(membersMenuView);

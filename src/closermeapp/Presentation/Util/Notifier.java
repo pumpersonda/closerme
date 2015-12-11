@@ -18,12 +18,14 @@ public class Notifier {
         showMessageDialog(title, message, PLAIN_MESSAGE);
     }
 
-    public void showFailMessage(String title, String message) {
+    public void showFailMessage(String message) {
+        String title = "Error";
         int ERROR_MESSAGE = JOptionPane.ERROR_MESSAGE;
         showMessageDialog(title, message, ERROR_MESSAGE);
     }
 
-    public void showWarningMessage(String title, String message) {
+    public void showWarningMessage(String message) {
+        String title = "Advertencia";
         int WARNING_MESSAGE = JOptionPane.WARNING_MESSAGE;
         showMessageDialog(title, message, WARNING_MESSAGE);
     }

@@ -14,6 +14,7 @@ public class Enterprise implements Serializable {
     private String city;
     private String phone;
     private String email;
+    private Membership membership;
     private List<Employee> employeeList = new ArrayList<>();
 
     public Enterprise(
@@ -61,6 +62,10 @@ public class Enterprise implements Serializable {
         this.id = id;
     }
 
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -87,6 +92,10 @@ public class Enterprise implements Serializable {
 
     public List<Employee> getEmployeeList() {
         return employeeList;
+    }
+
+    public Membership getMembership() {
+        return membership;
     }
 
     public void addEmployee(Employee employee) {
