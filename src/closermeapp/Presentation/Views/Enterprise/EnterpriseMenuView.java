@@ -1,14 +1,15 @@
 package closermeapp.Presentation.Views.Enterprise;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+
 import javax.swing.*;
 
 /**
+ *
  * @author André
  */
 public class EnterpriseMenuView extends javax.swing.JFrame {
@@ -34,15 +35,16 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         tablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        employeeTable = new javax.swing.JTable();
         employeeTitle = new javax.swing.JLabel();
         buttonsPanel = new javax.swing.JPanel();
         registerEmployeeButton = new javax.swing.JButton();
         deleteEmployeeButton = new javax.swing.JButton();
         enterprisePanel = new javax.swing.JPanel();
-        addEnterpriseButton = new javax.swing.JButton();
+        registerEnterpriseButton = new javax.swing.JButton();
         enterpriseComboBox = new javax.swing.JComboBox();
         deleteEnterpriseButton = new javax.swing.JButton();
+        chargeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -54,19 +56,18 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         titlePanelLayout.setHorizontalGroup(
                 titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(titlePanelLayout.createSequentialGroup()
-                                .addGap(210, 210, 210)
+                                .addContainerGap()
                                 .addComponent(titleLabel)
-                                .addContainerGap(230, Short.MAX_VALUE))
+                                .addContainerGap(430, Short.MAX_VALUE))
         );
         titlePanelLayout.setVerticalGroup(
                 titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(titleLabel)
-                                .addContainerGap())
+                                .addGap(0, 22, Short.MAX_VALUE)
+                                .addComponent(titleLabel))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                         {null, null, null, null},
                         {null, null, null, null},
@@ -77,7 +78,7 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
                         "Title 1", "Title 2", "Title 3", "Title 4"
                 }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(employeeTable);
 
         employeeTitle.setText("Empleados");
 
@@ -130,11 +131,13 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
 
         enterprisePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        addEnterpriseButton.setText("Registrar");
+        registerEnterpriseButton.setText("Registrar");
 
         enterpriseComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
         deleteEnterpriseButton.setText("Eliminar");
+
+        chargeButton.setText("Cobrar");
 
         javax.swing.GroupLayout enterprisePanelLayout = new javax.swing.GroupLayout(enterprisePanel);
         enterprisePanel.setLayout(enterprisePanelLayout);
@@ -143,20 +146,23 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
                         .addGroup(enterprisePanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(enterpriseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
-                                .addComponent(addEnterpriseButton)
-                                .addGap(33, 33, 33)
+                                .addGap(53, 53, 53)
+                                .addComponent(registerEnterpriseButton)
+                                .addGap(18, 18, 18)
                                 .addComponent(deleteEnterpriseButton)
-                                .addContainerGap(37, Short.MAX_VALUE))
+                                .addGap(27, 27, 27)
+                                .addComponent(chargeButton)
+                                .addContainerGap(30, Short.MAX_VALUE))
         );
         enterprisePanelLayout.setVerticalGroup(
                 enterprisePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(enterprisePanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(enterprisePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(addEnterpriseButton)
+                                        .addComponent(registerEnterpriseButton)
                                         .addComponent(enterpriseComboBox)
-                                        .addComponent(deleteEnterpriseButton))
+                                        .addComponent(deleteEnterpriseButton)
+                                        .addComponent(chargeButton))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -164,25 +170,22 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         WindowsPanel.setLayout(WindowsPanelLayout);
         WindowsPanelLayout.setHorizontalGroup(
                 WindowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WindowsPanelLayout.createSequentialGroup()
-                                .addContainerGap(95, Short.MAX_VALUE)
-                                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54))
                         .addGroup(WindowsPanelLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap(74, Short.MAX_VALUE)
                                 .addGroup(WindowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(enterprisePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(WindowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(75, Short.MAX_VALUE))
         );
         WindowsPanelLayout.setVerticalGroup(
                 WindowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(WindowsPanelLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
+                                .addGap(19, 19, 19)
                                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(enterprisePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,12 +238,12 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         return WindowsPanel;
     }
 
-    public JButton getAddEnterpriseButton() {
-        return addEnterpriseButton;
-    }
-
     public JPanel getButtonsPanel() {
         return buttonsPanel;
+    }
+
+    public JButton getChargeButton() {
+        return chargeButton;
     }
 
     public JButton getDeleteEmployeeButton() {
@@ -249,6 +252,10 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
 
     public JButton getDeleteEnterpriseButton() {
         return deleteEnterpriseButton;
+    }
+
+    public JTable getEmployeeTable() {
+        return employeeTable;
     }
 
     public JLabel getEmployeeTitle() {
@@ -267,12 +274,12 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         return jScrollPane1;
     }
 
-    public JTable getjTable1() {
-        return jTable1;
-    }
-
     public JButton getRegisterEmployeeButton() {
         return registerEmployeeButton;
+    }
+
+    public JButton getRegisterEnterpriseButton() {
+        return registerEnterpriseButton;
     }
 
     public JPanel getTablePanel() {
@@ -287,20 +294,23 @@ public class EnterpriseMenuView extends javax.swing.JFrame {
         return titlePanel;
     }
 
+
     // Variables declaration - do not modify
     private javax.swing.JPanel WindowsPanel;
-    private javax.swing.JButton addEnterpriseButton;
     private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JButton chargeButton;
     private javax.swing.JButton deleteEmployeeButton;
     private javax.swing.JButton deleteEnterpriseButton;
+    private javax.swing.JTable employeeTable;
     private javax.swing.JLabel employeeTitle;
     private javax.swing.JComboBox enterpriseComboBox;
     private javax.swing.JPanel enterprisePanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton registerEmployeeButton;
+    private javax.swing.JButton registerEnterpriseButton;
     private javax.swing.JPanel tablePanel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePanel;
     // End of variables declaration
 }
+

@@ -85,7 +85,7 @@ public class MembershipManager {
         this.member = member;
     }
 
-    public void setEnterprise(Enterprise enterprise) {
+    private void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
 
@@ -93,7 +93,7 @@ public class MembershipManager {
         return member;
     }
 
-    public Enterprise getEnterprise() {
+    private Enterprise getEnterprise() {
         return enterprise;
     }
 }

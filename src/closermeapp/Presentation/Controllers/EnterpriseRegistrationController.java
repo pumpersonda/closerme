@@ -13,13 +13,13 @@ import java.util.HashMap;
 public class EnterpriseRegistrationController extends AbstractViewController {
     private EnterpriseRegistrationView enterpriseRegistrationView;
     private EnterpriseManager enterpriseManager;
-    private EmployeeRegistrationController employeeRegistrationController;
+    private EnterpriseMenuController enterpriseMenuController;
     private Notifier notifier;
 
-    public EnterpriseRegistrationController(EmployeeRegistrationController employeeRegistrationController) {
+    public EnterpriseRegistrationController(EnterpriseMenuController enterpriseMenuController) {
         enterpriseRegistrationView = new EnterpriseRegistrationView();
         enterpriseManager = EnterpriseManager.getEnterpriseManager();
-        this.employeeRegistrationController = employeeRegistrationController;
+        this.enterpriseMenuController = enterpriseMenuController;
         notifier = new Notifier();
 
         initializeView();
@@ -96,12 +96,13 @@ public class EnterpriseRegistrationController extends AbstractViewController {
     }
 
     private boolean isValidEnterprise(String enterpriseName) {
-        HashMap enterpriseUnavailableList = employeeRegistrationController.getEnterpriseList();
+        HashMap enterpriseUnavailableList = enterpriseMenuController.getEnterpriseHashMap();
         return !enterpriseUnavailableList.containsKey(enterpriseName);
     }
 
     private void updateWindow(Enterprise enterprise) {
-        employeeRegistrationController.addEnterpriseToListBox(enterprise);
+        enterpriseMenuController.addEnterpriseToListBox(enterprise);
+
         resetFields();
 
     }
