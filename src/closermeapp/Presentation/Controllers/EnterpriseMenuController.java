@@ -39,6 +39,7 @@ public class EnterpriseMenuController extends AbstractViewController {
         this.employeeRegistrationController = new EmployeeRegistrationController(this);
         this.enterpriseRegistrationController = new EnterpriseRegistrationController(this);
         this.enterpriseComboBox = enterpriseMenuView.getEnterpriseComboBox();
+        this.notifier = new Notifier();
 
 
         initializeView();
@@ -156,11 +157,15 @@ public class EnterpriseMenuController extends AbstractViewController {
     }
 
     private void deleteEnterprise() {
-        Enterprise enterprise = getEnterpriseSelected();
 
-        enterpriseHashMap.remove(enterprise.getName());
-        enterpriseComboBox.removeItem(enterprise);
-        enterpriseManager.deleteEnterprise(enterprise);
+        if (isDeletionConfirmed()) {
+            Enterprise enterprise = getEnterpriseSelected();
+
+            enterpriseHashMap.remove(enterprise.getName());
+            enterpriseComboBox.removeItem(enterprise.getName());
+            enterpriseManager.deleteEnterprise(enterprise);
+        }
+
     }
 
     private void deleteEmployee() {
@@ -168,7 +173,7 @@ public class EnterpriseMenuController extends AbstractViewController {
         int numberRowSelected = employeeTable.getSelectedRow();
         boolean validRow = numberRowSelected >= 0;
 
-        if (validRow) {
+        if (validRow && isDeletionConfirmed()) {
             final int columnId = 0;
             String tablePosition = (String) employeeTable.getValueAt(numberRowSelected, columnId);
             int employeeListPosition = Integer.parseInt(tablePosition) - 1;
@@ -179,6 +184,12 @@ public class EnterpriseMenuController extends AbstractViewController {
 
             loadEmployeesToTable();
         }
+    }
+
+    private boolean isDeletionConfirmed() {
+        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        int optionSelected = notifier.showConfirmDialog(messageConfirm);
+        return optionSelected == notifier.getYES_OPTION();
     }
 
     @Override
