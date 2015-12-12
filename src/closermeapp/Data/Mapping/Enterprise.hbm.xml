@@ -10,6 +10,7 @@
             </generator>
         </id>
 
+
         <property name="name"/>
         <property name="address"/>
         <property name="city"/>
@@ -22,6 +23,6 @@
             <one-to-many class="closermeapp.Bussiness.Entities.Employee"/>
         </list>
 
-        <one-to-one name="membership" cascade="persist, delete"/>
+        <one-to-one name="membership" cascade="persist,delete"/>
     </class>
 </hibernate-mapping>

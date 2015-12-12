@@ -27,10 +27,15 @@ public class EmployeeManager {
     }
 
     public void addEmployee(Employee employee, Enterprise enterprise) {
-
         employee.setEnterprise(enterprise);
         enterpriseManager.addEmployeeToEnterprise(employee, enterprise);
 
     }
+
+    public void deleteEmployee(int index, Enterprise enterprise) {
+        enterpriseManager.removeEmployeeToEnterprise(index, enterprise);
+    }
+
+
 
 }

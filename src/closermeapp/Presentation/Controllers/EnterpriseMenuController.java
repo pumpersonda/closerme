@@ -1,5 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.EnterpriseManager.EmployeeManager;
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Employee;
 import closermeapp.Bussiness.Entities.Enterprise;
@@ -21,6 +22,7 @@ import static java.lang.String.valueOf;
 public class EnterpriseMenuController extends AbstractViewController {
     private EnterpriseMenuView enterpriseMenuView;
     private EnterpriseManager enterpriseManager;
+    private EmployeeManager employeeManager;
     private EmployeeRegistrationController employeeRegistrationController;
     private EnterpriseRegistrationController enterpriseRegistrationController;
     private HashMap<String, Enterprise> enterpriseHashMap;
@@ -32,6 +34,7 @@ public class EnterpriseMenuController extends AbstractViewController {
     public EnterpriseMenuController() {
         this.enterpriseMenuView = new EnterpriseMenuView();
         this.enterpriseManager = EnterpriseManager.getEnterpriseManager();
+        this.employeeManager = EmployeeManager.getEmployeeManager();
         this.enterpriseHashMap = new HashMap<String, Enterprise>();
         this.employeeRegistrationController = new EmployeeRegistrationController(this);
         this.enterpriseRegistrationController = new EnterpriseRegistrationController(this);
@@ -151,6 +154,33 @@ public class EnterpriseMenuController extends AbstractViewController {
         Enterprise enterprise = getEnterpriseSelected();
         return enterprise.getEmployeeList().isEmpty();
     }
+
+    private void deleteEnterprise() {
+        Enterprise enterprise = getEnterpriseSelected();
+
+        enterpriseHashMap.remove(enterprise.getName());
+        enterpriseComboBox.removeItem(enterprise);
+        enterpriseManager.deleteEnterprise(enterprise);
+    }
+
+    private void deleteEmployee() {
+        JTable employeeTable = enterpriseMenuView.getEmployeeTable();
+        int numberRowSelected = employeeTable.getSelectedRow();
+        boolean validRow = numberRowSelected >= 0;
+
+        if (validRow) {
+            final int columnId = 0;
+            String tablePosition = (String) employeeTable.getValueAt(numberRowSelected, columnId);
+            int employeeListPosition = Integer.parseInt(tablePosition) - 1;
+
+            Employee employee = employeeList.get(employeeListPosition);
+            Enterprise enterprise = getEnterpriseSelected();
+            employeeManager.deleteEmployee(employeeListPosition, enterprise);
+
+            loadEmployeesToTable();
+        }
+    }
+
     @Override
     protected void initializeView() {
         configureWindow(enterpriseMenuView);
@@ -165,6 +195,8 @@ public class EnterpriseMenuController extends AbstractViewController {
         enterpriseMenuView.getRegisterEmployeeButton().addActionListener(actionEvent -> openEmployeeRegistrationWindow());
         enterpriseMenuView.getRegisterEnterpriseButton().addActionListener(actionEvent -> openEnterpriseRegistrationWindow());
         enterpriseMenuView.getEnterpriseComboBox().addActionListener(actionEvent -> loadEmployeesToTable());
+        enterpriseMenuView.getDeleteEnterpriseButton().addActionListener(actionEvent -> deleteEnterprise());
+        enterpriseMenuView.getDeleteEmployeeButton().addActionListener(actionEvent -> deleteEmployee());
     }
 
 }

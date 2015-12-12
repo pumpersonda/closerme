@@ -99,7 +99,11 @@ public class Enterprise implements Serializable {
     }
 
     public void addEmployee(Employee employee) {
-
         this.employeeList.add(employee);
+    }
+
+    public void removeEmployee(int index) {
+
+        this.employeeList.remove(index);
     }
 }

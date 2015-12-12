@@ -52,8 +52,17 @@ public class EnterpriseManager {
         updateEnterprise(enterprise);
     }
 
+    public void removeEmployeeToEnterprise(int index, Enterprise enterprise) {
+        enterprise.removeEmployee(index);
+        updateEnterprise(enterprise);
+    }
+
     public void updateEnterprise(Enterprise enterprise) {
         enterpriseDAO.update(enterprise);
+    }
+
+    public void deleteEnterprise(Enterprise enterprise) {
+        enterpriseDAO.delete(enterprise);
     }
 
     public ArrayList<Enterprise> getEnterpriseList() {
