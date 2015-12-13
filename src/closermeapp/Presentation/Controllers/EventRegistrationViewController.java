@@ -7,57 +7,39 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
-import closermeapp.Presentation.EventManagement.EventRegistrationView;
-
-import javax.swing.*;
+import closermeapp.Presentation.Util.Notifier;
+import closermeapp.Presentation.Views.EventManagement.EventRegistrationView;
+import javax.swing.WindowConstants;
 
 /**
  *
  * @author JoseJulio
  */
-public class EventRegistrationViewController extends AbstractViewController {
-     EventRegistrationView eventRegistrationView;
+public class EventRegistrationController extends AbstractController {
+     private EventRegistrationView eventRegistrationView;
+     private EventViewerController eventViewerController;
 
-    public EventRegistrationViewController() {
+     public EventRegistrationController(EventViewerController eventViewerController) {
             initializeView();
+            this.eventViewerController = eventViewerController;
      }
      
      public void registerEvent(Event newEvent){
-         EventManager.getEventManager().addEvent(newEvent);
+         EventManager.getEventManager().reserveEvent(newEvent);
      }
      
-     public void sendEventToEventView(
-             String name, 
-             String startDate,
-             String startTime, 
-             String endDate,
-             String endTime, 
-             String clientName,
-             String clientPhone
-     ){
-         Event newEvent = EventManager.getEventManager().createEvent(name, startDate, startTime, endDate, endTime, clientName, clientPhone);
-         
-         //...
-         
-     }
-
-    protected void initializeView() {
+     private void initializeView(){
          configureWindow();
          setEvents();
      }
 
     private void configureWindow() {
-        this.eventRegistrationView = new EventRegistrationView(this);
+        this.eventRegistrationView = new EventRegistrationView();
         this.eventRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.eventRegistrationView.setResizable(false);
         this.eventRegistrationView.setLocationRelativeTo(null);
     }
 
-
-    @Override
-    public void openWindow() {
-
-    }
 
     protected void setEvents(){
         eventRegistrationView.getCancelButton().addActionListener(actionEvent -> closeWindow());
@@ -77,9 +59,32 @@ public class EventRegistrationViewController extends AbstractViewController {
         String clientName = eventRegistrationView.getClientNameTextBox().getText();
         String clientPhone = eventRegistrationView.getClientPhoneTextBox().getText();
 
-        Event newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+        boolean isValid = isValid(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+        if(isValid) {
+            Event newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+            registerEvent(newEvent);
+            closeWindow();
+        }
+        else{
+            Notifier notifier = new Notifier();
+            notifier.showFailMessage("Error","Los campos ingresados no son validos");
+        }
+    }
 
-        registerEvent(newEvent);
+    private boolean isValid(String eventName, String eventStartDate, String eventStartTime, String eventEndDate, String eventEndTime, String clientName, String clientPhone) {
+        boolean valid = eventName!="" &&
+                eventStartDate!="" &&
+                eventStartTime!="" &&
+                eventEndDate!="" &&
+                eventEndTime!="" &&
+                clientName!="" &&
+                clientPhone!="";
+        return  valid;
+    }
+
+    @Override
+    protected void openWindow() {
+        this.eventRegistrationView.setVisible(true);
     }
 
 
