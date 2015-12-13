@@ -199,7 +199,7 @@ public class EnterpriseMenuController extends AbstractViewController {
     }
 
     private boolean isDeletionConfirmed() {
-        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        String messageConfirm = "¿Estas seguro que deseas eliminarlo?";
         int optionSelected = notifier.showConfirmDialog(messageConfirm);
         return optionSelected == notifier.getYES_OPTION();
     }

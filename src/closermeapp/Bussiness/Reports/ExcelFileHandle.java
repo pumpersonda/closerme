@@ -33,7 +33,8 @@ public class ExcelFileHandle {
     public void saveActivityLog(
             List<MemberChargesRegister> memberListOfMonth,
             List<EnterpriseChargesRegister> enterpriseListOfMonth,
-            double totalGain
+            double totalGain,
+            String date
     ) {
 
         try {
@@ -46,7 +47,6 @@ public class ExcelFileHandle {
 
             int positionList = 0;
 
-            String date = memberListOfMonth.get(positionList).getMembershipStarDate();
             saveDate(sheet, date);
 
             saveTotalGain(sheet, totalGain);
@@ -54,10 +54,15 @@ public class ExcelFileHandle {
             int totalMembers = memberListOfMonth.size();
             saveTotalMember(sheet, totalMembers);
 
-            int totalEnterprises = enterpriseListOfMonth.size();//falta
+            int totalEnterprises = enterpriseListOfMonth.size();
             saveTotalEnterprise(sheet, totalEnterprises);
 
-            int totalEmployees = enterpriseListOfMonth.get(positionList).getEmployeesNumber();
+            int totalEmployees = 0;
+            boolean isValidList = enterpriseListOfMonth.size() > 0;
+            if (isValidList) {
+                totalEmployees = enterpriseListOfMonth.get(positionList).getEmployeesNumber();
+
+            }
             saveTotalEmployee(sheet, totalEmployees);
 
             saveMemberList(sheet, memberListOfMonth);
@@ -128,7 +133,7 @@ public class ExcelFileHandle {
             WritableSheet sheet,
             List<EnterpriseChargesRegister> enterpriseListOfMonth
     ) throws WriteException {
-        int column = 14;
+        int column = 12;
         int row = 11;
 
         for (int i = 0; i < enterpriseListOfMonth.size(); i++) {
@@ -138,7 +143,6 @@ public class ExcelFileHandle {
         }
     }
 
-    //
     private void saveNumericData(
             int column,
             int row,

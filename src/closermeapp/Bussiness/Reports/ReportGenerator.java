@@ -17,20 +17,20 @@ public class ReportGenerator {
     private DateManager dateManager;
 
     public ReportGenerator() {
-        this.dateManager = DateManager.getDateManager();
+        this.dateManager = DateManager.getInstance();
         this.excelFileHandle = ExcelFileHandle.getExcelFileHandle();
     }
 
-    public void generateMonthlyReport() {
-        List<MemberChargesRegister> memberListOfMonth = getMemberListOfMonth();
-        List<EnterpriseChargesRegister> enterpriseListOfMonth = getEnterpriseListOfMonth();
+    public void generateMonthlyReport(int month) {
+        String beginningOfMonth = dateManager.getDate(month);
+        List<MemberChargesRegister> memberListOfMonth = getMemberListOfMonth(month);
+        List<EnterpriseChargesRegister> enterpriseListOfMonth = getEnterpriseListOfMonth(month);
         double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
 
-        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain);
+        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, beginningOfMonth);
     }
 
-    private List<MemberChargesRegister> getMemberListOfMonth() {
-        int month = 12;
+    private List<MemberChargesRegister> getMemberListOfMonth(int month) {
         String beginningOfMonth = dateManager.getDate(month);
         String finishOfMonth = dateManager.getNextDate(month);
 
@@ -41,8 +41,7 @@ public class ReportGenerator {
         return registersOfTheMonth;
     }
 
-    private List<EnterpriseChargesRegister> getEnterpriseListOfMonth() {
-        int month = 12;
+    private List<EnterpriseChargesRegister> getEnterpriseListOfMonth(int month) {
         String beginningOfMonth = dateManager.getDate(month);
         String finishOfMonth = dateManager.getNextDate(month);
 

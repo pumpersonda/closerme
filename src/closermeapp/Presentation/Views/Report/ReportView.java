@@ -5,6 +5,7 @@ package closermeapp.Presentation.Views.Report;
  * and open the template in the editor.
  */
 
+
 import javax.swing.*;
 
 /**
@@ -33,7 +34,7 @@ public class ReportView extends javax.swing.JFrame {
         monthReportPanel = new javax.swing.JPanel();
         generateMonthReportButton = new javax.swing.JButton();
         generateReporLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        dateComboBox = new javax.swing.JComboBox();
         selectDateLabel = new javax.swing.JLabel();
         weeklyReportPanel = new javax.swing.JPanel();
         generateWeeklyReportButton = new javax.swing.JButton();
@@ -51,7 +52,7 @@ public class ReportView extends javax.swing.JFrame {
 
         generateReporLabel.setText("Generar reporte mensual");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel());
+        dateComboBox.setModel(new javax.swing.DefaultComboBoxModel());
 
         selectDateLabel.setText("Selecciona una Fecha");
 
@@ -62,7 +63,7 @@ public class ReportView extends javax.swing.JFrame {
                         .addGroup(monthReportPanelLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(monthReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(selectDateLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(monthReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +86,7 @@ public class ReportView extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(selectDateLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -218,6 +219,10 @@ public class ReportView extends javax.swing.JFrame {
         });
     }
 
+    public JComboBox getDateComboBox() {
+        return dateComboBox;
+    }
+
     public JButton getGenerateMonthReportButton() {
         return generateMonthReportButton;
     }
@@ -236,10 +241,6 @@ public class ReportView extends javax.swing.JFrame {
 
     public JButton getGenerateWeeklyReportButton() {
         return generateWeeklyReportButton;
-    }
-
-    public JComboBox getjComboBox1() {
-        return jComboBox1;
     }
 
     public JLabel getjLabel1() {
@@ -268,12 +269,12 @@ public class ReportView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify
+    private javax.swing.JComboBox dateComboBox;
     private javax.swing.JButton generateMonthReportButton;
     private javax.swing.JLabel generateReporLabel;
     private javax.swing.JButton generateTodaysReport;
     private javax.swing.JLabel generateWeeklyButton;
     private javax.swing.JButton generateWeeklyReportButton;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel monthReportPanel;
     private javax.swing.JLabel selectDateLabel;
@@ -282,3 +283,5 @@ public class ReportView extends javax.swing.JFrame {
     private javax.swing.JPanel windowsPanel;
     // End of variables declaration
 }
+
+

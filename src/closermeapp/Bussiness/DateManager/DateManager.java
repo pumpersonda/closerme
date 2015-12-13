@@ -15,7 +15,7 @@ public class DateManager {
 
     }
 
-    public static DateManager getDateManager() {
+    public static DateManager getInstance() {
         if (dateManager == null) {
             dateManager = new DateManager();
         }
