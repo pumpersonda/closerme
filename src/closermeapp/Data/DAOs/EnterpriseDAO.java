@@ -24,20 +24,17 @@ public class EnterpriseDAO extends AbstractDAO<Enterprise> {
 
     @Override
     public void add(Enterprise enterprise) {
-        String query = "add";
-        enquire(query, enterprise);
+        saveEntity(enterprise);
     }
 
     @Override
     public void delete(Enterprise enterprise) {
-        String query = "delete";
-        enquire(query, enterprise);
+        deleteEntity(enterprise);
     }
 
     @Override
     public void update(Enterprise enterprise) {
-        String query = "update";
-        enquire(query, enterprise);
+        updateEntity(enterprise);
     }
 
     @Override

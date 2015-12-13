@@ -1,5 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.DebtCollector.DebtCollector;
 import closermeapp.Bussiness.EnterpriseManager.EmployeeManager;
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Employee;
@@ -25,6 +26,8 @@ public class EnterpriseMenuController extends AbstractViewController {
     private EmployeeManager employeeManager;
     private EmployeeRegistrationController employeeRegistrationController;
     private EnterpriseRegistrationController enterpriseRegistrationController;
+    private ChargeController chargeController;
+    private DebtCollector debtCollector;
     private HashMap<String, Enterprise> enterpriseHashMap;
     private List<Employee> employeeList;
     private JComboBox enterpriseComboBox;
@@ -34,6 +37,8 @@ public class EnterpriseMenuController extends AbstractViewController {
     public EnterpriseMenuController() {
         this.enterpriseMenuView = new EnterpriseMenuView();
         this.enterpriseManager = EnterpriseManager.getEnterpriseManager();
+        this.chargeController = new ChargeController();
+        this.debtCollector = DebtCollector.getDebtCollector();
         this.employeeManager = EmployeeManager.getEmployeeManager();
         this.enterpriseHashMap = new HashMap<String, Enterprise>();
         this.employeeRegistrationController = new EmployeeRegistrationController(this);
@@ -164,6 +169,10 @@ public class EnterpriseMenuController extends AbstractViewController {
             enterpriseHashMap.remove(enterprise.getName());
             enterpriseComboBox.removeItem(enterprise.getName());
             enterpriseManager.deleteEnterprise(enterprise);
+
+            String title = "Empresa borrada";
+            String message = "Se ha borrado con exito";
+            notifier.showSuccessMessage(title, message);
         }
 
     }
@@ -178,11 +187,14 @@ public class EnterpriseMenuController extends AbstractViewController {
             String tablePosition = (String) employeeTable.getValueAt(numberRowSelected, columnId);
             int employeeListPosition = Integer.parseInt(tablePosition) - 1;
 
-            Employee employee = employeeList.get(employeeListPosition);
             Enterprise enterprise = getEnterpriseSelected();
             employeeManager.deleteEmployee(employeeListPosition, enterprise);
 
             loadEmployeesToTable();
+
+            String title = "Empleado borrado";
+            String message = "Se ha borrado con exito";
+            notifier.showSuccessMessage(title, message);
         }
     }
 
@@ -190,6 +202,13 @@ public class EnterpriseMenuController extends AbstractViewController {
         String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
         int optionSelected = notifier.showConfirmDialog(messageConfirm);
         return optionSelected == notifier.getYES_OPTION();
+    }
+
+    private void showChargeWindow() {
+        Enterprise enterprise = getEnterpriseSelected();
+        double totalCost = debtCollector.chargeTheEnterprise(enterprise);
+        chargeController.setTotalChargeMessage(totalCost);
+        chargeController.openWindow();
     }
 
     @Override
@@ -208,6 +227,7 @@ public class EnterpriseMenuController extends AbstractViewController {
         enterpriseMenuView.getEnterpriseComboBox().addActionListener(actionEvent -> loadEmployeesToTable());
         enterpriseMenuView.getDeleteEnterpriseButton().addActionListener(actionEvent -> deleteEnterprise());
         enterpriseMenuView.getDeleteEmployeeButton().addActionListener(actionEvent -> deleteEmployee());
+        enterpriseMenuView.getChargeButton().addActionListener(actionEvent -> showChargeWindow());
     }
 
 }

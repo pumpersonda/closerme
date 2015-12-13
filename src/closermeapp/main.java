@@ -1,10 +1,7 @@
 package closermeapp;
 
 import ch.randelshofer.quaqua.QuaquaManager;
-import closermeapp.Presentation.Controllers.CallLogController;
-import closermeapp.Presentation.Controllers.EnterpriseMenuController;
-import closermeapp.Presentation.Controllers.MembersMenuController;
-import closermeapp.Presentation.Controllers.VisitorViewController;
+import closermeapp.Presentation.Controllers.*;
 
 import javax.swing.*;
 
@@ -19,11 +16,12 @@ public class main {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
 
-            //createMembersMenu();
+            createMembersMenu();
             //createRegisterMenu();
             //createVisitor();
             //createEmployeeRegistration();
-            createEnterpriseMenu();
+            //createEnterpriseMenu();
+            createPrincipalMenu();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -47,6 +45,11 @@ public class main {
     public static void createEnterpriseMenu() {
         EnterpriseMenuController enterpriseMenuController = new EnterpriseMenuController();
         enterpriseMenuController.openWindow();
+    }
+
+    public static void createPrincipalMenu() {
+        PrincipalMenuController principalMenuController = new PrincipalMenuController();
+        principalMenuController.openWindow();
     }
 }
 

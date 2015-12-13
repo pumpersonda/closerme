@@ -1,26 +1,26 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.DebtCollector.DebtCollector;
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
-import closermeapp.Bussiness.MemberManager.MembershipManager;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.VisitorManagement.MemberRegistrationView;
 
 public class MemberRegistrationController extends AbstractViewController {
     private MemberRegistrationView memberRegistrationView;
     private MembersMenuController membersMenuController;
-    private MembersChargeController membersChargeController;
+    private ChargeController chargeController;
+    private DebtCollector debtCollector;
     private Notifier notifier;
     private MembersManager membersManager;
-    private MembershipManager membershipManager;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
+        this.debtCollector = DebtCollector.getDebtCollector();
         this.notifier = new Notifier();
         this.membersMenuController = membersMenuController;
-        this.membersChargeController = new MembersChargeController();
+        this.chargeController = new ChargeController();
         this.membersManager = MembersManager.getMembersManager();
-        this.membershipManager = MembershipManager.getMembershipManager();
 
         initializeView();
     }
@@ -82,9 +82,8 @@ public class MemberRegistrationController extends AbstractViewController {
         Member member = membersManager.createMember(name, phone, address, cellphone, membershipType, discount);
         membersManager.addMember(member);
         notifier.showSuccessMessage("Agregado", "Miembro agregado correctamente");
-        showChargeView();
-        getTotalCharge();
-        windowsUpdate(member);
+        double totalCharge = getTotalCharge(member, discount);
+        windowsUpdate(member, totalCharge);
 
     }
 
@@ -107,19 +106,21 @@ public class MemberRegistrationController extends AbstractViewController {
     }
 
 
-
-    private void windowsUpdate(Member member) {
+    private void windowsUpdate(Member member, double totalCharge) {
         resetFields();
         membersMenuController.addMemberToTable(member);
+        chargeController.setTotalChargeMessage(totalCharge);
+        showChargeView();
     }
 
-    private void getTotalCharge() {
-        double totalMembershipCost = membershipManager.getTotalMembershipCost();
-        membersChargeController.setTotalChargeMessage(totalMembershipCost);
+    private double getTotalCharge(Member member, double discount) {
+
+        double totalCharge = debtCollector.chargeTheMember(member, discount);
+        return totalCharge;
     }
 
     private void showChargeView() {
-        membersChargeController.openWindow();
+        chargeController.openWindow();
     }
 
     private void closeWindow() {

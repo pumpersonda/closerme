@@ -24,20 +24,17 @@ public class MembershipDAO extends AbstractDAO<Membership> {
 
     @Override
     public void add(Membership membership) {
-        String query = "add";
-        enquire(query, membership);
+        saveEntity(membership);
     }
 
     @Override
     public void delete(Membership membership) {
-        String query = "delete";
-        enquire(query, membership);
+        deleteEntity(membership);
     }
 
     @Override
     public void update(Membership membership) {
-        String query = "update";
-        enquire(query, membership);
+        updateEntity(membership);
     }
 
     @Override

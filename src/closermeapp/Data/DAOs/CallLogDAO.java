@@ -22,20 +22,18 @@ public class CallLogDAO extends AbstractDAO<CallLog> {
 
     @Override
     public void add(CallLog callLog) {
-        String query = "add";
-        enquire(query, callLog);
+        saveEntity(callLog);
+
     }
 
     @Override
     public void delete(CallLog callLog) {
-        String query = "delete";
-        enquire(query, callLog);
+        deleteEntity(callLog);
     }
 
     @Override
     public void update(CallLog callLog) {
-        String query = "update";
-        enquire(query, callLog);
+        updateEntity(callLog);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class MembersManager {
             double discount
     ) {
         Member member = new Member(name, phone, address, cellphone);
-        this.membershipManager.addMembershipToMember(member, membershipNameType, discount);
+        this.membershipManager.addMembershipToMember(member, membershipNameType);
         return member;
     }
 

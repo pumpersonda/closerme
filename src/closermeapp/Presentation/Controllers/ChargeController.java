@@ -1,29 +1,29 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Presentation.Views.VisitorManagement.MembersChargeView;
+import closermeapp.Presentation.Views.Charge.ChargeView;
 
 import static java.lang.String.valueOf;
 
 /**
  * Created by André on 28/11/2015.
  */
-public class MembersChargeController extends AbstractViewController {
-    private MembersChargeView membersChargeView;
+public class ChargeController extends AbstractViewController {
+    private ChargeView chargeView;
 
-    public MembersChargeController() {
-        this.membersChargeView = new MembersChargeView();
+    public ChargeController() {
+        this.chargeView = new ChargeView();
         initializeView();
     }
 
 
     public void openWindow() {
-        membersChargeView.setVisible(true);
+        chargeView.setVisible(true);
     }
 
 
     public void setTotalChargeMessage(double totalCharge) {
         String totalChargeText = getTotalChargeText(totalCharge);
-        membersChargeView.getTotalTextField().setText(totalChargeText);
+        chargeView.getTotalTextField().setText(totalChargeText);
     }
 
     private String getTotalChargeText(double totalCharge) {
@@ -32,17 +32,17 @@ public class MembersChargeController extends AbstractViewController {
     }
 
     private void charge() {
-        membersChargeView.dispose();
+        chargeView.dispose();
     }
 
     @Override
     protected void initializeView() {
-        configureWindow(membersChargeView);
+        configureWindow(chargeView);
         setEvents();
     }
 
     @Override
     protected void setEvents() {
-        membersChargeView.getChargeButton().addActionListener(actionEvent -> charge());
+        chargeView.getChargeButton().addActionListener(actionEvent -> charge());
     }
 }
