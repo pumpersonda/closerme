@@ -1,36 +1,60 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Bussiness.Reports.ReportGenerator;
-import closermeapp.Presentation.Views.ReportView;
+import closermeapp.Presentation.Views.PrincipalMenuView;
 
 /**
- * Created by André on 12/12/2015.
+ * Created by André on 13/12/2015.
  */
 public class PrincipalMenuController extends AbstractViewController {
-    private ReportView reportView;
+    private PrincipalMenuView principalMenuView;
+    private MembersMenuController membersMenuController;
+    private EnterpriseMenuController enterpriseMenuController;
+    private CallLogController callLogController;
+    private ReportController reportController;
+
 
     public PrincipalMenuController() {
-        this.reportView = new ReportView();
+        this.principalMenuView = new PrincipalMenuView();
+        this.membersMenuController = new MembersMenuController();
+        this.enterpriseMenuController = new EnterpriseMenuController();
+        this.callLogController = new CallLogController();
+        this.reportController = new ReportController();
         initializeView();
     }
 
-    private void generateReport() {
-        ReportGenerator reportGenerator = new ReportGenerator();
-        reportGenerator.generateMonthlyReport();
+    private void openMembersMenu() {
+        membersMenuController.openWindow();
+    }
+
+    private void openEnterpriseMenu() {
+        enterpriseMenuController.openWindow();
+    }
+
+    private void openCallLogMenu() {
+        callLogController.openWindow();
+    }
+
+    private void openReportMenu() {
+        reportController.openWindow();
     }
 
     @Override
     public void openWindow() {
-        reportView.setVisible(true);
+        principalMenuView.setVisible(true);
     }
 
     @Override
     protected void initializeView() {
+        configureWindow(principalMenuView);
         setEvents();
     }
 
     @Override
     protected void setEvents() {
-        reportView.getGenerateReportButton().addActionListener(actionEvent -> generateReport());
+        principalMenuView.getMemberButton().addActionListener(actionEvent -> openMembersMenu());
+        principalMenuView.getEnterpriseButton().addActionListener(actionEvent -> openEnterpriseMenu());
+        principalMenuView.getCallLogButton().addActionListener(actionEvent -> openCallLogMenu());
+        principalMenuView.getReportButton().addActionListener(actionEvent -> openReportMenu());
+
     }
 }
