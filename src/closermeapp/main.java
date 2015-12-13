@@ -1,9 +1,7 @@
 package closermeapp;
 
 import ch.randelshofer.quaqua.QuaquaManager;
-import closermeapp.Presentation.Controllers.CallLogController;
-import closermeapp.Presentation.Controllers.MembersMenuController;
-import closermeapp.Presentation.Controllers.VisitorController;
+import closermeapp.Presentation.Controllers.PrincipalMenuController;
 
 import javax.swing.*;
 
@@ -15,29 +13,18 @@ public class main {
             JFrame.setDefaultLookAndFeelDecorated(true);
             JDialog.setDefaultLookAndFeelDecorated(true);
             UIManager.setLookAndFeel(QuaquaManager.getLookAndFeel());
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+            // UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 
-
-            createMenuMembers();
-            createRegisterMenu();
-            //createVisitor();
-
+            createPrincipalMenu();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    public static void createVisitor() {
-        VisitorController visitorController = new VisitorController();
-    }
 
-    public static void createMenuMembers() {
-        MembersMenuController membersMenuController = new MembersMenuController();
-    }
-
-    public static void createRegisterMenu() {
-        CallLogController callLogController = new CallLogController();
-        callLogController.openWindow();
+    public static void createPrincipalMenu() {
+        PrincipalMenuController principalMenuController = new PrincipalMenuController();
+        principalMenuController.openWindow();
     }
 }
 

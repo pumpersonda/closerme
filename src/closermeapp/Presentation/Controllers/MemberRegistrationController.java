@@ -1,40 +1,34 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Bussiness.DebtCollector.DebtCollector;
+import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
-import closermeapp.Bussiness.MemberManager.MembershipManager;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.VisitorManagement.MemberRegistrationView;
 
-import javax.swing.*;
-
-public class MemberRegistrationController {
+public class MemberRegistrationController extends AbstractViewController {
     private MemberRegistrationView memberRegistrationView;
     private MembersMenuController membersMenuController;
-    private MembersChargeController membersChargeController;
-    private Notifier notification;
+    private ChargeController chargeController;
+    private DebtCollector debtCollector;
+    private Notifier notifier;
     private MembersManager membersManager;
-    private MembershipManager membershipManager;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
-        this.notification = new Notifier();
+        this.debtCollector = DebtCollector.getDebtCollector();
+        this.notifier = new Notifier();
         this.membersMenuController = membersMenuController;
-        this.membersChargeController = new MembersChargeController();
+        this.chargeController = new ChargeController();
         this.membersManager = MembersManager.getMembersManager();
-        this.membershipManager = MembershipManager.getMembershipManager();
 
-        String defaultDiscount = "0";
-        memberRegistrationView.getMembershipDiscountTextBox().setText(defaultDiscount);
-        memberRegistrationView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        memberRegistrationView.setLocationRelativeTo(null);
-        memberRegistrationView.setResizable(false);
-
-        setEvents();
+        initializeView();
     }
 
     public void openWindow() {
         memberRegistrationView.setVisible(true);
     }
+
 
     private void registerMemberData() {
         String name = memberRegistrationView.getMemberNameTextBox().getText();
@@ -42,20 +36,21 @@ public class MemberRegistrationController {
         String cellphone = memberRegistrationView.getMemberCellPhoneTextBox().getText();
         String address = getFormattedAddress();
         String membershipType = (String) memberRegistrationView.getMembershipTypeComboBox().getSelectedItem();
-
+        String message;
         try {
+
             double discount = Double.parseDouble(memberRegistrationView.getMembershipDiscountTextBox().getText());
 
             if (isEmptyFields(name, phone, cellphone, address)) {
-
-                notification.showWarningMessage("Advertencia", "Por favor rellene todos los campos");
+                message = "Por favor rellene todos los campos";
+                notifier.showWarningMessage(message);
             } else {
-
                 sendMemberDataToManager(name, phone, cellphone, address, membershipType, discount);
-                
             }
+
         } catch (NumberFormatException numberFormatException) {
-            notification.showFailMessage("Advertencia", "Ingrese un descuento valido");
+            message = "Ingrese un descuento valido";
+            notifier.showFailMessage(message);
         }
     }
 
@@ -84,11 +79,11 @@ public class MemberRegistrationController {
             Double discount
     ) {
 
-        membersManager.addMember(name, phone, address, cellphone, membershipType, discount);
-        notification.showSuccessMessage("Agregado", "Miembro agregado correctamente");
-        showChargeView();
-        getTotalCharge();
-        windowsUpdate();
+        Member member = membersManager.createMember(name, phone, address, cellphone, membershipType, discount);
+        membersManager.addMember(member);
+        notifier.showSuccessMessage("Agregado", "Miembro agregado correctamente");
+        double totalCharge = getTotalCharge(member, discount);
+        windowsUpdate(member, totalCharge);
 
     }
 
@@ -110,28 +105,45 @@ public class MemberRegistrationController {
         closeWindow();
     }
 
-    private void setEvents() {
-        memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMemberData());
-        memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
 
-    }
-
-    private void windowsUpdate() {
+    private void windowsUpdate(Member member, double totalCharge) {
         resetFields();
-        membersMenuController.addMemberToTable();
+        membersMenuController.addMemberToTable(member);
+        chargeController.setTotalChargeMessage(totalCharge);
+        showChargeView();
     }
 
-    private void getTotalCharge() {
-        double totalMembershipCost = membershipManager.getTotalMembershipCost();
-        membersChargeController.setTotalChargeMessage(totalMembershipCost);
+    private double getTotalCharge(Member member, double discount) {
+
+        double totalCharge = debtCollector.chargeTheMember(member, discount);
+        return totalCharge;
     }
 
     private void showChargeView() {
-        membersChargeController.openWindow();
+        chargeController.openWindow();
     }
 
     private void closeWindow() {
         memberRegistrationView.dispose();
+    }
+
+    private void setDefaultDiscount() {
+        String defaultDiscount = "0";
+        memberRegistrationView.getMembershipDiscountTextBox().setText(defaultDiscount);
+    }
+
+    @Override
+    protected void initializeView() {
+        configureWindow(memberRegistrationView);
+        setDefaultDiscount();
+        setEvents();
+    }
+
+    @Override
+    protected void setEvents() {
+        memberRegistrationView.getRegisterMemberButton().addActionListener(actionEvent -> registerMemberData());
+        memberRegistrationView.getCancelButton().addActionListener(actionEvent -> CancelButton());
+
     }
 
 }

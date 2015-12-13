@@ -16,8 +16,8 @@ public class MembersManager {
     private static MembersManager membersManager;
 
     private MembersManager() {
-        membershipManager = MembershipManager.getMembershipManager();
-        membersDAO = MembersDAO.getMembersDAO();
+        this.membershipManager = MembershipManager.getMembershipManager();
+        this.membersDAO = MembersDAO.getMembersDAO();
     }
 
     public static MembersManager getMembersManager() {
@@ -27,7 +27,7 @@ public class MembersManager {
         return membersManager;
     }
 
-    public void addMember(
+    public Member createMember(
             String name,
             String phone,
             String address,
@@ -36,9 +36,14 @@ public class MembersManager {
             double discount
     ) {
         Member member = new Member(name, phone, address, cellphone);
-        this.membershipManager.addMembership(member, membershipNameType, discount);
+        this.membershipManager.addMembershipToMember(member, membershipNameType);
+        return member;
+    }
+
+    public void addMember(Member member) {
         saveMember(member);
     }
+
 
     public void deleteMember(Member member) {
         membersDAO.delete(member);
@@ -49,7 +54,7 @@ public class MembersManager {
         return member;
     }
 
-    public ArrayList getMemberList() {
+    public ArrayList<Member> getMemberList() {
         ArrayList<Member> memberList;
         memberList = this.membersDAO.getList();
 

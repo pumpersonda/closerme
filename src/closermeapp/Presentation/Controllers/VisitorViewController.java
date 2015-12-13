@@ -7,11 +7,11 @@ import javax.swing.*;
 /**
  * Created by Andr� on 24/11/2015.
  */
-public class VisitorController extends AbstractController {
+public class VisitorViewController extends AbstractViewController {
     private VisitorView visitorView;
 
 
-    public VisitorController() {
+    public VisitorViewController() {
         visitorView = new VisitorView();
 
         visitorView.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -30,7 +30,12 @@ public class VisitorController extends AbstractController {
     }
 
     @Override
-    protected void openWindow() {
+    public void openWindow() {
+
+    }
+
+    @Override
+    protected void initializeView() {
 
     }
 

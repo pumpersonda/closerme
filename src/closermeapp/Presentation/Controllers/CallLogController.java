@@ -8,7 +8,6 @@ import closermeapp.Presentation.Views.CallLog.CallLogView;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import static java.lang.String.valueOf;
@@ -16,7 +15,7 @@ import static java.lang.String.valueOf;
 /**
  * Created by André on 29/11/2015.
  */
-public class CallLogController implements Serializable {
+public class CallLogController extends AbstractViewController {
     private CallLogView callLogView;
     private CallLogDataController callLogDataController;
     private CallLogManager callLogManager;
@@ -30,28 +29,18 @@ public class CallLogController implements Serializable {
         callLogManager = CallLogManager.getCallLogManager();
         notifier = new Notifier();
 
-        initTable();
-        callLogView.setLocationRelativeTo(null);
-        callLogView.setResizable(false);
-        callLogView.pack();
-        callLogView.setLocationRelativeTo(null);
 
-        updateCallLogList();
-        loadCallLogsToTable();
-        setEvents();
-
+        initializeView();
     }
 
+    @Override
     public void openWindow() {
         this.callLogView.setVisible(true);
     }
 
-    public void addMemberToTable() {
-        updateCallLogList();
+    public void addMemberToTable(CallLog callLog) {
+        callLogList.add(callLog);
         int lasElementOfList = callLogList.size() - 1;
-        int lastElementId = callLogList.get(lasElementOfList).getRegisterId();
-
-        CallLog callLog = callLogManager.getCallLog(lastElementId);
 
         ArrayList memberDataList = createMemberListData(callLog, lasElementOfList);
         addRow(memberDataList);
@@ -62,11 +51,10 @@ public class CallLogController implements Serializable {
     }
 
     private void openCallLogDataView() {
-        callLogDataController.opeWindow();
+        callLogDataController.openWindow();
     }
 
-
-    private void initTable() {
+    private void initializeTable() {
         String[] headers = {"", "Fecha", "Miembro", "Numero", "Duración"};
         tableModel = new TableModel(headers);
 
@@ -80,10 +68,11 @@ public class CallLogController implements Serializable {
         columnModel.getColumn(firstColumn).setPreferredWidth(sizeColumn);
     }
 
-    private ArrayList<String> createMemberListData(CallLog callLog, int index) {
+    private ArrayList<String> createMemberListData(CallLog callLog, int listIndex) {
         ArrayList<String> memberDataList = new ArrayList();
 
-        memberDataList.add(valueOf(index));
+        int tablePosition = listIndex + 1;
+        memberDataList.add(valueOf(tablePosition));
         memberDataList.add(callLog.getDate());
         memberDataList.add(callLog.getMemberName());
         memberDataList.add(callLog.getNumberPhone());
@@ -105,46 +94,71 @@ public class CallLogController implements Serializable {
         tableModel.resetTable();
     }
 
-    private void confirmDelete() {
-        String messageConfirm = "¿Estas seguro que deseas eliminar a este registro?";
-        int confirmDialog = notifier.showConfirmDialog(messageConfirm);
+    private void deleteSelectedCallLog() {
+        JTable registerTable = callLogView.getRegisterTable();
+        int numberRowSelected = registerTable.getSelectedRow();
+        boolean validRow = numberRowSelected >= 0;
 
-        if (confirmDialog == notifier.getYES_OPTION()) {
-            deleteCallLog();
+        if (validRow && isDeletionConfirmed()) {
+            final int columnId = 0;
+            String tablePosition = (String) registerTable.getValueAt(numberRowSelected, columnId);
+            int callLogListPosition = Integer.parseInt(tablePosition) - 1;
 
-            String title = "Eliminado";
-            String message = "Se ha eliminado con exito";
+            CallLog callLog = callLogList.get(callLogListPosition);
+            deleteCallLog(callLog);
+            deleteCallLogList(callLogListPosition);
+
+            String title = "Miembro borrado";
+            String message = "Se ha borrado con exito";
             notifier.showSuccessMessage(title, message);
+            loadCallLogsToTable();
+        }
+    }
+
+    private void deleteAllCallLogs() {
+        if (isDeletionConfirmed()) {
+            int listSize = callLogList.size() - 1;
+            for (int listIndex = listSize; listIndex >= 0; listIndex--) {
+
+                CallLog callLog = callLogList.get(listIndex);
+                deleteCallLog(callLog);
+                deleteCallLogList(listIndex);
+            }
+            loadCallLogsToTable();
         }
 
     }
 
-    private void deleteCallLog() {
-
-        int numberRowSelected = callLogView.getRegisterTable().getSelectedRow();
-        int columnId = 0;
-        int rowId = Integer.parseInt((String) callLogView.getRegisterTable().getValueAt(numberRowSelected, columnId));
-
-        boolean isValidIndex = rowId >= 0;
-
-        if (isValidIndex) {
-            tableModel.deleteRow(numberRowSelected);
-            deleteMember(rowId);
-        }
-        loadCallLogsToTable();
+    private boolean isDeletionConfirmed() {
+        String messageConfirm = "¿Estas seguro que deseas eliminar a este miembro?";
+        int optionSelected = notifier.showConfirmDialog(messageConfirm);
+        return optionSelected == notifier.getYES_OPTION();
     }
 
-    private void deleteMember(int rowId) {
-        callLogManager.deleteLog(callLogList.get(rowId));
-        updateCallLogList();
+    private void deleteCallLog(CallLog callLog) {
+        callLogManager.deleteLog(callLog);
     }
 
-    private void updateCallLogList() {
+    private void deleteCallLogList(int listIndex) {
+        callLogList.remove(listIndex);
+    }
+
+    private void loadCallLogList() {
         callLogList = callLogManager.getMemberList();
     }
 
-    private void setEvents() {
+    protected void initializeView() {
+        configureWindow(callLogView);
+        initializeTable();
+        loadCallLogList();
+        loadCallLogsToTable();
+        setEvents();
+    }
+
+    @Override
+    protected void setEvents() {
         callLogView.getNewRegisterButton().addActionListener(actionEvent -> openCallLogDataView());
-        callLogView.getDeleteButton().addActionListener(actionEvent -> confirmDelete());
+        callLogView.getDeleteButton().addActionListener(actionEvent -> deleteSelectedCallLog());
+        callLogView.getDeleteAllButton().addActionListener(actionEvent -> deleteAllCallLogs());
     }
 }

@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -24,31 +25,23 @@ public abstract class AbstractDAO<Entity> {
         throw new HibernateException("Ocurrio un error en la capa de acceso a datos", hibernateException);
     }
 
-    protected abstract void add(Entity entity);
 
-    protected abstract void delete(Entity entity);
+    public abstract void add(Entity entity) throws SQLException;
 
-    protected abstract void update(Entity entity);
+    public abstract void delete(Entity entity);
 
-    protected abstract Object get(int objectId);
+    public abstract void update(Entity entity);
 
-    protected abstract ArrayList<?> getList();
+    public abstract Object get(int objectId);
 
-    protected void enquire(String queryId, Entity entity) {
+    public abstract ArrayList<?> getList();
+
+
+    protected void saveEntity(Entity entity) {
         try {
             openSession();
 
-            switch (queryId) {
-                case "add":
-                    session.save(entity);
-                    break;
-                case "delete":
-                    session.delete(entity);
-                    break;
-                case "update":
-                    session.update(entity);
-                    break;
-            }
+            session.save(entity);
             transaction.commit();
         } catch (HibernateException hibernateException) {
             exceptionManagement(hibernateException);
@@ -58,6 +51,33 @@ public abstract class AbstractDAO<Entity> {
         }
     }
 
+    protected void deleteEntity(Entity entity) {
+        try {
+            openSession();
+            session.delete(entity);
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            exceptionManagement(hibernateException);
+            throw hibernateException;
+        } finally {
+            session.close();
+        }
+    }
+
+    protected void updateEntity(Entity entity) {
+        try {
+            openSession();
+
+            session.update(entity);
+
+            transaction.commit();
+        } catch (HibernateException hibernateException) {
+            exceptionManagement(hibernateException);
+            throw hibernateException;
+        } finally {
+            session.close();
+        }
+    }
 
 
 }

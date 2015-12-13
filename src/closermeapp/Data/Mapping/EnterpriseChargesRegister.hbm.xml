@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="closermeapp.Bussiness.ChargesRegister.EnterpriseChargesRegister" table="enterprise_charges_register">
+        <id name="idReport" column="idReport">
+            <generator class="assigned"/>
+        </id>
+
+        <property name="enterpriseName" column="enterprise_name"/>
+        <property name="enterpriseAddress" column="enterprise_address"/>
+        <property name="enterpriseCity" column="enterprise_city"/>
+        <property name="enterprisePhone" column="enterprise_phone"/>
+        <property name="enterpriseEmail" column="enterprise_email"/>
+        <property name="membershipType" column="membership_type"/>
+        <property name="employeesNumber" column="employeess_Number"/>
+        <property name="membershipStarDate" column="membership_Start_date"/>
+        <property name="totalCharge" column="total_charge"/>
+    </class>
+</hibernate-mapping>

@@ -6,19 +6,42 @@
 package closermeapp.Bussiness.Entities;
 
 
-public class Employee extends Client {
+import java.io.Serializable;
+
+public class Employee extends Visitor implements Serializable {
+    private int id;
     private String role;
+    private Enterprise enterprise;
 
     public Employee(String name, String phone, String role) {
         super(name, phone);
         this.role = role;
     }
 
-    public String getRole() {
-        return role;
+    public Employee() {
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setId(int employeeId) {
+        this.id = employeeId;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
     }
 }

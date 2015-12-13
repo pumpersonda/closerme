@@ -5,6 +5,13 @@
  */
 package closermeapp.Presentation.Views.VisitorManagement;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
 import javax.swing.*;
 
 /**
@@ -41,8 +48,6 @@ public class MembersMenuView extends javax.swing.JFrame {
         membersTable = new javax.swing.JTable();
         titlePanel = new javax.swing.JPanel();
         tittle = new javax.swing.JLabel();
-        backPanel = new javax.swing.JPanel();
-        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
@@ -142,25 +147,6 @@ public class MembersMenuView extends javax.swing.JFrame {
                                 .addComponent(tittle))
         );
 
-        backButton.setText("Volver");
-
-        javax.swing.GroupLayout backPanelLayout = new javax.swing.GroupLayout(backPanel);
-        backPanel.setLayout(backPanelLayout);
-        backPanelLayout.setHorizontalGroup(
-                backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backPanelLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(backButton)
-                                .addContainerGap())
-        );
-        backPanelLayout.setVerticalGroup(
-                backPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(backPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(backButton)
-                                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout windowPanelLayout = new javax.swing.GroupLayout(windowPanel);
         windowPanel.setLayout(windowPanelLayout);
         windowPanelLayout.setHorizontalGroup(
@@ -169,9 +155,7 @@ public class MembersMenuView extends javax.swing.JFrame {
                                 .addGroup(windowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(windowPanelLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(178, 178, 178)
+                                                .addGap(271, 271, 271)
                                                 .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
@@ -187,10 +171,8 @@ public class MembersMenuView extends javax.swing.JFrame {
         windowPanelLayout.setVerticalGroup(
                 windowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, windowPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(windowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(backPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
@@ -251,13 +233,7 @@ public class MembersMenuView extends javax.swing.JFrame {
         return addButton;
     }
 
-    public JButton getBackButton() {
-        return backButton;
-    }
 
-    public JPanel getBackPanel() {
-        return backPanel;
-    }
 
     public JPanel getButtonPanel() {
         return buttonsPanel;
@@ -307,8 +283,6 @@ public class MembersMenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     private javax.swing.JButton addButton;
-    private javax.swing.JButton backButton;
-    private javax.swing.JPanel backPanel;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JScrollPane jScrollPane1;
@@ -322,3 +296,4 @@ public class MembersMenuView extends javax.swing.JFrame {
     private javax.swing.JPanel windowPanel;
     // End of variables declaration
 }
+
