@@ -65,6 +65,8 @@ public class Cashier {
 
         totalCost = Math.abs(totalCost);
 
+        getChargesRegisterGenerator().addEventChargeRegister(event,totalCost);
+
         return totalCost;
 
     }
