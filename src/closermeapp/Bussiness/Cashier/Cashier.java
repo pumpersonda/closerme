@@ -2,7 +2,6 @@ package closermeapp.Bussiness.Cashier;
 
 import closermeapp.Bussiness.ChargesRegister.ChargesRegisterGenerator;
 import closermeapp.Bussiness.Entities.Enterprise;
-import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.Entities.Member;
 
 import java.time.LocalDate;
@@ -40,7 +39,7 @@ public class Cashier {
         return totalCost;
     }
 
-    public double chargeThEvent(Event event) {
+    public double chargeThEvent() {
 
         return 0.0;
     }
