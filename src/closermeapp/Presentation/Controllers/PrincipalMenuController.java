@@ -1,5 +1,9 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Presentation.Controllers.CallLog.CallLogController;
+import closermeapp.Presentation.Controllers.Enterprise.EnterpriseMenuController;
+import closermeapp.Presentation.Controllers.Report.ReportController;
+import closermeapp.Presentation.Controllers.VisitorManagement.MembersMenuController;
 import closermeapp.Presentation.Views.PrincipalMenuView;
 
 import javax.swing.*;
@@ -13,6 +17,7 @@ public class PrincipalMenuController extends AbstractViewController {
     private EnterpriseMenuController enterpriseMenuController;
     private CallLogController callLogController;
     private ReportController reportController;
+    private EventMenuController eventViewerController;
 
 
     public PrincipalMenuController() {
@@ -21,6 +26,8 @@ public class PrincipalMenuController extends AbstractViewController {
         setEnterpriseMenuController( new EnterpriseMenuController() );
         setCallLogController( new CallLogController() );
         setReportController( new ReportController() );
+        setEventViewerController( new EventMenuController() );
+
         initializeView();
     }
 
@@ -38,6 +45,10 @@ public class PrincipalMenuController extends AbstractViewController {
 
     private void openReportMenu() {
         getReportController().openWindow();
+    }
+
+    private void openEventMenu() {
+        getEventViewerController().openWindow();
     }
 
     @Override
@@ -58,46 +69,55 @@ public class PrincipalMenuController extends AbstractViewController {
         getPrincipalMenuView().getEnterpriseButton().addActionListener( actionEvent -> openEnterpriseMenu() );
         getPrincipalMenuView().getCallLogButton().addActionListener( actionEvent -> openCallLogMenu() );
         getPrincipalMenuView().getReportButton().addActionListener( actionEvent -> openReportMenu() );
+        getPrincipalMenuView().getEventButton().addActionListener( actionEvent -> openEventMenu() );
 
     }
 
-    public void setCallLogController(CallLogController callLogController) {
+    private void setCallLogController(CallLogController callLogController) {
         this.callLogController = callLogController;
     }
 
-    public void setEnterpriseMenuController(EnterpriseMenuController enterpriseMenuController) {
+    private void setEnterpriseMenuController(EnterpriseMenuController enterpriseMenuController) {
         this.enterpriseMenuController = enterpriseMenuController;
     }
 
-    public void setMembersMenuController(MembersMenuController membersMenuController) {
+    private void setMembersMenuController(MembersMenuController membersMenuController) {
         this.membersMenuController = membersMenuController;
     }
 
-    public void setPrincipalMenuView(PrincipalMenuView principalMenuView) {
+    private void setPrincipalMenuView(PrincipalMenuView principalMenuView) {
         this.principalMenuView = principalMenuView;
     }
 
-    public void setReportController(ReportController reportController) {
+    private void setReportController(ReportController reportController) {
         this.reportController = reportController;
     }
 
-    public CallLogController getCallLogController() {
+    public void setEventViewerController(EventMenuController eventViewerController) {
+        this.eventViewerController = eventViewerController;
+    }
+
+    private CallLogController getCallLogController() {
         return callLogController;
     }
 
-    public EnterpriseMenuController getEnterpriseMenuController() {
+    private EnterpriseMenuController getEnterpriseMenuController() {
         return enterpriseMenuController;
     }
 
-    public MembersMenuController getMembersMenuController() {
+    private MembersMenuController getMembersMenuController() {
         return membersMenuController;
     }
 
-    public PrincipalMenuView getPrincipalMenuView() {
+    private PrincipalMenuView getPrincipalMenuView() {
         return principalMenuView;
     }
 
-    public ReportController getReportController() {
+    private ReportController getReportController() {
         return reportController;
+    }
+
+    public EventMenuController getEventViewerController() {
+        return eventViewerController;
     }
 }

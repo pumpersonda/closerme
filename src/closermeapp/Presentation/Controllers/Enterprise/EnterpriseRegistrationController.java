@@ -1,7 +1,8 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.Enterprise;
 
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Enterprise;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Views.Enterprise.EnterpriseRegistrationView;
 
 import javax.swing.*;

@@ -1,5 +1,6 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.Charge;
 
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Views.Charge.ChargeView;
 
 import static java.lang.String.valueOf;

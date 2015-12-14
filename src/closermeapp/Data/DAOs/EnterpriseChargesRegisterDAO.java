@@ -42,7 +42,7 @@ public class EnterpriseChargesRegisterDAO extends AbstractDAO<EnterpriseChargesR
     }
 
     @Override
-    public ArrayList<?> getList() {
+    public ArrayList<EnterpriseChargesRegister> getList() {
         return null;
     }
 

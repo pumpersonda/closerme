@@ -3,9 +3,10 @@ package closermeapp.Presentation.Controllers;
 import closermeapp.Bussiness.Cashier.Cashier;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Presentation.Controllers.Charge.ChargeController;
 import closermeapp.Presentation.Util.Notifier;
-import closermeapp.Presentation.Views.EventManagement.EventViewer;
 import closermeapp.Presentation.Util.TableModel;
+import closermeapp.Presentation.Views.EventManagement.EventViewer;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
@@ -184,13 +185,13 @@ public class EventMenuController extends  AbstractViewController {
 
     private  boolean confirmIfEventSucceded(){
         Notifier notifier = new Notifier();
-        int answer = notifier.showConfirmDialog("¿El evento concluyo con exito?");
+        int answer = notifier.showConfirmDialog("ï¿½El evento concluyo con exito?");
         return answer == notifier.getYES_OPTION();
     }
 
     private boolean confirmEventDeletion(){
         Notifier notifier = new Notifier();
-        int answer = notifier.showConfirmDialog("¿Estas seguro que deseas eliminar este evento?");
+        int answer = notifier.showConfirmDialog("ï¿½Estas seguro que deseas eliminar este evento?");
         return answer == notifier.getYES_OPTION();
     }
 

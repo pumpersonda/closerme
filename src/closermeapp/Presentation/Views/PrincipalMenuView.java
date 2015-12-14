@@ -1,5 +1,4 @@
 package closermeapp.Presentation.Views;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +9,7 @@ package closermeapp.Presentation.Views;
 import javax.swing.*;
 
 /**
+ *
  * @author André
  */
 public class PrincipalMenuView extends javax.swing.JFrame {
@@ -36,9 +36,21 @@ public class PrincipalMenuView extends javax.swing.JFrame {
         enterpriseButton = new javax.swing.JButton();
         callLogButton = new javax.swing.JButton();
         reportButton = new javax.swing.JButton();
+        memberLabel = new javax.swing.JLabel();
+        enterpriseLabel = new javax.swing.JLabel();
+        titlePanel = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
+        iconLabel = new javax.swing.JLabel();
+        callLogLabel = new javax.swing.JLabel();
+        reportLabel = new javax.swing.JLabel();
+        eventButton = new javax.swing.JButton();
+        eventLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel1.setBackground( new java.awt.Color( 51, 153, 255 ) );
+        jPanel1.setForeground( new java.awt.Color( 0, 102, 255 ) );
 
         memberButton.setText("Miembros");
 
@@ -48,6 +60,47 @@ public class PrincipalMenuView extends javax.swing.JFrame {
 
         reportButton.setText("Reportes");
 
+        memberLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/user-icon (1).png" ) ) ); // NOI18N
+
+        enterpriseLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/users-icon.png" ) ) ); // NOI18N
+
+        titlePanel.setBackground( new java.awt.Color( 51, 153, 255 ) );
+
+        titleLabel.setFont( new java.awt.Font( "Plantagenet Cherokee", 0, 48 ) ); // NOI18N
+        titleLabel.setText( "Closerme" );
+
+        iconLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/logo.png" ) ) ); // NOI18N
+
+        javax.swing.GroupLayout titlePanelLayout = new javax.swing.GroupLayout( titlePanel );
+        titlePanel.setLayout( titlePanelLayout );
+        titlePanelLayout.setHorizontalGroup(
+                titlePanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                        .addGroup( javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
+                                .addContainerGap( 98, Short.MAX_VALUE )
+                                .addComponent( titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE )
+                                .addPreferredGap( javax.swing.LayoutStyle.ComponentPlacement.RELATED )
+                                .addComponent( iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE )
+                                .addGap( 32, 32, 32 ) )
+        );
+        titlePanelLayout.setVerticalGroup(
+                titlePanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                        .addGroup( titlePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent( iconLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE ) )
+                        .addGroup( javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
+                                .addContainerGap( 27, Short.MAX_VALUE )
+                                .addComponent( titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE )
+                                .addGap( 19, 19, 19 ) )
+        );
+
+        callLogLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/telephone-icon.png" ) ) ); // NOI18N
+
+        reportLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/news-icon (1).png" ) ) ); // NOI18N
+
+        eventButton.setText( "Eventos" );
+
+        eventLabel.setIcon( new javax.swing.ImageIcon( getClass().getResource( "/image/megaphone-icon.png" ) ) ); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -55,28 +108,50 @@ public class PrincipalMenuView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(97, 97, 97)
-                                                .addComponent(memberButton)
-                                                .addGap(95, 95, 95)
-                                                .addComponent(enterpriseButton)
-                                                .addGap(112, 112, 112)
-                                                .addComponent(callLogButton))
+                                                .addGap( 49, 49, 49 )
+                                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.TRAILING )
+                                                        .addComponent( memberButton )
+                                                        .addComponent( memberLabel ) )
+                                                .addGap( 55, 55, 55 )
+                                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING, false )
+                                                        .addComponent( enterpriseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
+                                                        .addComponent( enterpriseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE ) )
+                                                .addGap( 62, 62, 62 )
+                                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.TRAILING, false )
+                                                        .addComponent( reportLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
+                                                        .addComponent( reportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE ) )
+                                                .addGap( 35, 35, 35 )
+                                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                                                        .addComponent( callLogButton, javax.swing.GroupLayout.Alignment.TRAILING )
+                                                        .addComponent( callLogLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE ) )
+                                                .addGap( 38, 38, 38 )
+                                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                                                        .addComponent( eventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE )
+                                                        .addComponent( eventButton ) ) )
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(279, 279, 279)
-                                                .addComponent(reportButton)))
-                                .addContainerGap(171, Short.MAX_VALUE))
+                                                .addGap( 144, 144, 144 )
+                                                .addComponent( titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE ) ) )
+                                .addContainerGap( 78, Short.MAX_VALUE ) )
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
+                                .addComponent( titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE )
+                                .addGap( 18, 18, 18 )
+                                .addGroup( jPanel1Layout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                                        .addComponent( memberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE )
+                                        .addComponent( enterpriseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
+                                        .addComponent( callLogLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
+                                        .addComponent( reportLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
+                                        .addComponent( eventLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE ) )
+                                .addPreferredGap( javax.swing.LayoutStyle.ComponentPlacement.RELATED )
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(memberButton)
                                         .addComponent(enterpriseButton)
-                                        .addComponent(callLogButton))
-                                .addGap(62, 62, 62)
-                                .addComponent(reportButton)
-                                .addContainerGap(160, Short.MAX_VALUE))
+                                        .addComponent( reportButton )
+                                        .addComponent( callLogButton )
+                                        .addComponent( eventButton ) )
+                                .addGap( 122, 122, 122 ) )
         );
 
         getContentPane().add(jPanel1);
@@ -128,8 +203,8 @@ public class PrincipalMenuView extends javax.swing.JFrame {
         return enterpriseButton;
     }
 
-    public JPanel getjPanel1() {
-        return jPanel1;
+    public JButton getEventButton() {
+        return eventButton;
     }
 
     public JButton getMemberButton() {
@@ -143,9 +218,18 @@ public class PrincipalMenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     private javax.swing.JButton callLogButton;
+    private javax.swing.JLabel callLogLabel;
     private javax.swing.JButton enterpriseButton;
+    private javax.swing.JLabel enterpriseLabel;
+    private javax.swing.JButton eventButton;
+    private javax.swing.JLabel eventLabel;
+    private javax.swing.JLabel iconLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton memberButton;
+    private javax.swing.JLabel memberLabel;
     private javax.swing.JButton reportButton;
+    private javax.swing.JLabel reportLabel;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JPanel titlePanel;
     // End of variables declaration
 }

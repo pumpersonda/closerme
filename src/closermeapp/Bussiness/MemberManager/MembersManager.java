@@ -29,8 +29,7 @@ public class MembersManager {
             String phone,
             String address,
             String cellphone,
-            String membershipNameType,
-            double discount
+            String membershipNameType
     ) {
         Member member = new Member(name, phone, address, cellphone);
         this.membershipManager.addMembershipToMember(member, membershipNameType);
@@ -46,10 +45,6 @@ public class MembersManager {
         membersDAO.delete(member);
     }
 
-    public Member getMember(int memberId) {
-        Member member = (Member) this.membersDAO.get(memberId);
-        return member;
-    }
 
     public ArrayList<Member> getMemberList() {
         ArrayList<Member> memberList;

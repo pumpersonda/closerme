@@ -1,4 +1,4 @@
-package closermeapp.Bussiness.LogManager;
+package closermeapp.Bussiness.CallLogManager;
 
 import closermeapp.Bussiness.Entities.CallLog;
 import closermeapp.Data.DAOs.CallLogDAO;
@@ -36,13 +36,8 @@ public class CallLogManager {
         callLogDAO.delete(callLog);
     }
 
-    public CallLog getCallLog(int memberId) {
-        CallLog callLog = (CallLog) callLogDAO.get(memberId);
-        return callLog;
-    }
-
     public ArrayList getMemberList() {
-        ArrayList<CallLog> callLogList;
+        ArrayList callLogList;
         callLogList = this.callLogDAO.getList();
 
         return callLogList;
