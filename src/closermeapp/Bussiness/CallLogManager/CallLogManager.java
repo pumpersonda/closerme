@@ -1,4 +1,4 @@
-package closermeapp.Bussiness.LogManager;
+package closermeapp.Bussiness.CallLogManager;
 
 import closermeapp.Bussiness.Entities.CallLog;
 import closermeapp.Data.DAOs.CallLogDAO;

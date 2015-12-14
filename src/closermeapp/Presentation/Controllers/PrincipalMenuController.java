@@ -1,5 +1,9 @@
 package closermeapp.Presentation.Controllers;
 
+import closermeapp.Presentation.Controllers.CallLog.CallLogController;
+import closermeapp.Presentation.Controllers.Enterprise.EnterpriseMenuController;
+import closermeapp.Presentation.Controllers.Report.ReportController;
+import closermeapp.Presentation.Controllers.VisitorManagement.MembersMenuController;
 import closermeapp.Presentation.Views.PrincipalMenuView;
 
 import javax.swing.*;

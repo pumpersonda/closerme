@@ -1,9 +1,11 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.VisitorManagement;
 
 import closermeapp.Bussiness.Cashier.Cashier;
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
-import closermeapp.Presentation.Views.VisitorManagement.MemberRegistrationView;
+import closermeapp.Presentation.Controllers.AbstractViewController;
+import closermeapp.Presentation.Controllers.Charge.ChargeController;
+import closermeapp.Presentation.Views.VisitorManager.MemberRegistrationView;
 
 import static java.lang.Double.parseDouble;
 
@@ -71,10 +73,10 @@ public class MemberRegistrationController extends AbstractViewController {
             String cellphone,
             String address,
             String membershipType,
-            Double discount
+            double discount
     ) {
         MembersManager membersManager = MembersManager.getMembersManager();
-        Member member = membersManager.createMember(name, phone, address, cellphone, membershipType, discount);
+        Member member = membersManager.createMember( name, phone, address, cellphone, membershipType );
         membersManager.addMember(member);
 
         double totalCharge = getTotalCharge(member, discount);

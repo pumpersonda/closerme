@@ -1,6 +1,7 @@
 package closermeapp.Bussiness.Reports;
 
 import closermeapp.Bussiness.ChargesRegister.EnterpriseChargesRegister;
+import closermeapp.Bussiness.ChargesRegister.EventChargeRegister;
 import closermeapp.Bussiness.ChargesRegister.MemberChargesRegister;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -28,8 +29,9 @@ public class ExcelFileHandle {
     }
 
     public void saveActivityLog(
-            List<MemberChargesRegister> memberListOfMonth,
-            List<EnterpriseChargesRegister> enterpriseListOfMonth,
+            List<MemberChargesRegister> memberList,
+            List<EnterpriseChargesRegister> enterpriseList,
+            List<EventChargeRegister> eventList,
             double totalGain,
             String date
     ) {
@@ -47,29 +49,30 @@ public class ExcelFileHandle {
             int numberSheet = 0;
             WritableSheet sheet = writableWorkbook.getSheet(numberSheet);
 
-
-
             saveDate(sheet, date);
-
             saveTotalGain(sheet, totalGain);
 
-            int totalMembers = memberListOfMonth.size();
+            int totalMembers = memberList.size();
             saveTotalMember(sheet, totalMembers);
 
-            int totalEnterprises = enterpriseListOfMonth.size();
+            int totalEnterprises = enterpriseList.size();
             saveTotalEnterprise(sheet, totalEnterprises);
 
+            int totalEvent = eventList.size();
+            saveTotalEvent( sheet, totalEvent );
+
             int totalEmployees = 0;
-            boolean isValidList = enterpriseListOfMonth.size() > 0;
+            boolean isValidList = enterpriseList.size() > 0;
             if (isValidList) {
                 int positionList = 0;
-                totalEmployees = enterpriseListOfMonth.get(positionList).getEmployeesNumber();
-
+                totalEmployees = enterpriseList.get( positionList ).getEmployeesNumber();
             }
+
             saveTotalEmployee(sheet, totalEmployees);
 
-            saveMemberList(sheet, memberListOfMonth);
-            saveEnterpriseList(sheet, enterpriseListOfMonth);
+            saveMemberList( sheet, memberList );
+            saveEnterpriseList( sheet, enterpriseList );
+            saveEventList( sheet, eventList );
 
             writableWorkbook.write();
             writableWorkbook.close();
@@ -79,15 +82,6 @@ public class ExcelFileHandle {
             exception.printStackTrace();
         }
 
-
-    }
-
-    public void generateTodayReport(
-            List<MemberChargesRegister> memberListOfMonth,
-            List<EnterpriseChargesRegister> enterpriseListOfMonth,
-            double totalGain,
-            String date
-    ) {
 
     }
 
@@ -127,43 +121,68 @@ public class ExcelFileHandle {
         sheet.addCell(label);
     }
 
+    private void saveTotalEvent(WritableSheet sheet, int totalEvent) throws WriteException {
+        int column = 2;
+        int row = 7;
+        Label label = new Label( column, row, String.valueOf( totalEvent ) );
+        sheet.addCell( label );
+    }
+
     private void saveMemberList(
             WritableSheet sheet,
-            List<MemberChargesRegister> memberListOfMonth
+            List<MemberChargesRegister> memberList
     ) throws WriteException {
-        int column = 0;
-        int row = 11;
 
-        for (int i = 0; i < memberListOfMonth.size(); i++) {
-            Label label = new Label(column, row, memberListOfMonth.get(i).toString());
-            sheet.addCell(label);
-            row++;
+        if (isValidList( memberList )) {
+            int column = 0;
+            int row = 11;
+
+            for (int index = 0; index < memberList.size(); index++) {
+                Label label = new Label( column, row, memberList.get( index ).toString() );
+                sheet.addCell( label );
+                row++;
+            }
         }
     }
 
     private void saveEnterpriseList(
             WritableSheet sheet,
-            List<EnterpriseChargesRegister> enterpriseListOfMonth
+            List<EnterpriseChargesRegister> enterpriseList
     ) throws WriteException {
-        int column = 12;
-        int row = 11;
 
-        for (int i = 0; i < enterpriseListOfMonth.size(); i++) {
-            Label label = new Label(column, row, enterpriseListOfMonth.get(i).toString());
-            sheet.addCell(label);
-            row++;
+        if (isValidList( enterpriseList )) {
+
+            int column = 12;
+            int row = 11;
+
+            for (int index = 0; index < enterpriseList.size(); index++) {
+                Label label = new Label( column, row, enterpriseList.get( index ).toString() );
+                sheet.addCell( label );
+                row++;
+            }
         }
     }
 
-    private void saveNumericData(
-            int column,
-            int row,
+    private void saveEventList(
             WritableSheet sheet,
-            int numericData
+            List<EventChargeRegister> eventList
     ) throws WriteException {
 
-        Label label = new Label(column, row, String.valueOf(numericData));
-        sheet.addCell(label);
+        if (isValidList( eventList )) {
+
+            int column = 25;
+            int row = 11;
+
+            for (int index = 0; index < eventList.size(); index++) {
+                Label label = new Label( column, row, eventList.get( index ).toString() );
+                sheet.addCell( label );
+                row++;
+            }
+        }
+    }
+
+    private boolean isValidList(List list) {
+        return list.size() > 0;
     }
 
 

@@ -1,7 +1,8 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.CallLog;
 
+import closermeapp.Bussiness.CallLogManager.CallLogManager;
 import closermeapp.Bussiness.Entities.CallLog;
-import closermeapp.Bussiness.LogManager.CallLogManager;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Views.CallLog.CallLogDataView;
 
 /**

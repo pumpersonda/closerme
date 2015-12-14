@@ -1,9 +1,10 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.VisitorManagement;
 
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Util.TableModel;
-import closermeapp.Presentation.Views.VisitorManagement.MembersMenuView;
+import closermeapp.Presentation.Views.VisitorManager.MembersMenuView;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;

@@ -1,4 +1,4 @@
-package closermeapp.Presentation.Views.VisitorManagement;
+package closermeapp.Presentation.Views.VisitorManager;
 
 
 import javax.swing.*;

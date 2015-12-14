@@ -4,7 +4,6 @@ import closermeapp.Bussiness.ChargesRegister.EventChargeRegister;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class EventChargeRegisterDAO extends AbstractDAO<EventChargeRegister> {
 
     }
 
-    public static EventChargeRegisterDAO getEventChargeRegisterDAO(){
+    public static EventChargeRegisterDAO GetInstance() {
         if(eventChargeRegisterDAO == null){
             eventChargeRegisterDAO = new EventChargeRegisterDAO();
         }
@@ -55,7 +54,7 @@ public class EventChargeRegisterDAO extends AbstractDAO<EventChargeRegister> {
     }
 
     @Override
-    public ArrayList<?> getList() {
+    public ArrayList<EventChargeRegister> getList() {
         ArrayList memberList = null;
 
         try {

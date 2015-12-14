@@ -1,9 +1,11 @@
 package closermeapp.Bussiness.Reports;
 
 import closermeapp.Bussiness.ChargesRegister.EnterpriseChargesRegister;
+import closermeapp.Bussiness.ChargesRegister.EventChargeRegister;
 import closermeapp.Bussiness.ChargesRegister.MemberChargesRegister;
 import closermeapp.Bussiness.DateManager.DateManager;
 import closermeapp.Data.DAOs.EnterpriseChargesRegisterDAO;
+import closermeapp.Data.DAOs.EventChargeRegisterDAO;
 import closermeapp.Data.DAOs.MemberChargesRegisterDAO;
 
 import java.util.List;
@@ -29,15 +31,24 @@ public class ReportGenerator {
         String beginningOfMonth = dateManager.getDate(month);
         String finishOfMonth = dateManager.getNextDate(month);
 
-        List<MemberChargesRegister> memberListOfMonth;
-        memberListOfMonth = getMemberListOfMonth(beginningOfMonth, finishOfMonth);
+        List<MemberChargesRegister> memberListOfWeek;
+        memberListOfWeek = getMemberListRegister( beginningOfMonth, finishOfMonth );
 
         List<EnterpriseChargesRegister> enterpriseListOfMonth;
-        enterpriseListOfMonth = getEnterpriseListOfMonth(beginningOfMonth, finishOfMonth);
+        enterpriseListOfMonth = getEnterpriseListRegister( beginningOfMonth, finishOfMonth );
 
-        double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
+        List<EventChargeRegister> eventListOfMonth;
+        eventListOfMonth = getEventListRegister( beginningOfMonth, finishOfMonth );
 
-        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, beginningOfMonth);
+        double totalGain = getTotalGain( memberListOfWeek, enterpriseListOfMonth );
+
+        excelFileHandle.saveActivityLog(
+                memberListOfWeek,
+                enterpriseListOfMonth,
+                eventListOfMonth,
+                totalGain,
+                beginningOfMonth
+        );
     }
 
     public void generateTodayReport() {
@@ -45,16 +56,24 @@ public class ReportGenerator {
         String yesterday = dateManager.getPastDate(daysApart);
         String tomorrow = dateManager.getFutureDate(daysApart);
 
-        List<MemberChargesRegister> memberListOfMonth;
-        memberListOfMonth = getMemberListOfMonth(yesterday, tomorrow);
+        List<MemberChargesRegister> memberTodayList;
+        memberTodayList = getMemberListRegister( yesterday, tomorrow );
 
-        List<EnterpriseChargesRegister> enterpriseListOfMonth;
-        enterpriseListOfMonth = getEnterpriseListOfMonth(yesterday, tomorrow);
+        List<EnterpriseChargesRegister> enterpriseTodayList;
+        enterpriseTodayList = getEnterpriseListRegister( yesterday, tomorrow );
 
-        double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
+        List<EventChargeRegister> eventTodayList;
+        eventTodayList = getEventListRegister( yesterday, tomorrow );
+
+        double totalGain = getTotalGain( memberTodayList, enterpriseTodayList );
 
         String today = dateManager.getTodayDate();
-        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, today);
+        excelFileHandle.saveActivityLog(
+                memberTodayList,
+                enterpriseTodayList,
+                eventTodayList,
+                totalGain,
+                today );
     }
 
     public void generateWeeklyReport() {
@@ -62,34 +81,49 @@ public class ReportGenerator {
         String yesterday = dateManager.getPastDate(daysApart);
         String today = dateManager.getTodayDate();
 
-        List<MemberChargesRegister> memberListOfMonth;
-        memberListOfMonth = getMemberListOfMonth(yesterday, today);
+        List<MemberChargesRegister> memberLisOfWeek;
+        memberLisOfWeek = getMemberListRegister( yesterday, today );
 
-        List<EnterpriseChargesRegister> enterpriseListOfMonth;
-        enterpriseListOfMonth = getEnterpriseListOfMonth(yesterday, today);
+        List<EnterpriseChargesRegister> enterpriseListOfWeek;
+        enterpriseListOfWeek = getEnterpriseListRegister( yesterday, today );
 
-        double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
-        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, today);
+        List<EventChargeRegister> eventListOfWeek;
+        eventListOfWeek = getEventListRegister( yesterday, today );
+
+        double totalGain = getTotalGain( memberLisOfWeek, enterpriseListOfWeek );
+        excelFileHandle.saveActivityLog(
+                memberLisOfWeek,
+                enterpriseListOfWeek,
+                eventListOfWeek,
+                totalGain,
+                today );
     }
 
 
-    private List<MemberChargesRegister> getMemberListOfMonth(String beginningOfMonth, String finishOfMonth) {
-
-        List<MemberChargesRegister> registersOfTheMonth;
+    private List<MemberChargesRegister> getMemberListRegister(String beginningDate, String finishDate) {
+        List<MemberChargesRegister> memberListRegister;
         MemberChargesRegisterDAO memberChargesRegisterDAO = MemberChargesRegisterDAO.GetInstance();
-        registersOfTheMonth = memberChargesRegisterDAO.getInSpecificDate(beginningOfMonth, finishOfMonth);
+        memberListRegister = memberChargesRegisterDAO.getInSpecificDate( beginningDate, finishDate );
 
-        return registersOfTheMonth;
+        return memberListRegister;
     }
 
-    private List<EnterpriseChargesRegister> getEnterpriseListOfMonth(String beginningOfMonth, String finishOfMonth) {
 
-        List<EnterpriseChargesRegister> registersOfTheMonth;
+    private List<EnterpriseChargesRegister> getEnterpriseListRegister(String beginningDate, String finishDate) {
+        List<EnterpriseChargesRegister> enterpriseListRegister;
         EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.GetInstance();
-        registersOfTheMonth = enterpriseChargesRegisterDAO.getInSpecificDate(beginningOfMonth, finishOfMonth);
+        enterpriseListRegister = enterpriseChargesRegisterDAO.getInSpecificDate( beginningDate, finishDate );
 
-        return registersOfTheMonth;
+        return enterpriseListRegister;
 
+    }
+
+    private List<EventChargeRegister> getEventListRegister(String beginningDate, String finishDate) {
+        List<EventChargeRegister> eventChargeRegisters;
+        EventChargeRegisterDAO eventChargeRegisterDAO = EventChargeRegisterDAO.GetInstance();
+        eventChargeRegisters = eventChargeRegisterDAO.getInSpecifiedDate( beginningDate, finishDate );
+
+        return eventChargeRegisters;
     }
 
 
