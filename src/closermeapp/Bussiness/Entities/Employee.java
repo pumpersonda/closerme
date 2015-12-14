@@ -8,7 +8,7 @@ package closermeapp.Bussiness.Entities;
 
 import java.io.Serializable;
 
-public class Employee extends Visitor implements Serializable {
+public class Employee extends Client implements Serializable {
     private int id;
     private String role;
     private Enterprise enterprise;

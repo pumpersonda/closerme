@@ -33,7 +33,7 @@ public class EventEditionView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        editPanel = new javax.swing.JPanel();
         eventNameLabel = new javax.swing.JLabel();
         eventNameTextBox = new javax.swing.JTextField();
         startDateLabel = new javax.swing.JLabel();
@@ -49,7 +49,7 @@ public class EventEditionView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edicion de Evento"));
+        editPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edicion de Evento"));
 
         eventNameLabel.setText("Nombre:");
 
@@ -75,55 +75,55 @@ public class EventEditionView extends javax.swing.JFrame {
         eventEndTimeTextBox.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         eventEndTimeTextBox.setText("hh:mm");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout(editPanel);
+        editPanel.setLayout(editPanelLayout);
+        editPanelLayout.setHorizontalGroup(
+                editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(editPanelLayout.createSequentialGroup()
                                                 .addComponent(eventNameLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(eventNameTextBox))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(editPanelLayout.createSequentialGroup()
+                                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventEndDateLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventEndDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(editPanelLayout.createSequentialGroup()
                                                                 .addGap(10, 10, 10)
                                                                 .addComponent(startDateLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(eventStartDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addGroup(editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventStartTimeLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventStartTimeTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventEndTimeLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventEndTimeTextBox)))
                                                 .addGap(0, 101, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        editPanelLayout.setVerticalGroup(
+                editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(editPanelLayout.createSequentialGroup()
+                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(eventNameLabel)
                                         .addComponent(eventNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(startDateLabel)
                                         .addComponent(eventStartDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(eventStartTimeLabel)
                                         .addComponent(eventStartTimeTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(eventEndDateLabel)
                                         .addComponent(eventEndDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(eventEndTimeLabel)
@@ -142,7 +142,7 @@ public class EventEditionView extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(cancelButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -153,11 +153,12 @@ public class EventEditionView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(editPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(confirmButton)
-                                        .addComponent(cancelButton)))
+                                        .addComponent(cancelButton))
+                                .addContainerGap())
         );
 
         pack();
@@ -258,11 +259,11 @@ public class EventEditionView extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel1() {
-        return jPanel1;
+        return editPanel;
     }
 
     public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
+        this.editPanel = jPanel1;
     }
 
     public JLabel getStartDateLabel() {
@@ -278,6 +279,7 @@ public class EventEditionView extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JPanel editPanel;
     private javax.swing.JLabel eventEndDateLabel;
     private javax.swing.JFormattedTextField eventEndDateTextBox;
     private javax.swing.JLabel eventEndTimeLabel;
@@ -287,7 +289,6 @@ public class EventEditionView extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField eventStartDateTextBox;
     private javax.swing.JLabel eventStartTimeLabel;
     private javax.swing.JFormattedTextField eventStartTimeTextBox;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel startDateLabel;
     // End of variables declaration                   
 }
