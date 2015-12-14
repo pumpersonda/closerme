@@ -19,11 +19,9 @@ public class ChargesRegisterGenerator {
     private EventChargeRegisterDAO eventChargeRegisterDAO;
 
     public ChargesRegisterGenerator() {
-
         this.memberChargesRegisterDAO = MemberChargesRegisterDAO.GetInstance();
         this.enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.GetInstance();
         this.eventChargeRegisterDAO = EventChargeRegisterDAO.getEventChargeRegisterDAO();
-
 
     }
 

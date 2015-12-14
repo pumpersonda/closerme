@@ -4,9 +4,12 @@ import closermeapp.Bussiness.ChargesRegister.ChargesRegisterGenerator;
 import closermeapp.Bussiness.Entities.Enterprise;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.Entities.Member;
+import closermeapp.Bussiness.EventManager.EventManager;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by André on 12/12/2015.
@@ -42,7 +45,26 @@ public class Cashier {
 
     public double chargeThEvent(Event event) {
 
-        return 0.0;
+        String start = event.getStartDate();
+        String end = event.getEndDate();
+
+        String[] splitedStart = start.split( "," );
+        LocalDate startDate = getParsedDate( splitedStart[0] );
+        LocalTime startTime = getParsedTime( splitedStart[1] );
+        LocalDateTime startDateTime = LocalDateTime.of( startDate, startTime );
+
+        String[] splitedEnd = end.split( "," );
+        LocalDate endDate = getParsedDate( splitedEnd[0] );
+        LocalTime endTime = getParsedTime( splitedEnd[1] );
+        LocalDateTime endDateTime = LocalDateTime.of( endDate, endTime );
+
+        long hours = ChronoUnit.HOURS.between( startDateTime, endDateTime );
+
+        double totalCost = (float) hours * EventManager.getEventManager().COST_PER_HOUR;
+
+        totalCost = Math.abs( totalCost );
+
+        return totalCost;
     }
 
     private LocalDate getParsedDate(String date) {
