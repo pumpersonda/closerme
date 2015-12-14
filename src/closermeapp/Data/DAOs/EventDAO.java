@@ -22,20 +22,17 @@ public class EventDAO extends AbstractDAO<Event> {
 
     @Override
     public void add(Event event) {
-        String query = "add";
-        enquire(query,event);
+        saveEntity(event);
     }
 
     @Override
     public void delete(Event event) {
-        String query = "delete";
-        enquire(query,event);
+        deleteEntity(event);
     }
 
     @Override
     public void update(Event event) {
-        String query = "update";
-        enquire(query,event);
+        updateEntity(event);
     }
 
     @Override

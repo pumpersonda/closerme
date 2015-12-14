@@ -1,6 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Bussiness.DebtCollector.DebtCollector;
+import closermeapp.Bussiness.Cashier.Cashier;
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.MemberManager.MembersManager;
 import closermeapp.Presentation.Util.Notifier;
@@ -10,13 +10,13 @@ public class MemberRegistrationController extends AbstractViewController {
     private MemberRegistrationView memberRegistrationView;
     private MembersMenuController membersMenuController;
     private ChargeController chargeController;
-    private DebtCollector debtCollector;
+    private Cashier cashier;
     private Notifier notifier;
     private MembersManager membersManager;
 
     public MemberRegistrationController(MembersMenuController membersMenuController) {
         this.memberRegistrationView = new MemberRegistrationView();
-        this.debtCollector = DebtCollector.getDebtCollector();
+        this.cashier = Cashier.getInstance();
         this.notifier = new Notifier();
         this.membersMenuController = membersMenuController;
         this.chargeController = new ChargeController();
@@ -115,7 +115,7 @@ public class MemberRegistrationController extends AbstractViewController {
 
     private double getTotalCharge(Member member, double discount) {
 
-        double totalCharge = debtCollector.chargeTheMember(member, discount);
+        double totalCharge = cashier.chargeTheMember(member, discount);
         return totalCharge;
     }
 

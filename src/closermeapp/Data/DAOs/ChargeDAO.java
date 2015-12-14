@@ -24,20 +24,17 @@ public class ChargeDAO extends AbstractDAO<Charge>{
 
     @Override
     public void add(Charge charge) {
-        String query = "add";
-        enquire(query,charge);
+        saveEntity(charge);
     }
 
     @Override
     public void delete(Charge charge) {
-        String query = "delete";
-        enquire(query,charge);
+        deleteEntity(charge);
     }
 
     @Override
     public void update(Charge charge) {
-        String query = "update";
-        enquire(query,charge);
+        updateEntity(charge);
     }
 
     @Override

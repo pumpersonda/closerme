@@ -38,7 +38,7 @@ public class ReportView extends javax.swing.JFrame {
         selectDateLabel = new javax.swing.JLabel();
         weeklyReportPanel = new javax.swing.JPanel();
         generateWeeklyReportButton = new javax.swing.JButton();
-        generateWeeklyButton = new javax.swing.JLabel();
+        generateWeeklyLabel = new javax.swing.JLabel();
         todaysReportPanel = new javax.swing.JPanel();
         generateTodaysReport = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -94,7 +94,7 @@ public class ReportView extends javax.swing.JFrame {
 
         generateWeeklyReportButton.setText("Generar");
 
-        generateWeeklyButton.setText("Generar reporte semanal");
+        generateWeeklyLabel.setText("Generar reporte semanal");
 
         javax.swing.GroupLayout weeklyReportPanelLayout = new javax.swing.GroupLayout(weeklyReportPanel);
         weeklyReportPanel.setLayout(weeklyReportPanelLayout);
@@ -107,14 +107,14 @@ public class ReportView extends javax.swing.JFrame {
                                                 .addComponent(generateWeeklyReportButton))
                                         .addGroup(weeklyReportPanelLayout.createSequentialGroup()
                                                 .addGap(37, 37, 37)
-                                                .addComponent(generateWeeklyButton)))
+                                                .addComponent(generateWeeklyLabel)))
                                 .addContainerGap(23, Short.MAX_VALUE))
         );
         weeklyReportPanelLayout.setVerticalGroup(
                 weeklyReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, weeklyReportPanelLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(generateWeeklyButton)
+                                .addComponent(generateWeeklyLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(generateWeeklyReportButton)
                                 .addGap(30, 30, 30))
@@ -162,18 +162,18 @@ public class ReportView extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, windowsPanelLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(todaysReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(165, 165, 165))
+                                .addGap(152, 152, 152))
         );
         windowsPanelLayout.setVerticalGroup(
                 windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(windowsPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(monthReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(weeklyReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
+                                .addGroup(windowsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(monthReportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(weeklyReportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addComponent(todaysReportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(31, Short.MAX_VALUE))
+                                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         getContentPane().add(windowsPanel);
@@ -235,8 +235,8 @@ public class ReportView extends javax.swing.JFrame {
         return generateTodaysReport;
     }
 
-    public JLabel getGenerateWeeklyButton() {
-        return generateWeeklyButton;
+    public JLabel getGenerateWeeklyLabel() {
+        return generateWeeklyLabel;
     }
 
     public JButton getGenerateWeeklyReportButton() {
@@ -273,7 +273,7 @@ public class ReportView extends javax.swing.JFrame {
     private javax.swing.JButton generateMonthReportButton;
     private javax.swing.JLabel generateReporLabel;
     private javax.swing.JButton generateTodaysReport;
-    private javax.swing.JLabel generateWeeklyButton;
+    private javax.swing.JLabel generateWeeklyLabel;
     private javax.swing.JButton generateWeeklyReportButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel monthReportPanel;
@@ -283,5 +283,3 @@ public class ReportView extends javax.swing.JFrame {
     private javax.swing.JPanel windowsPanel;
     // End of variables declaration
 }
-
-

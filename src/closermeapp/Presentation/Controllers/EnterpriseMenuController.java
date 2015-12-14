@@ -1,6 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
-import closermeapp.Bussiness.DebtCollector.DebtCollector;
+import closermeapp.Bussiness.Cashier.Cashier;
 import closermeapp.Bussiness.EnterpriseManager.EmployeeManager;
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Employee;
@@ -27,7 +27,7 @@ public class EnterpriseMenuController extends AbstractViewController {
     private EmployeeRegistrationController employeeRegistrationController;
     private EnterpriseRegistrationController enterpriseRegistrationController;
     private ChargeController chargeController;
-    private DebtCollector debtCollector;
+    private Cashier cashier;
     private HashMap<String, Enterprise> enterpriseHashMap;
     private List<Employee> employeeList;
     private JComboBox enterpriseComboBox;
@@ -38,7 +38,7 @@ public class EnterpriseMenuController extends AbstractViewController {
         this.enterpriseMenuView = new EnterpriseMenuView();
         this.enterpriseManager = EnterpriseManager.getEnterpriseManager();
         this.chargeController = new ChargeController();
-        this.debtCollector = DebtCollector.getDebtCollector();
+        this.cashier = Cashier.getInstance();
         this.employeeManager = EmployeeManager.getEmployeeManager();
         this.enterpriseHashMap = new HashMap<String, Enterprise>();
         this.employeeRegistrationController = new EmployeeRegistrationController(this);
@@ -206,7 +206,7 @@ public class EnterpriseMenuController extends AbstractViewController {
 
     private void showChargeWindow() {
         Enterprise enterprise = getEnterpriseSelected();
-        double totalCost = debtCollector.chargeTheEnterprise(enterprise);
+        double totalCost = cashier.chargeTheEnterprise(enterprise);
         chargeController.setTotalChargeMessage(totalCost);
         chargeController.openWindow();
     }

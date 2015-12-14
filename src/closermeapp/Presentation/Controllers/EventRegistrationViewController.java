@@ -9,29 +9,30 @@ import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.EventManagement.EventRegistrationView;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
 
 /**
  *
  * @author JoseJulio
  */
-public class EventRegistrationController extends AbstractController {
-     private EventRegistrationView eventRegistrationView;
-     private EventViewerController eventViewerController;
+public class EventRegistrationViewController extends AbstractViewController {
+    private EventRegistrationView eventRegistrationView;
+    private EventViewerViewController eventViewerController;
 
-     public EventRegistrationController(EventViewerController eventViewerController) {
-            initializeView();
-            this.eventViewerController = eventViewerController;
-     }
-     
-     public void registerEvent(Event newEvent){
-         EventManager.getEventManager().reserveEvent(newEvent);
-     }
-     
-     private void initializeView(){
-         configureWindow();
-         setEvents();
-     }
+    public EventRegistrationViewController(EventViewerViewController eventViewerController) {
+        initializeView();
+        this.eventViewerController = eventViewerController;
+    }
+
+    public void registerEvent(Event newEvent) {
+        EventManager.getEventManager().reserveEvent(newEvent);
+    }
+
+    protected void initializeView() {
+        configureWindow();
+        setEvents();
+    }
 
     private void configureWindow() {
         this.eventRegistrationView = new EventRegistrationView();
@@ -67,7 +68,7 @@ public class EventRegistrationController extends AbstractController {
         }
         else{
             Notifier notifier = new Notifier();
-            notifier.showFailMessage("Error","Los campos ingresados no son validos");
+            notifier.showFailMessage("Los campos ingresados no son validos");
         }
     }
 
@@ -83,7 +84,7 @@ public class EventRegistrationController extends AbstractController {
     }
 
     @Override
-    protected void openWindow() {
+    public void openWindow() {
         this.eventRegistrationView.setVisible(true);
     }
 

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateManager {
     private static DateManager dateManager;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
     private DateManager() {

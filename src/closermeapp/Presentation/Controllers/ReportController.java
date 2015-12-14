@@ -12,6 +12,7 @@ import java.util.HashMap;
  */
 public class ReportController extends AbstractViewController {
     private ReportView reportView;
+    private ReportGenerator reportGenerator;
     private JComboBox monthComboBox;
     private HashMap<String, Integer> monthHashMap;
     private Notifier notifier;
@@ -19,6 +20,7 @@ public class ReportController extends AbstractViewController {
 
     public ReportController() {
         this.reportView = new ReportView();
+        this.reportGenerator = new ReportGenerator();
         this.monthComboBox = reportView.getDateComboBox();
         this.monthHashMap = new HashMap<String, Integer>();
         this.notifier = new Notifier();
@@ -26,19 +28,36 @@ public class ReportController extends AbstractViewController {
         initializeView();
     }
 
-    private void generateMonthReport() {
-        ReportGenerator reportGenerator = new ReportGenerator();
-        int numberMonth = getMonthSelected();
-        reportGenerator.generateMonthlyReport(numberMonth);
-
-        String title = "Reporte creado";
-        String message = "Se ha creado el reporte con exito";
-        notifier.showSuccessMessage(title, message);
-    }
 
     @Override
     public void openWindow() {
         reportView.setVisible(true);
+    }
+
+
+    private void generateMonthReport() {
+
+        int numberMonth = getMonthSelected();
+        reportGenerator.generateMonthlyReport(numberMonth);
+
+        showSuccessMessage();
+    }
+
+    private void generateTodayReport() {
+        reportGenerator.generateTodayReport();
+        showSuccessMessage();
+    }
+
+    private void generateWeeklyReport() {
+        reportGenerator.generateWeeklyReport();
+        showSuccessMessage();
+    }
+
+
+    private void showSuccessMessage() {
+        String title = "Reporte creado";
+        String message = "Se ha creado el reporte con exito";
+        notifier.showSuccessMessage(title, message);
     }
 
 
@@ -86,5 +105,7 @@ public class ReportController extends AbstractViewController {
     @Override
     protected void setEvents() {
         reportView.getGenerateMonthReportButton().addActionListener(actionEvent -> generateMonthReport());
+        reportView.getGenerateMonthReportButton().addActionListener(actionEvent -> generateTodayReport());
+        reportView.getGenerateWeeklyReportButton().addActionListener(actionEvent -> generateWeeklyReport());
     }
 }

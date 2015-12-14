@@ -1,4 +1,4 @@
-package closermeapp.Bussiness.DebtCollector;
+package closermeapp.Bussiness.Cashier;
 
 import closermeapp.Bussiness.ChargesRegister.ChargesRegisterGenerator;
 import closermeapp.Bussiness.Entities.Enterprise;
@@ -7,20 +7,20 @@ import closermeapp.Bussiness.Entities.Member;
 /**
  * Created by André on 12/12/2015.
  */
-public class DebtCollector {
-    private static DebtCollector debtCollector;
+public class Cashier {
+    private static Cashier cashier;
     private ChargesRegisterGenerator chargesRegisterGenerator;
 
 
-    private DebtCollector() {
+    private Cashier() {
         this.chargesRegisterGenerator = new ChargesRegisterGenerator();
     }
 
-    public static DebtCollector getDebtCollector() {
-        if (debtCollector == null) {
-            debtCollector = new DebtCollector();
+    public static Cashier getInstance() {
+        if (cashier == null) {
+            cashier = new Cashier();
         }
-        return debtCollector;
+        return cashier;
     }
 
     public double chargeTheMember(Member member, double discount) {

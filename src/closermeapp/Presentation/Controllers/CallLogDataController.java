@@ -20,7 +20,7 @@ public class CallLogDataController extends AbstractViewController {
         notifier = new Notifier();
 
         callLogManager = CallLogManager.getCallLogManager();
-
+        initializeView();
 
     }
 

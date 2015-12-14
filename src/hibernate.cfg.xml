@@ -26,6 +26,8 @@
         <mapping resource="closermeapp/Data/Mapping/Enterprise.hbm.xml"/>
         <mapping resource="closermeapp/Data/Mapping/MemberChargesRegister.hbm.xml"/>
         <mapping resource="closermeapp/Data/Mapping/EnterpriseChargesRegister.hbm.xml"/>
+        <mapping resource="closermeapp/Data/Mapping/Event.hbm.xml"/>
+        <mapping resource="closermeapp/Data/Mapping/Charge.hbm.xml"/>
 
 
     </session-factory>

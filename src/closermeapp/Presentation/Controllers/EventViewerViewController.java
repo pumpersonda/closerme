@@ -2,8 +2,8 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
-import closermeapp.Presentation.Views.EventManagement.EventViewer;
 import closermeapp.Presentation.Util.TableModel;
+import closermeapp.Presentation.Views.EventManagement.EventViewer;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 /**
  * Created by JoseJulio on 30/11/2015.
  */
-public class EventViewerController extends  AbstractController {
+public class EventViewerViewController extends AbstractViewController {
 
     EventViewer eventViewer;
-    EventRegistrationController eventRegistrationController;
+    EventRegistrationViewController eventRegistrationController;
     TableModel eventsTableModel;
     private ArrayList<Event> currentEvents;
 
-    public EventViewerController(){
+    public EventViewerViewController() {
 
-        eventRegistrationController = new EventRegistrationController(this);
+        eventRegistrationController = new EventRegistrationViewController(this);
 
         eventViewer = new EventViewer();
         loadAllEvents();
@@ -48,7 +48,7 @@ public class EventViewerController extends  AbstractController {
     }
 
     @Override
-    protected void openWindow() {
+    public void openWindow() {
         eventViewer.setVisible(true);
     }
 

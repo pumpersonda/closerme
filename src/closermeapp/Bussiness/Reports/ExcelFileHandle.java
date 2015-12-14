@@ -23,7 +23,7 @@ public class ExcelFileHandle {
     private ExcelFileHandle() {
     }
 
-    public static ExcelFileHandle getExcelFileHandle() {
+    public static ExcelFileHandle getInstance() {
         if (excelFileHandle == null) {
             excelFileHandle = new ExcelFileHandle();
         }
@@ -39,13 +39,18 @@ public class ExcelFileHandle {
 
         try {
 
-            Workbook workbook = Workbook.getWorkbook(new File("src/formato.xls"));
-            WritableWorkbook writableWorkbook = Workbook.createWorkbook(new File("src/Nueva.xls"), workbook);
+            Workbook workbook;
+            File file = new File("src/formato.xls");
+            workbook = Workbook.getWorkbook(file);
+
+            WritableWorkbook writableWorkbook;
+            file = new File("src/Nuevo_Reporte_" + date + ".xls");
+            writableWorkbook = Workbook.createWorkbook(file, workbook);
 
             int numberSheet = 0;
             WritableSheet sheet = writableWorkbook.getSheet(numberSheet);
 
-            int positionList = 0;
+
 
             saveDate(sheet, date);
 
@@ -60,6 +65,7 @@ public class ExcelFileHandle {
             int totalEmployees = 0;
             boolean isValidList = enterpriseListOfMonth.size() > 0;
             if (isValidList) {
+                int positionList = 0;
                 totalEmployees = enterpriseListOfMonth.get(positionList).getEmployeesNumber();
 
             }
@@ -76,6 +82,15 @@ public class ExcelFileHandle {
             exception.printStackTrace();
         }
 
+
+    }
+
+    public void generateTodayReport(
+            List<MemberChargesRegister> memberListOfMonth,
+            List<EnterpriseChargesRegister> enterpriseListOfMonth,
+            double totalGain,
+            String date
+    ) {
 
     }
 

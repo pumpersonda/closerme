@@ -8,7 +8,7 @@ package closermeapp.Bussiness.EventManager;
 import closermeapp.Bussiness.ChargeManager.ChargeManager;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Data.DAOs.EventDAO;
-import closermeapp.Presentation.Controllers.EventViewerController;
+import closermeapp.Presentation.Controllers.EventViewerViewController;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public class EventManager {
 
     private final float COST_PER_HOUR = 20; // pesos
 
-    private EventViewerController eventViewerController;
+    private EventViewerViewController eventViewerController;
 
     private EventManager(){ }
     private static EventManager eventManager;

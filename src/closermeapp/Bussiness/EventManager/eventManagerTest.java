@@ -1,6 +1,6 @@
 package closermeapp.Bussiness.EventManager;
 
-import closermeapp.Presentation.Controllers.EventViewerController;
+import closermeapp.Presentation.Controllers.EventViewerViewController;
 
 /**
  * Created by JoseJulio on 09/12/2015.
@@ -8,7 +8,7 @@ import closermeapp.Presentation.Controllers.EventViewerController;
 public class eventManagerTest {
 
     public static void main(String[] args) {
-        EventViewerController eventViewerController = new EventViewerController();
+        EventViewerViewController eventViewerController = new EventViewerViewController();
     }
 
 }

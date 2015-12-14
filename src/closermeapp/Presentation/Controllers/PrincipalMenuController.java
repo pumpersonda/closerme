@@ -2,6 +2,8 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Presentation.Views.PrincipalMenuView;
 
+import javax.swing.*;
+
 /**
  * Created by André on 13/12/2015.
  */
@@ -46,6 +48,7 @@ public class PrincipalMenuController extends AbstractViewController {
     @Override
     protected void initializeView() {
         configureWindow(principalMenuView);
+        principalMenuView.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setEvents();
     }
 

@@ -18,21 +18,60 @@ public class ReportGenerator {
 
     public ReportGenerator() {
         this.dateManager = DateManager.getInstance();
-        this.excelFileHandle = ExcelFileHandle.getExcelFileHandle();
+        this.excelFileHandle = ExcelFileHandle.getInstance();
     }
 
     public void generateMonthlyReport(int month) {
         String beginningOfMonth = dateManager.getDate(month);
-        List<MemberChargesRegister> memberListOfMonth = getMemberListOfMonth(month);
-        List<EnterpriseChargesRegister> enterpriseListOfMonth = getEnterpriseListOfMonth(month);
+        String finishOfMonth = dateManager.getNextDate(month);
+
+        List<MemberChargesRegister> memberListOfMonth;
+        memberListOfMonth = getMemberListOfMonth(beginningOfMonth, finishOfMonth);
+
+        List<EnterpriseChargesRegister> enterpriseListOfMonth;
+        enterpriseListOfMonth = getEnterpriseListOfMonth(beginningOfMonth, finishOfMonth);
+
         double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
 
         excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, beginningOfMonth);
     }
 
-    private List<MemberChargesRegister> getMemberListOfMonth(int month) {
-        String beginningOfMonth = dateManager.getDate(month);
-        String finishOfMonth = dateManager.getNextDate(month);
+    public void generateTodayReport() {
+        int daysApart = 1;
+        String yesterday = dateManager.getPastDate(daysApart);
+        String tomorrow = dateManager.getFutureDate(daysApart);
+
+        List<MemberChargesRegister> memberListOfMonth;
+        memberListOfMonth = getMemberListOfMonth(yesterday, tomorrow);
+
+        List<EnterpriseChargesRegister> enterpriseListOfMonth;
+        enterpriseListOfMonth = getEnterpriseListOfMonth(yesterday, tomorrow);
+
+        double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
+
+        String today = dateManager.getTodayDate();
+        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, today);
+    }
+
+    public void generateWeeklyReport() {
+        int daysApart = 7;
+        String yesterday = dateManager.getPastDate(daysApart);
+        String today = dateManager.getTodayDate();
+
+        List<MemberChargesRegister> memberListOfMonth;
+        memberListOfMonth = getMemberListOfMonth(yesterday, today);
+
+        List<EnterpriseChargesRegister> enterpriseListOfMonth;
+        enterpriseListOfMonth = getEnterpriseListOfMonth(yesterday, today);
+
+        double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
+
+
+        excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, today);
+    }
+
+
+    private List<MemberChargesRegister> getMemberListOfMonth(String beginningOfMonth, String finishOfMonth) {
 
         List<MemberChargesRegister> registersOfTheMonth;
         MemberChargesRegisterDAO memberChargesRegisterDAO = MemberChargesRegisterDAO.getInstance();
@@ -41,9 +80,7 @@ public class ReportGenerator {
         return registersOfTheMonth;
     }
 
-    private List<EnterpriseChargesRegister> getEnterpriseListOfMonth(int month) {
-        String beginningOfMonth = dateManager.getDate(month);
-        String finishOfMonth = dateManager.getNextDate(month);
+    private List<EnterpriseChargesRegister> getEnterpriseListOfMonth(String beginningOfMonth, String finishOfMonth) {
 
         List<EnterpriseChargesRegister> registersOfTheMonth;
         EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.getInstance();
