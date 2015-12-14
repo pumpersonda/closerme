@@ -1,6 +1,7 @@
 package closermeapp.Bussiness.ChargesRegister;
 
 import closermeapp.Bussiness.Entities.Event;
+import closermeapp.Bussiness.Util.DateFormater;
 
 /**
  * Created by JoseJulio on 13/12/2015.
@@ -10,7 +11,6 @@ public class EventChargeRegister {
     int eventRegisterId;
     String eventName;
     String eventStartDate;
-    String eventEndDate;
     String clientName;
     String clientPhone;
     double totalCost;
@@ -20,7 +20,6 @@ public class EventChargeRegister {
         eventRegisterId = event.getEventID();
         eventName = event.getName();
         eventStartDate = event.getStartDate();
-        eventEndDate = event.getEndDate();
         clientName = event.getClientName();
         clientPhone = event.getClientPhone();
         this.totalCost = totalCost;
@@ -61,14 +60,6 @@ public class EventChargeRegister {
         this.eventStartDate = eventStartDate;
     }
 
-    public String getEventEndDate() {
-        return eventEndDate;
-    }
-
-    public void setEventEndDate(String eventEndDate) {
-        this.eventEndDate = eventEndDate;
-    }
-
     public String getClientName() {
         return clientName;
     }
@@ -85,13 +76,16 @@ public class EventChargeRegister {
         this.clientPhone = clientPhone;
     }
 
+    public String getFormatedDate(){
+        return DateFormater.formatDateYYYYMMDD(eventStartDate);
+    }
+
     @Override
     public String toString() {
         return "EventChargeRegister{" +
                 "eventRegisterId=" + eventRegisterId +
                 ", eventName='" + eventName + '\'' +
                 ", eventStartDate='" + eventStartDate + '\'' +
-                ", eventEndDate='" + eventEndDate + '\'' +
                 ", clientName='" + clientName + '\'' +
                 ", clientPhone='" + clientPhone + '\'' +
                 '}';

@@ -5,6 +5,7 @@ import closermeapp.Bussiness.Entities.Enterprise;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.Entities.Member;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Bussiness.Util.DateFormater;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,13 +50,13 @@ public class Cashier {
         String end = event.getEndDate();
 
         String[] splitedStart = start.split(",");
-        LocalDate startDate = getParsedDate(splitedStart[0]);
-        LocalTime startTime = getParsedTime(splitedStart[1]);
+        LocalDate startDate = DateFormater.getParsedDate(splitedStart[0]);
+        LocalTime startTime = DateFormater.getParsedTime(splitedStart[1]);
         LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
 
         String[] splitedEnd = end.split(",");
-        LocalDate endDate = getParsedDate(splitedEnd[0]);
-        LocalTime endTime = getParsedTime(splitedEnd[1]);
+        LocalDate endDate = DateFormater.getParsedDate(splitedEnd[0]);
+        LocalTime endTime = DateFormater.getParsedTime(splitedEnd[1]);
         LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
 
         long hours = ChronoUnit.HOURS.between(startDateTime, endDateTime);
@@ -66,34 +67,6 @@ public class Cashier {
 
         return totalCost;
 
-    }
-
-    private LocalDate getParsedDate(String date) {
-        String[] dateValues = date.split( "/" );
-
-        int day = Integer.parseInt( dateValues[0] );
-        int month = Integer.parseInt( dateValues[1] );
-        int year = Integer.parseInt( dateValues[2] );
-
-        LocalDate parsedDate = LocalDate.of( day, month, year );
-        return parsedDate;
-    }
-
-    private LocalTime getParsedTime(String time) {
-        String[] timeValues = time.split( " " );
-        String hours = timeValues[0].substring( 0, 2 );
-        String minutes = timeValues[0].substring( 3, 5 );
-
-        int numeritHour = Integer.parseInt( hours );
-        int numericMinutes = Integer.parseInt( minutes );
-
-        if (timeValues[1] == "PM") {
-            numeritHour = (numeritHour + 12) % 24;
-        }
-
-        LocalTime parsedTime = LocalTime.of( numeritHour, numericMinutes );
-
-        return parsedTime;
     }
 
     public ChargesRegisterGenerator getChargesRegisterGenerator() {
