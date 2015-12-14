@@ -35,9 +35,9 @@ public class ChargesRegisterGenerator {
         saveEnterpriseChargesRegister(enterpriseChargesRegister);
     }
 
-    public  void addEventChargeRegister(Event event, double totalCost){
-        eventChargeRegister = new EventChargeRegister(event, totalCost);
-        saveEventChargeRegister(eventChargeRegister);
+    public void addEventChargeRegister(Event event, double totalCost) {
+        eventChargeRegister = new EventChargeRegister( event, totalCost );
+        saveEventChargeRegister( eventChargeRegister );
     }
 
     private void saveMemberChargesRegister(MemberChargesRegister memberChargesRegister) {
@@ -48,8 +48,8 @@ public class ChargesRegisterGenerator {
         enterpriseChargesRegisterDAO.add(enterpriseChargesRegister);
     }
 
-    private void saveEventChargeRegister(EventChargeRegister eventChargeRegister){
-        eventChargeRegisterDAO.add(eventChargeRegister);
+    private void saveEventChargeRegister(EventChargeRegister eventChargeRegister) {
+        eventChargeRegisterDAO.add( eventChargeRegister );
     }
 
 }

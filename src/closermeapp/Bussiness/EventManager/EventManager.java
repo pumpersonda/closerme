@@ -20,7 +20,7 @@ public class EventManager {
     public final float COST_PER_HOUR = 20; // pesos
     private EventViewerViewController eventViewerController;
 
-    private EventManager(){
+    private EventManager() {
     }
     private static EventManager eventManager;
 
@@ -33,9 +33,9 @@ public class EventManager {
     }
 
     public Event createEvent(String name, String startDate,String startTime, String endDate,String endTime, String clientName, String clientPhone){
-        String startDateFormated = startDate+","+startTime;
-        String endDateFormated = endDate+","+endTime;
-        return new Event(name, startDateFormated, endDateFormated, clientName, clientPhone);
+        String startDateFormated = startDate + "," + startTime;
+        String endDateFormated = endDate + "," + endTime;
+        return new Event( name, startDateFormated, endDateFormated, clientName, clientPhone );
     }
 
     public void reserveEvent(Event event){

@@ -21,9 +21,9 @@ public class Event {
     public Event(){}
 
     public Event(
-            String name, 
-            String startDate, 
-            String endDate, 
+            String name,
+            String startDate,
+            String endDate,
             String clientName,
             String clientPhone
     ) {

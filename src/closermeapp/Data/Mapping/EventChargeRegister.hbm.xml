@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
     <class name="closermeapp.Bussiness.ChargesRegister.EventChargeRegister" table="event_charge_register">
-        <id name="eventRegisterId" column="id_report">
+        <id name="eventRegisterId" column="eventRegisterId">
             <generator class="assigned"/>
         </id>
 

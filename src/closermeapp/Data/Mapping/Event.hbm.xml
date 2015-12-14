@@ -11,7 +11,7 @@
         <property name="name" type="java.lang.String" column="name"/>
         <property name="startDate" type="java.lang.String" column="startDate"/>
         <property name="endDate" type="java.lang.String" column="endDate"/>
-        <property name="clientName" type="java.lang.String" column="clientName"></property>
-        <property name="clientPhone" type="java.lang.String" column="clientPhone"></property>
+        <property name="clientName" type="java.lang.String" column="clientName"/>
+        <property name="clientPhone" type="java.lang.String" column="clientPhone"/>
     </class>
 </hibernate-mapping>

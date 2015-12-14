@@ -5,11 +5,7 @@
  */
 package closermeapp.Presentation.Views.EventManagement;
 
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  *
@@ -49,7 +45,7 @@ public class EventEditionView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Edicion de Evento"));
+        editPanel.setBorder( javax.swing.BorderFactory.createTitledBorder( "Edicion de Evento" ) );
 
         eventNameLabel.setText("Nombre:");
 
@@ -75,35 +71,35 @@ public class EventEditionView extends javax.swing.JFrame {
         eventEndTimeTextBox.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
         eventEndTimeTextBox.setText("hh:mm");
 
-        javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout(editPanel);
-        editPanel.setLayout(editPanelLayout);
+        javax.swing.GroupLayout editPanelLayout = new javax.swing.GroupLayout( editPanel );
+        editPanel.setLayout( editPanelLayout );
         editPanelLayout.setHorizontalGroup(
-                editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(editPanelLayout.createSequentialGroup()
+                editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                        .addGroup( editPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(editPanelLayout.createSequentialGroup()
+                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                                        .addGroup( editPanelLayout.createSequentialGroup()
                                                 .addComponent(eventNameLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(eventNameTextBox))
-                                        .addGroup(editPanelLayout.createSequentialGroup()
-                                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
+                                        .addGroup( editPanelLayout.createSequentialGroup()
+                                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                                                        .addGroup( javax.swing.GroupLayout.Alignment.TRAILING, editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventEndDateLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventEndDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(editPanelLayout.createSequentialGroup()
+                                                        .addGroup( editPanelLayout.createSequentialGroup()
                                                                 .addGap(10, 10, 10)
                                                                 .addComponent(startDateLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(eventStartDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(editPanelLayout.createSequentialGroup()
+                                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING, false )
+                                                        .addGroup( editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventStartTimeLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventStartTimeTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(editPanelLayout.createSequentialGroup()
+                                                        .addGroup( editPanelLayout.createSequentialGroup()
                                                                 .addComponent(eventEndTimeLabel)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(eventEndTimeTextBox)))
@@ -111,19 +107,19 @@ public class EventEditionView extends javax.swing.JFrame {
                                 .addContainerGap())
         );
         editPanelLayout.setVerticalGroup(
-                editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(editPanelLayout.createSequentialGroup()
-                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.LEADING )
+                        .addGroup( editPanelLayout.createSequentialGroup()
+                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.BASELINE )
                                         .addComponent(eventNameLabel)
                                         .addComponent(eventNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.BASELINE )
                                         .addComponent(startDateLabel)
                                         .addComponent(eventStartDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(eventStartTimeLabel)
                                         .addComponent(eventStartTimeTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(editPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup( editPanelLayout.createParallelGroup( javax.swing.GroupLayout.Alignment.BASELINE )
                                         .addComponent(eventEndDateLabel)
                                         .addComponent(eventEndDateTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(eventEndTimeLabel)
@@ -142,7 +138,7 @@ public class EventEditionView extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent( editPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE )
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(cancelButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -153,12 +149,12 @@ public class EventEditionView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(editPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent( editPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE )
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup( layout.createParallelGroup( javax.swing.GroupLayout.Alignment.BASELINE )
                                         .addComponent(confirmButton)
-                                        .addComponent(cancelButton))
-                                .addContainerGap())
+                                        .addComponent( cancelButton ) )
+                                .addContainerGap() )
         );
 
         pack();

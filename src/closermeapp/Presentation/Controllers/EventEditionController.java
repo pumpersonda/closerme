@@ -5,18 +5,17 @@ import closermeapp.Bussiness.EventManager.EventManager;
 import closermeapp.Presentation.Views.EventManagement.EventEditionView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
  * Created by JoseJulio on 07/12/2015.
  */
-public class EventEditionController extends  AbstractViewController {
+public class EventEditionController extends AbstractViewController {
 
     EventEditionView eventEditionView;
     Event eventToEdit;
     EventViewerViewController eventViewerViewController;
 
-    public EventEditionController(EventViewerViewController eventViewerViewController ,Event eventToEdit){
+    public EventEditionController(EventViewerViewController eventViewerViewController, Event eventToEdit) {
 
         this.eventToEdit = eventToEdit;
         this.eventViewerViewController = eventViewerViewController;
@@ -56,8 +55,8 @@ public class EventEditionController extends  AbstractViewController {
         String newEndTime = eventEditionView.getEventEndTimeTextBox().getText();
 
         eventToEdit.setName(newName);
-        eventToEdit.setStartDate(newStartDate + "," + newStartTime);
-        eventToEdit.setEndDate(newEndDate + "," + newEndTime);
+        eventToEdit.setStartDate( newStartDate + "," + newStartTime );
+        eventToEdit.setEndDate( newEndDate + "," + newEndTime );
 
         EventManager.getEventManager().updateEvent(eventToEdit);
 
@@ -70,16 +69,16 @@ public class EventEditionController extends  AbstractViewController {
         eventEditionView.setVisible(false);
     }
 
-    private void setFieldsValue(){
+    private void setFieldsValue() {
 
-        String[] startTimeValues = eventToEdit.getStartDate().split(",");
-        String[] endTimeValues = eventToEdit.getEndDate().split(",");
+        String[] startTimeValues = eventToEdit.getStartDate().split( "," );
+        String[] endTimeValues = eventToEdit.getEndDate().split( "," );
 
-        eventEditionView.getEventNameTextBox().setText(eventToEdit.getName());
-        eventEditionView.getEventStartDateTextBox().setText(startTimeValues[0]);
-        eventEditionView.getEventStartTimeTextBox().setText(startTimeValues[1]);
-        eventEditionView.getEventEndDateTextBox().setText(endTimeValues[0]);
-        eventEditionView.getEventEndTimeTextBox().setText(endTimeValues[1]);
+        eventEditionView.getEventNameTextBox().setText( eventToEdit.getName() );
+        eventEditionView.getEventStartDateTextBox().setText( startTimeValues[0] );
+        eventEditionView.getEventStartTimeTextBox().setText( startTimeValues[1] );
+        eventEditionView.getEventEndDateTextBox().setText( endTimeValues[0] );
+        eventEditionView.getEventEndTimeTextBox().setText( endTimeValues[1] );
     }
 
 }

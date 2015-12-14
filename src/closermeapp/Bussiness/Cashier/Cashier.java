@@ -48,49 +48,49 @@ public class Cashier {
         String start = event.getStartDate();
         String end = event.getEndDate();
 
-        String[] splitedStart = start.split(",");
-        LocalDate startDate = getParsedDate(splitedStart[0]);
-        LocalTime startTime = getParsedTime(splitedStart[1]);
-        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+        String[] splitedStart = start.split( "," );
+        LocalDate startDate = getParsedDate( splitedStart[0] );
+        LocalTime startTime = getParsedTime( splitedStart[1] );
+        LocalDateTime startDateTime = LocalDateTime.of( startDate, startTime );
 
-        String[] splitedEnd = end.split(",");
-        LocalDate endDate = getParsedDate(splitedEnd[0]);
-        LocalTime endTime = getParsedTime(splitedEnd[1]);
-        LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
+        String[] splitedEnd = end.split( "," );
+        LocalDate endDate = getParsedDate( splitedEnd[0] );
+        LocalTime endTime = getParsedTime( splitedEnd[1] );
+        LocalDateTime endDateTime = LocalDateTime.of( endDate, endTime );
 
-        long hours = ChronoUnit.HOURS.between(startDateTime, endDateTime);
+        long hours = ChronoUnit.HOURS.between( startDateTime, endDateTime );
 
-        double totalCost = (float)hours * EventManager.getEventManager().COST_PER_HOUR;
+        double totalCost = (float) hours * EventManager.getEventManager().COST_PER_HOUR;
 
-        totalCost = Math.abs(totalCost);
+        totalCost = Math.abs( totalCost );
 
         return totalCost;
     }
 
-    private LocalDate getParsedDate(String date){
-        String[] dateValues = date.split("/");
+    private LocalDate getParsedDate(String date) {
+        String[] dateValues = date.split( "/" );
 
-        int day = Integer.parseInt(dateValues[0]);
-        int month = Integer.parseInt(dateValues[1]);
-        int year = Integer.parseInt(dateValues[2]);
+        int day = Integer.parseInt( dateValues[0] );
+        int month = Integer.parseInt( dateValues[1] );
+        int year = Integer.parseInt( dateValues[2] );
 
-        LocalDate parsedDate = LocalDate.of(day,month,year);
+        LocalDate parsedDate = LocalDate.of( day, month, year );
         return parsedDate;
     }
 
-    private LocalTime getParsedTime(String time){
-        String[] timeValues = time.split(" ");
-        String hours = timeValues[0].substring(0,2);
-        String minutes = timeValues[0].substring(3, 5);
+    private LocalTime getParsedTime(String time) {
+        String[] timeValues = time.split( " " );
+        String hours = timeValues[0].substring( 0, 2 );
+        String minutes = timeValues[0].substring( 3, 5 );
 
-        int numeritHour = Integer.parseInt(hours);
-        int numericMinutes = Integer.parseInt(minutes);
+        int numeritHour = Integer.parseInt( hours );
+        int numericMinutes = Integer.parseInt( minutes );
 
-        if(timeValues[1] == "PM"){
-            numeritHour = (numeritHour+12)%24;
+        if (timeValues[1] == "PM") {
+            numeritHour = (numeritHour + 12) % 24;
         }
 
-        LocalTime parsedTime = LocalTime.of(numeritHour,numericMinutes);
+        LocalTime parsedTime = LocalTime.of( numeritHour, numericMinutes );
 
         return parsedTime;
     }

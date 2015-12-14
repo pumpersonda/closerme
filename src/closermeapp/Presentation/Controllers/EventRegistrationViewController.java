@@ -27,11 +27,11 @@ public class EventRegistrationViewController extends AbstractViewController {
         notifier = new Notifier();
     }
 
-    public void registerEvent(Event newEvent){
+    public void registerEvent(Event newEvent) {
         EventManager.getEventManager().reserveEvent(newEvent);
     }
 
-    protected void initializeView(){
+    protected void initializeView() {
         configureWindow();
         setEvents();
     }
@@ -66,15 +66,15 @@ public class EventRegistrationViewController extends AbstractViewController {
         boolean isValid = isValid(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
         if(isValid) {
             Event newEvent;
-            newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+            newEvent = EventManager.getEventManager().createEvent( eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone );
             registerEvent(newEvent);
             eventViewerController.updateView();
-            notifier.showSuccessMessage("Evento Creado","El evento se ha creado exitosamente");
+            notifier.showSuccessMessage( "Evento Creado", "El evento se ha creado exitosamente" );
             closeWindow();
         }
         else{
 
-            notifier.showWarningMessage("Porfavor llene todos los campos");
+            notifier.showWarningMessage( "Porfavor llene todos los campos" );
 
         }
 

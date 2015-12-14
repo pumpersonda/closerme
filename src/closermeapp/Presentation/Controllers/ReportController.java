@@ -36,7 +36,7 @@ public class ReportController extends AbstractViewController {
     @Override
     protected void setEvents() {
         getReportView().getGenerateMonthReportButton().addActionListener( actionEvent -> generateMonthReport() );
-        getReportView().getGenerateMonthReportButton().addActionListener( actionEvent -> generateTodayReport() );
+        getReportView().getGenerateTodaysReport().addActionListener( actionEvent -> generateTodayReport() );
         getReportView().getGenerateWeeklyReportButton().addActionListener( actionEvent -> generateWeeklyReport() );
     }
 
