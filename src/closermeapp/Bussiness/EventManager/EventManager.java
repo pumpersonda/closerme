@@ -30,7 +30,15 @@ public class EventManager {
         return eventManager;
     }
 
-    public Event createEvent(String name, String startDate,String startTime, String endDate,String endTime, String clientName, String clientPhone){
+    public Event createEvent(
+            String name,
+            String startDate,
+            String startTime,
+            String endDate,
+            String endTime,
+            String clientName,
+            String clientPhone
+    ){
         String startDateFormated = startDate+","+startTime;
         String endDateFormated = endDate+","+endTime;
         return new Event(name, startDateFormated, endDateFormated, clientName, clientPhone);
