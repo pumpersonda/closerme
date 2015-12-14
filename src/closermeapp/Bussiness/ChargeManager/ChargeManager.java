@@ -31,12 +31,12 @@ public class ChargeManager {
 
         if(answer == notifier.getYES_OPTION()){
             Charge newCharge = createChargeObect(concept, amount);
-            ChargeDAO.getChargeDAO().add(newCharge);
+            ChargeDAO.GetInstance().add( newCharge );
         }
     }
 
     public ArrayList<Charge> getChargeReport(){
-        ArrayList<Charge> charges = ChargeDAO.getChargeDAO().getList();
+        ArrayList<Charge> charges = ChargeDAO.GetInstance().getList();
         return charges;
     }
 

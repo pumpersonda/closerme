@@ -1,7 +1,6 @@
 package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Reports.ReportGenerator;
-import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.Report.ReportView;
 
 import javax.swing.*;
@@ -12,100 +11,117 @@ import java.util.HashMap;
  */
 public class ReportController extends AbstractViewController {
     private ReportView reportView;
-    private ReportGenerator reportGenerator;
     private JComboBox monthComboBox;
     private HashMap<String, Integer> monthHashMap;
-    private Notifier notifier;
-
 
     public ReportController() {
-        this.reportView = new ReportView();
-        this.reportGenerator = new ReportGenerator();
-        this.monthComboBox = reportView.getDateComboBox();
-        this.monthHashMap = new HashMap<String, Integer>();
-        this.notifier = new Notifier();
-
+        this.setReportView( new ReportView() );
+        this.setMonthComboBox( getReportView().getDateComboBox() );
+        this.setMonthHashMap( new HashMap<String, Integer>() );
         initializeView();
     }
 
-
     @Override
     public void openWindow() {
-        reportView.setVisible(true);
-    }
-
-
-    private void generateMonthReport() {
-
-        int numberMonth = getMonthSelected();
-        reportGenerator.generateMonthlyReport(numberMonth);
-
-        showSuccessMessage();
-    }
-
-    private void generateTodayReport() {
-        reportGenerator.generateTodayReport();
-        showSuccessMessage();
-    }
-
-    private void generateWeeklyReport() {
-        reportGenerator.generateWeeklyReport();
-        showSuccessMessage();
-    }
-
-
-    private void showSuccessMessage() {
-        String title = "Reporte creado";
-        String message = "Se ha creado el reporte con exito";
-        notifier.showSuccessMessage(title, message);
-    }
-
-
-    private int getMonthSelected() {
-        String month = (String) monthComboBox.getSelectedItem();
-        int numberMonth = monthHashMap.get(month);
-        return numberMonth;
-    }
-
-    private void loadMonths() {
-        monthHashMap.put("Enero", 1);
-        monthHashMap.put("Febrero", 2);
-        monthHashMap.put("Marzo", 3);
-        monthHashMap.put("Abril", 4);
-        monthHashMap.put("Mayo", 5);
-        monthHashMap.put("Junio", 6);
-        monthHashMap.put("Julio", 7);
-        monthHashMap.put("Agosto", 8);
-        monthHashMap.put("Septiembre", 9);
-        monthHashMap.put("Octubre", 10);
-        monthHashMap.put("Noviembre", 11);
-        monthHashMap.put("Diciembre", 12);
-
-        monthComboBox.addItem("Enero");
-        monthComboBox.addItem("Febrero");
-        monthComboBox.addItem("Marzo");
-        monthComboBox.addItem("Abril");
-        monthComboBox.addItem("Mayo");
-        monthComboBox.addItem("Junio");
-        monthComboBox.addItem("Julio");
-        monthComboBox.addItem("Agosto");
-        monthComboBox.addItem("Septiembre");
-        monthComboBox.addItem("Octubre");
-        monthComboBox.addItem("Noviembre");
-        monthComboBox.addItem("Diciembre");
+        getReportView().setVisible( true );
     }
 
     @Override
     protected void initializeView() {
-        configureWindow(reportView);
+        configureWindow( getReportView() );
         loadMonths();
         setEvents();
     }
 
     @Override
     protected void setEvents() {
-        reportView.getGenerateMonthReportButton().addActionListener(actionEvent -> generateMonthReport());
-        reportView.getGenerateMonthReportButton().addActionListener(actionEvent -> generateTodayReport());
-        reportView.getGenerateWeeklyReportButton().addActionListener(actionEvent -> generateWeeklyReport());
+        getReportView().getGenerateMonthReportButton().addActionListener( actionEvent -> generateMonthReport() );
+        getReportView().getGenerateMonthReportButton().addActionListener( actionEvent -> generateTodayReport() );
+        getReportView().getGenerateWeeklyReportButton().addActionListener( actionEvent -> generateWeeklyReport() );
+    }
+
+    private void generateMonthReport() {
+
+        int numberMonth = getMonthSelected();
+        ReportGenerator reportGenerator = ReportGenerator.GetInstance();
+        reportGenerator.generateMonthlyReport(numberMonth);
+
+        showSuccessMessage();
+    }
+
+    private void generateTodayReport() {
+        ReportGenerator reportGenerator = ReportGenerator.GetInstance();
+        reportGenerator.generateTodayReport();
+        showSuccessMessage();
+    }
+
+    private void generateWeeklyReport() {
+        ReportGenerator reportGenerator = ReportGenerator.GetInstance();
+        reportGenerator.generateWeeklyReport();
+        showSuccessMessage();
+    }
+
+    private void showSuccessMessage() {
+        String title = "Reporte creado";
+        String message = "Se ha creado el reporte con exito";
+        getNotifier().showSuccessMessage( title, message );
+    }
+
+    private int getMonthSelected() {
+        String month = (String) getMonthComboBox().getSelectedItem();
+        int numberMonth = getMonthHashMap().get( month );
+        return numberMonth;
+    }
+
+    private void loadMonths() {
+        getMonthHashMap().put( "Enero", 1 );
+        getMonthHashMap().put( "Febrero", 2 );
+        getMonthHashMap().put( "Marzo", 3 );
+        getMonthHashMap().put( "Abril", 4 );
+        getMonthHashMap().put( "Mayo", 5 );
+        getMonthHashMap().put( "Junio", 6 );
+        getMonthHashMap().put( "Julio", 7 );
+        getMonthHashMap().put( "Agosto", 8 );
+        getMonthHashMap().put( "Septiembre", 9 );
+        getMonthHashMap().put( "Octubre", 10 );
+        getMonthHashMap().put( "Noviembre", 11 );
+        getMonthHashMap().put( "Diciembre", 12 );
+
+        getMonthComboBox().addItem( "Enero" );
+        getMonthComboBox().addItem( "Febrero" );
+        getMonthComboBox().addItem( "Marzo" );
+        getMonthComboBox().addItem( "Abril" );
+        getMonthComboBox().addItem( "Mayo" );
+        getMonthComboBox().addItem( "Junio" );
+        getMonthComboBox().addItem( "Julio" );
+        getMonthComboBox().addItem( "Agosto" );
+        getMonthComboBox().addItem( "Septiembre" );
+        getMonthComboBox().addItem( "Octubre" );
+        getMonthComboBox().addItem( "Noviembre" );
+        getMonthComboBox().addItem( "Diciembre" );
+    }
+
+    private void setMonthComboBox(JComboBox monthComboBox) {
+        this.monthComboBox = monthComboBox;
+    }
+
+    private void setMonthHashMap(HashMap<String, Integer> monthHashMap) {
+        this.monthHashMap = monthHashMap;
+    }
+
+    private void setReportView(ReportView reportView) {
+        this.reportView = reportView;
+    }
+
+    private JComboBox getMonthComboBox() {
+        return monthComboBox;
+    }
+
+    private HashMap<String, Integer> getMonthHashMap() {
+        return monthHashMap;
+    }
+
+    private ReportView getReportView() {
+        return reportView;
     }
 }

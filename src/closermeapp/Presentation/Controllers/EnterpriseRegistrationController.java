@@ -2,9 +2,9 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Enterprise;
-import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.Enterprise.EnterpriseRegistrationView;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -12,32 +12,43 @@ import java.util.HashMap;
  */
 public class EnterpriseRegistrationController extends AbstractViewController {
     private EnterpriseRegistrationView enterpriseRegistrationView;
-    private EnterpriseManager enterpriseManager;
     private EnterpriseMenuController enterpriseMenuController;
-    private Notifier notifier;
 
     public EnterpriseRegistrationController(EnterpriseMenuController enterpriseMenuController) {
-        enterpriseRegistrationView = new EnterpriseRegistrationView();
-        enterpriseManager = EnterpriseManager.getEnterpriseManager();
-        this.enterpriseMenuController = enterpriseMenuController;
-        notifier = new Notifier();
+        setEnterpriseRegistrationView( new EnterpriseRegistrationView() );
+        setEnterpriseMenuController( enterpriseMenuController );
 
         initializeView();
     }
 
     @Override
     public void openWindow() {
-        enterpriseRegistrationView.setVisible(true);
+        getEnterpriseRegistrationView().setVisible( true );
+    }
+
+    @Override
+    protected void initializeView() {
+        configureWindow( getEnterpriseRegistrationView() );
+        setEvents();
+    }
+
+    @Override
+    protected void setEvents() {
+        getEnterpriseRegistrationView().getCancelButton().addActionListener( actionEvent -> closeWindow() );
+        getEnterpriseRegistrationView().getAddEnterpriseButton().addActionListener( actionEvent -> registerEnterprise() );
     }
 
     private void registerEnterprise() {
 
-        String name = enterpriseRegistrationView.getNameTextField().getText();
-        String address = enterpriseRegistrationView.getAddressTextField().getText();
-        String city = enterpriseRegistrationView.getCityTextField().getText();
-        String phone = enterpriseRegistrationView.getPhoneTextField().getText();
-        String email = enterpriseRegistrationView.getEmailTextField().getText();
-        String membershipType = (String) enterpriseRegistrationView.getMembershipTypeComboBox().getSelectedItem();
+        String name = getEnterpriseRegistrationView().getNameTextField().getText();
+        String address = getEnterpriseRegistrationView().getAddressTextField().getText();
+        String city = getEnterpriseRegistrationView().getCityTextField().getText();
+        String phone = getEnterpriseRegistrationView().getPhoneTextField().getText();
+        String email = getEnterpriseRegistrationView().getEmailTextField().getText();
+
+        JComboBox membershipTypeComboBox = getEnterpriseRegistrationView().getMembershipTypeComboBox();
+        String membershipType = (String) membershipTypeComboBox.getSelectedItem();
+
         boolean isValidField = !isEmptyFields(name, address, city, phone, email);
 
         String title;
@@ -49,16 +60,16 @@ public class EnterpriseRegistrationController extends AbstractViewController {
                 sendEnterpriseDataToManager(name, address, city, phone, email, membershipType);
                 title = "Agregado";
                 message = "Empresa registrada";
-                notifier.showSuccessMessage(title, message);
+                getNotifier().showSuccessMessage( title, message );
 
             } else {
                 message = "Ya existe esta empresa";
-                notifier.showWarningMessage(message);
+                getNotifier().showWarningMessage( message );
             }
 
         } else {
             message = "Por favor rellene todos los campos";
-            notifier.showWarningMessage(message);
+            getNotifier().showWarningMessage( message );
         }
     }
 
@@ -71,8 +82,11 @@ public class EnterpriseRegistrationController extends AbstractViewController {
             String email,
             String membershipType
     ) {
+        EnterpriseManager enterpriseManager = EnterpriseManager.GetInstance();
+
         Enterprise enterprise = enterpriseManager.createEnterprise(name, address, city, phone, email, membershipType);
         enterpriseManager.addEnterprise(enterprise);
+
         updateWindow(enterprise);
     }
 
@@ -88,39 +102,42 @@ public class EnterpriseRegistrationController extends AbstractViewController {
 
     private void resetFields() {
         String whiteSpace = "";
-        enterpriseRegistrationView.getNameTextField().setText(whiteSpace);
-        enterpriseRegistrationView.getAddressTextField().setText(whiteSpace);
-        enterpriseRegistrationView.getCityTextField().setText(whiteSpace);
-        enterpriseRegistrationView.getPhoneTextField().setText(whiteSpace);
-        enterpriseRegistrationView.getEmailTextField().setText(whiteSpace);
+        getEnterpriseRegistrationView().getNameTextField().setText( whiteSpace );
+        getEnterpriseRegistrationView().getAddressTextField().setText( whiteSpace );
+        getEnterpriseRegistrationView().getCityTextField().setText( whiteSpace );
+        getEnterpriseRegistrationView().getPhoneTextField().setText( whiteSpace );
+        getEnterpriseRegistrationView().getEmailTextField().setText( whiteSpace );
     }
 
     private boolean isValidEnterprise(String enterpriseName) {
-        HashMap enterpriseUnavailableList = enterpriseMenuController.getEnterpriseHashMap();
+        HashMap enterpriseUnavailableList = getEnterpriseMenuController().getEnterpriseHashMap();
         return !enterpriseUnavailableList.containsKey(enterpriseName);
     }
 
     private void updateWindow(Enterprise enterprise) {
-        enterpriseMenuController.addEnterpriseToListBox(enterprise);
-
+        getEnterpriseMenuController().addEnterpriseToListBox( enterprise );
         resetFields();
-
     }
 
     private void closeWindow() {
-        enterpriseRegistrationView.dispose();
-    }
-
-    @Override
-    protected void initializeView() {
-        configureWindow(enterpriseRegistrationView);
-        setEvents();
+        getEnterpriseRegistrationView().dispose();
     }
 
 
-    protected void setEvents() {
-        enterpriseRegistrationView.getCancelButton().addActionListener(actionEvent -> closeWindow());
-        enterpriseRegistrationView.getAddEnterpriseButton().addActionListener(actionEvent -> registerEnterprise());
+    private void setEnterpriseMenuController(EnterpriseMenuController enterpriseMenuController) {
+        this.enterpriseMenuController = enterpriseMenuController;
+    }
+
+    private void setEnterpriseRegistrationView(EnterpriseRegistrationView enterpriseRegistrationView) {
+        this.enterpriseRegistrationView = enterpriseRegistrationView;
+    }
+
+    private EnterpriseMenuController getEnterpriseMenuController() {
+        return enterpriseMenuController;
+    }
+
+    private EnterpriseRegistrationView getEnterpriseRegistrationView() {
+        return enterpriseRegistrationView;
     }
 
 

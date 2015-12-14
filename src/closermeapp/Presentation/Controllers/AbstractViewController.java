@@ -8,7 +8,7 @@ import javax.swing.*;
  * Created by Andr� on 24/11/2015.
  */
 public abstract class AbstractViewController {
-    protected Notifier notifier;
+    private Notifier notifier = new Notifier();
 
 
     public abstract void openWindow();
@@ -25,4 +25,11 @@ public abstract class AbstractViewController {
 
     protected abstract void setEvents();
 
+    protected Notifier getNotifier() {
+        return notifier;
+    }
+
+    protected void setNotifier(Notifier notifier) {
+        this.notifier = notifier;
+    }
 }

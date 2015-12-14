@@ -17,16 +17,13 @@ import java.util.List;
  * Created by André on 12/12/2015.
  */
 public class ExcelFileHandle {
-    private static ExcelFileHandle excelFileHandle = null;
+    private static final ExcelFileHandle excelFileHandle = new ExcelFileHandle();
 
 
     private ExcelFileHandle() {
     }
 
-    public static ExcelFileHandle getInstance() {
-        if (excelFileHandle == null) {
-            excelFileHandle = new ExcelFileHandle();
-        }
+    public static ExcelFileHandle GetInstance() {
         return excelFileHandle;
     }
 

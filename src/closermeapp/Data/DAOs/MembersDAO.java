@@ -8,16 +8,14 @@ import java.util.ArrayList;
  * Created by Andr� on 02/11/2015.
  */
 public class MembersDAO extends AbstractDAO<Member> {
-    private static MembersDAO membersDAO;
+    private static final MembersDAO membersDAO = new MembersDAO();
 
     private MembersDAO() {
 
     }
 
-    public static MembersDAO getMembersDAO() {
-        if (membersDAO == null) {
-            membersDAO = new MembersDAO();
-        }
+    public static MembersDAO GetInstance() {
+
         return membersDAO;
     }
 

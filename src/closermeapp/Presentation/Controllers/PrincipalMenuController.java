@@ -16,48 +16,88 @@ public class PrincipalMenuController extends AbstractViewController {
 
 
     public PrincipalMenuController() {
-        this.principalMenuView = new PrincipalMenuView();
-        this.membersMenuController = new MembersMenuController();
-        this.enterpriseMenuController = new EnterpriseMenuController();
-        this.callLogController = new CallLogController();
-        this.reportController = new ReportController();
+        setPrincipalMenuView( new PrincipalMenuView() );
+        setMembersMenuController( new MembersMenuController() );
+        setEnterpriseMenuController( new EnterpriseMenuController() );
+        setCallLogController( new CallLogController() );
+        setReportController( new ReportController() );
         initializeView();
     }
 
     private void openMembersMenu() {
-        membersMenuController.openWindow();
+        getMembersMenuController().openWindow();
     }
 
     private void openEnterpriseMenu() {
-        enterpriseMenuController.openWindow();
+        getEnterpriseMenuController().openWindow();
     }
 
     private void openCallLogMenu() {
-        callLogController.openWindow();
+        getCallLogController().openWindow();
     }
 
     private void openReportMenu() {
-        reportController.openWindow();
+        getReportController().openWindow();
     }
 
     @Override
     public void openWindow() {
-        principalMenuView.setVisible(true);
+        getPrincipalMenuView().setVisible( true );
     }
 
     @Override
     protected void initializeView() {
-        configureWindow(principalMenuView);
-        principalMenuView.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        configureWindow( getPrincipalMenuView() );
+        getPrincipalMenuView().setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         setEvents();
     }
 
     @Override
     protected void setEvents() {
-        principalMenuView.getMemberButton().addActionListener(actionEvent -> openMembersMenu());
-        principalMenuView.getEnterpriseButton().addActionListener(actionEvent -> openEnterpriseMenu());
-        principalMenuView.getCallLogButton().addActionListener(actionEvent -> openCallLogMenu());
-        principalMenuView.getReportButton().addActionListener(actionEvent -> openReportMenu());
+        getPrincipalMenuView().getMemberButton().addActionListener( actionEvent -> openMembersMenu() );
+        getPrincipalMenuView().getEnterpriseButton().addActionListener( actionEvent -> openEnterpriseMenu() );
+        getPrincipalMenuView().getCallLogButton().addActionListener( actionEvent -> openCallLogMenu() );
+        getPrincipalMenuView().getReportButton().addActionListener( actionEvent -> openReportMenu() );
 
+    }
+
+    public void setCallLogController(CallLogController callLogController) {
+        this.callLogController = callLogController;
+    }
+
+    public void setEnterpriseMenuController(EnterpriseMenuController enterpriseMenuController) {
+        this.enterpriseMenuController = enterpriseMenuController;
+    }
+
+    public void setMembersMenuController(MembersMenuController membersMenuController) {
+        this.membersMenuController = membersMenuController;
+    }
+
+    public void setPrincipalMenuView(PrincipalMenuView principalMenuView) {
+        this.principalMenuView = principalMenuView;
+    }
+
+    public void setReportController(ReportController reportController) {
+        this.reportController = reportController;
+    }
+
+    public CallLogController getCallLogController() {
+        return callLogController;
+    }
+
+    public EnterpriseMenuController getEnterpriseMenuController() {
+        return enterpriseMenuController;
+    }
+
+    public MembersMenuController getMembersMenuController() {
+        return membersMenuController;
+    }
+
+    public PrincipalMenuView getPrincipalMenuView() {
+        return principalMenuView;
+    }
+
+    public ReportController getReportController() {
+        return reportController;
     }
 }

@@ -11,22 +11,18 @@ import java.util.ArrayList;
  * Created by André on 30/11/2015.
  */
 public class CallLogManager {
-    private static CallLogManager callLogManager;
+    private static final CallLogManager callLogManager = new CallLogManager();
     private CallLogDAO callLogDAO;
 
-
     private CallLogManager() {
-        callLogDAO = CallLogDAO.getCallLogDAO();
+        callLogDAO = CallLogDAO.GetInstance();
     }
 
-    public static CallLogManager getCallLogManager() {
-        if (callLogManager == null) {
-            callLogManager = new CallLogManager();
-        }
+    public static CallLogManager GetInstance() {
         return callLogManager;
     }
 
-    public CallLog createCalloLog(String memberName, String numberPhone, String duration) {
+    public CallLog createCallLog(String memberName, String numberPhone, String duration) {
         CallLog callLog = new CallLog(memberName, numberPhone, duration);
         return callLog;
     }

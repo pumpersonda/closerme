@@ -5,7 +5,6 @@ import closermeapp.Bussiness.EnterpriseManager.EmployeeManager;
 import closermeapp.Bussiness.EnterpriseManager.EnterpriseManager;
 import closermeapp.Bussiness.Entities.Employee;
 import closermeapp.Bussiness.Entities.Enterprise;
-import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Util.TableModel;
 import closermeapp.Presentation.Views.Enterprise.EnterpriseMenuView;
 
@@ -22,37 +21,26 @@ import static java.lang.String.valueOf;
  */
 public class EnterpriseMenuController extends AbstractViewController {
     private EnterpriseMenuView enterpriseMenuView;
-    private EnterpriseManager enterpriseManager;
-    private EmployeeManager employeeManager;
     private EmployeeRegistrationController employeeRegistrationController;
     private EnterpriseRegistrationController enterpriseRegistrationController;
-    private ChargeController chargeController;
-    private Cashier cashier;
     private HashMap<String, Enterprise> enterpriseHashMap;
     private List<Employee> employeeList;
     private JComboBox enterpriseComboBox;
-    private Notifier notifier;
     private TableModel tableModel;
 
     public EnterpriseMenuController() {
-        this.enterpriseMenuView = new EnterpriseMenuView();
-        this.enterpriseManager = EnterpriseManager.getEnterpriseManager();
-        this.chargeController = new ChargeController();
-        this.cashier = Cashier.getInstance();
-        this.employeeManager = EmployeeManager.getEmployeeManager();
-        this.enterpriseHashMap = new HashMap<String, Enterprise>();
-        this.employeeRegistrationController = new EmployeeRegistrationController(this);
-        this.enterpriseRegistrationController = new EnterpriseRegistrationController(this);
-        this.enterpriseComboBox = enterpriseMenuView.getEnterpriseComboBox();
-        this.notifier = new Notifier();
-
+        setEnterpriseMenuView( new EnterpriseMenuView() );
+        setEnterpriseHashMap( new HashMap<String, Enterprise>() );
+        setEmployeeRegistrationController( new EmployeeRegistrationController( this ) );
+        setEnterpriseRegistrationController( new EnterpriseRegistrationController( this ) );
+        setEnterpriseComboBox( getEnterpriseMenuView().getEnterpriseComboBox() );
 
         initializeView();
     }
 
     @Override
     public void openWindow() {
-        enterpriseMenuView.setVisible(true);
+        getEnterpriseMenuView().setVisible( true );
     }
 
     public HashMap<String, Enterprise> getEnterpriseHashMap() {
@@ -69,11 +57,30 @@ public class EnterpriseMenuController extends AbstractViewController {
         loadEmployeesToTable();
     }
 
+    @Override
+    protected void initializeView() {
+        configureWindow( getEnterpriseMenuView() );
+        initializeTable();
+        loadAvailableEnterprises();
+        setEvents();
+        loadEmployeesToTable();
+    }
+
+    @Override
+    protected void setEvents() {
+        getEnterpriseMenuView().getRegisterEmployeeButton().addActionListener( actionEvent -> openEmployeeRegistrationWindow() );
+        getEnterpriseMenuView().getRegisterEnterpriseButton().addActionListener( actionEvent -> openEnterpriseRegistrationWindow() );
+        getEnterpriseMenuView().getEnterpriseComboBox().addActionListener( actionEvent -> loadEmployeesToTable() );
+        getEnterpriseMenuView().getDeleteEnterpriseButton().addActionListener( actionEvent -> deleteEnterprise() );
+        getEnterpriseMenuView().getDeleteEmployeeButton().addActionListener( actionEvent -> deleteEmployee() );
+        getEnterpriseMenuView().getChargeButton().addActionListener( actionEvent -> showChargeWindow() );
+    }
+
     private void initializeTable() {
         String[] headers = {"", "Name", "Phone", "Role"};
-        tableModel = new TableModel(headers);
-        JTable employeeTable = enterpriseMenuView.getEmployeeTable();
-        employeeTable.setModel(tableModel);
+        setTableModel( new TableModel( headers ) );
+        JTable employeeTable = getEnterpriseMenuView().getEmployeeTable();
+        employeeTable.setModel( getTableModel() );
         employeeTable.getTableHeader().setReorderingAllowed(false);
 
         TableColumnModel columnModel = employeeTable.getColumnModel();
@@ -91,6 +98,7 @@ public class EnterpriseMenuController extends AbstractViewController {
     }
 
     private ArrayList getEnterpriseList() {
+        EnterpriseManager enterpriseManager = EnterpriseManager.GetInstance();
         ArrayList<Enterprise> enterpriseList = enterpriseManager.getEnterpriseList();
         return enterpriseList;
     }
@@ -102,12 +110,12 @@ public class EnterpriseMenuController extends AbstractViewController {
 
 
     private void openEmployeeRegistrationWindow() {
-        employeeRegistrationController.setEnterprise(getEnterpriseSelected());
-        employeeRegistrationController.openWindow();
+        getEmployeeRegistrationController().setEnterprise( getEnterpriseSelected() );
+        getEmployeeRegistrationController().openWindow();
     }
 
     private void openEnterpriseRegistrationWindow() {
-        enterpriseRegistrationController.openWindow();
+        getEnterpriseRegistrationController().openWindow();
     }
 
 
@@ -122,9 +130,9 @@ public class EnterpriseMenuController extends AbstractViewController {
 
         if (!isEmptyList()) {
             loadListEmployee();
-            for (int listIndex = 0; listIndex < employeeList.size(); listIndex++) {
+            for (int listIndex = 0; listIndex < getEmployeeList().size(); listIndex++) {
 
-                Employee employee = employeeList.get(listIndex);
+                Employee employee = getEmployeeList().get( listIndex );
                 ArrayList memberDataList = createMemberListData(employee, listIndex);
                 addRow(memberDataList);
             }
@@ -145,15 +153,15 @@ public class EnterpriseMenuController extends AbstractViewController {
 
     private void loadListEmployee() {
         Enterprise enterprise = getEnterpriseSelected();
-        employeeList = enterprise.getEmployeeList();
+        setEmployeeList( enterprise.getEmployeeList() );
     }
 
     private void addRow(ArrayList list) {
-        tableModel.addRow(list);
+        getTableModel().addRow( list );
     }
 
     private void resetTable() {
-        tableModel.resetTable();
+        getTableModel().resetTable();
     }
 
     private boolean isEmptyList() {
@@ -162,23 +170,24 @@ public class EnterpriseMenuController extends AbstractViewController {
     }
 
     private void deleteEnterprise() {
-
         if (isDeletionConfirmed()) {
             Enterprise enterprise = getEnterpriseSelected();
 
             enterpriseHashMap.remove(enterprise.getName());
             enterpriseComboBox.removeItem(enterprise.getName());
+
+            EnterpriseManager enterpriseManager = EnterpriseManager.GetInstance();
             enterpriseManager.deleteEnterprise(enterprise);
 
             String title = "Empresa borrada";
             String message = "Se ha borrado con exito";
-            notifier.showSuccessMessage(title, message);
+            getNotifier().showSuccessMessage( title, message );
         }
 
     }
 
     private void deleteEmployee() {
-        JTable employeeTable = enterpriseMenuView.getEmployeeTable();
+        JTable employeeTable = getEnterpriseMenuView().getEmployeeTable();
         int numberRowSelected = employeeTable.getSelectedRow();
         boolean validRow = numberRowSelected >= 0;
 
@@ -188,46 +197,80 @@ public class EnterpriseMenuController extends AbstractViewController {
             int employeeListPosition = Integer.parseInt(tablePosition) - 1;
 
             Enterprise enterprise = getEnterpriseSelected();
+
+            EmployeeManager employeeManager = EmployeeManager.GetInstance();
             employeeManager.deleteEmployee(employeeListPosition, enterprise);
 
             loadEmployeesToTable();
 
             String title = "Empleado borrado";
             String message = "Se ha borrado con exito";
-            notifier.showSuccessMessage(title, message);
+            getNotifier().showSuccessMessage( title, message );
         }
     }
 
     private boolean isDeletionConfirmed() {
         String messageConfirm = "¿Estas seguro que deseas eliminarlo?";
-        int optionSelected = notifier.showConfirmDialog(messageConfirm);
-        return optionSelected == notifier.getYES_OPTION();
+        int optionSelected = getNotifier().showConfirmDialog( messageConfirm );
+        return optionSelected == getNotifier().getYES_OPTION();
     }
 
     private void showChargeWindow() {
+        Cashier cashier = Cashier.getInstance();
+
         Enterprise enterprise = getEnterpriseSelected();
         double totalCost = cashier.chargeTheEnterprise(enterprise);
+
+        ChargeController chargeController = new ChargeController();
         chargeController.setTotalChargeMessage(totalCost);
         chargeController.openWindow();
     }
 
-    @Override
-    protected void initializeView() {
-        configureWindow(enterpriseMenuView);
-        initializeTable();
-        loadAvailableEnterprises();
-        setEvents();
-        loadEmployeesToTable();
+    private void setEnterpriseComboBox(JComboBox enterpriseComboBox) {
+        this.enterpriseComboBox = enterpriseComboBox;
     }
 
-    @Override
-    protected void setEvents() {
-        enterpriseMenuView.getRegisterEmployeeButton().addActionListener(actionEvent -> openEmployeeRegistrationWindow());
-        enterpriseMenuView.getRegisterEnterpriseButton().addActionListener(actionEvent -> openEnterpriseRegistrationWindow());
-        enterpriseMenuView.getEnterpriseComboBox().addActionListener(actionEvent -> loadEmployeesToTable());
-        enterpriseMenuView.getDeleteEnterpriseButton().addActionListener(actionEvent -> deleteEnterprise());
-        enterpriseMenuView.getDeleteEmployeeButton().addActionListener(actionEvent -> deleteEmployee());
-        enterpriseMenuView.getChargeButton().addActionListener(actionEvent -> showChargeWindow());
+    private void setEnterpriseHashMap(HashMap<String, Enterprise> enterpriseHashMap) {
+        this.enterpriseHashMap = enterpriseHashMap;
     }
 
+    private EnterpriseMenuView getEnterpriseMenuView() {
+        return enterpriseMenuView;
+    }
+
+    private void setEnterpriseMenuView(EnterpriseMenuView enterpriseMenuView) {
+        this.enterpriseMenuView = enterpriseMenuView;
+    }
+
+    private EmployeeRegistrationController getEmployeeRegistrationController() {
+        return employeeRegistrationController;
+    }
+
+    private void setEmployeeRegistrationController(EmployeeRegistrationController employeeRegistrationController) {
+        this.employeeRegistrationController = employeeRegistrationController;
+    }
+
+    private EnterpriseRegistrationController getEnterpriseRegistrationController() {
+        return enterpriseRegistrationController;
+    }
+
+    private void setEnterpriseRegistrationController(EnterpriseRegistrationController enterpriseRegistrationController) {
+        this.enterpriseRegistrationController = enterpriseRegistrationController;
+    }
+
+    private List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    private void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    private TableModel getTableModel() {
+        return tableModel;
+    }
+
+    private void setTableModel(TableModel tableModel) {
+        this.tableModel = tableModel;
+    }
 }

@@ -11,19 +11,16 @@ import closermeapp.Data.DAOs.MembersDAO;
 import java.util.ArrayList;
 
 public class MembersManager {
+    private static final MembersManager membersManager = new MembersManager();
     private MembershipManager membershipManager;
     private MembersDAO membersDAO;
-    private static MembersManager membersManager;
 
     private MembersManager() {
-        this.membershipManager = MembershipManager.getMembershipManager();
-        this.membersDAO = MembersDAO.getMembersDAO();
+        this.membershipManager = MembershipManager.GetInstance();
+        this.membersDAO = MembersDAO.GetInstance();
     }
 
     public static MembersManager getMembersManager() {
-        if (membersManager == null) {
-            membersManager = new MembersManager();
-        }
         return membersManager;
     }
 

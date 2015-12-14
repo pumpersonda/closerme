@@ -11,21 +11,18 @@ import java.util.ArrayList;
  * Created by André on 05/12/2015.
  */
 public class EnterpriseManager {
-    private static EnterpriseManager enterpriseManager;
+    private static final EnterpriseManager enterpriseManager = new EnterpriseManager();
     private MembershipManager membershipManager;
-    private EmployeeManager employeeManager;
     private EnterpriseDAO enterpriseDAO;
 
 
     private EnterpriseManager() {
-        this.enterpriseDAO = EnterpriseDAO.getEnterpriseDAO();
-        this.membershipManager = MembershipManager.getMembershipManager();
+        this.enterpriseDAO = EnterpriseDAO.GetInstance();
+        this.membershipManager = MembershipManager.GetInstance();
     }
 
-    public static EnterpriseManager getEnterpriseManager() {
-        if (enterpriseManager == null) {
-            enterpriseManager = new EnterpriseManager();
-        }
+    public static EnterpriseManager GetInstance() {
+
         return enterpriseManager;
     }
 

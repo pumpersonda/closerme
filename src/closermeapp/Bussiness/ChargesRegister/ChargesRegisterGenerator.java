@@ -15,8 +15,8 @@ public class ChargesRegisterGenerator {
     private EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO;
 
     public ChargesRegisterGenerator() {
-        this.memberChargesRegisterDAO = MemberChargesRegisterDAO.getInstance();
-        this.enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.getInstance();
+        this.memberChargesRegisterDAO = MemberChargesRegisterDAO.GetInstance();
+        this.enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.GetInstance();
     }
 
     public void addMemberChargesRegister(Member member, double totalCost) {

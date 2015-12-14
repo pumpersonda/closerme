@@ -15,7 +15,7 @@ public class ChargeDAO extends AbstractDAO<Charge>{
 
     }
 
-    public static ChargeDAO getChargeDAO(){
+    public static ChargeDAO GetInstance() {
         if(chargeDAO== null){
             chargeDAO = new ChargeDAO();
         }
@@ -34,7 +34,7 @@ public class ChargeDAO extends AbstractDAO<Charge>{
 
     @Override
     public void update(Charge charge) {
-        updateEntity(charge);
+        updateEntity( charge );
     }
 
     @Override

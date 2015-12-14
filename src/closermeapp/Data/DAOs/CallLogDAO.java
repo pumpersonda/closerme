@@ -8,15 +8,12 @@ import java.util.ArrayList;
  * Created by André on 29/11/2015.
  */
 public class CallLogDAO extends AbstractDAO<CallLog> {
-    private static CallLogDAO callLogDAO;
+    private static final CallLogDAO callLogDAO = new CallLogDAO();
 
     private CallLogDAO() {
     }
 
-    public static CallLogDAO getCallLogDAO() {
-        if (callLogDAO == null) {
-            callLogDAO = new CallLogDAO();
-        }
+    public static CallLogDAO GetInstance() {
         return callLogDAO;
     }
 

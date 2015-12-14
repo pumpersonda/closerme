@@ -12,13 +12,17 @@ import java.util.List;
  * Created by André on 12/12/2015.
  */
 public class ReportGenerator {
-
+    private static final ReportGenerator reportGenerator = new ReportGenerator();
     private ExcelFileHandle excelFileHandle;
     private DateManager dateManager;
 
-    public ReportGenerator() {
+    private ReportGenerator() {
         this.dateManager = DateManager.getInstance();
-        this.excelFileHandle = ExcelFileHandle.getInstance();
+        this.excelFileHandle = ExcelFileHandle.GetInstance();
+    }
+
+    public static ReportGenerator GetInstance() {
+        return reportGenerator;
     }
 
     public void generateMonthlyReport(int month) {
@@ -74,7 +78,7 @@ public class ReportGenerator {
     private List<MemberChargesRegister> getMemberListOfMonth(String beginningOfMonth, String finishOfMonth) {
 
         List<MemberChargesRegister> registersOfTheMonth;
-        MemberChargesRegisterDAO memberChargesRegisterDAO = MemberChargesRegisterDAO.getInstance();
+        MemberChargesRegisterDAO memberChargesRegisterDAO = MemberChargesRegisterDAO.GetInstance();
         registersOfTheMonth = memberChargesRegisterDAO.getInSpecificDate(beginningOfMonth, finishOfMonth);
 
         return registersOfTheMonth;
@@ -83,7 +87,7 @@ public class ReportGenerator {
     private List<EnterpriseChargesRegister> getEnterpriseListOfMonth(String beginningOfMonth, String finishOfMonth) {
 
         List<EnterpriseChargesRegister> registersOfTheMonth;
-        EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.getInstance();
+        EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO = EnterpriseChargesRegisterDAO.GetInstance();
         registersOfTheMonth = enterpriseChargesRegisterDAO.getInSpecificDate(beginningOfMonth, finishOfMonth);
 
         return registersOfTheMonth;

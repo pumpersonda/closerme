@@ -2,7 +2,6 @@ package closermeapp.Presentation.Controllers;
 
 import closermeapp.Bussiness.Entities.CallLog;
 import closermeapp.Bussiness.LogManager.CallLogManager;
-import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Views.CallLog.CallLogDataView;
 
 /**
@@ -11,65 +10,72 @@ import closermeapp.Presentation.Views.CallLog.CallLogDataView;
 public class CallLogDataController extends AbstractViewController {
     private CallLogDataView callLogDataView;
     private CallLogController callLogController;
-    private CallLogManager callLogManager;
-    private Notifier notifier;
 
     public CallLogDataController(CallLogController callLogController) {
-        this.callLogDataView = new CallLogDataView();
-        this.callLogController = callLogController;
-        notifier = new Notifier();
+        this.setCallLogDataView( new CallLogDataView() );
+        this.setCallLogController( callLogController );
 
-        callLogManager = CallLogManager.getCallLogManager();
         initializeView();
-
     }
 
+    @Override
     public void openWindow() {
-        callLogDataView.setVisible(true);
+        getCallLogDataView().setVisible( true );
+    }
+
+    @Override
+    protected void initializeView() {
+        configureWindow( getCallLogDataView() );
+        setEvents();
+    }
+
+    @Override
+    protected void setEvents() {
+        getCallLogDataView().getRegisterButton().addActionListener( actionEvent -> registerCall() );
+        getCallLogDataView().getCancelButton().addActionListener( actionEvent -> closeWindow() );
     }
 
     private void registerCall() {
-        String memberName = callLogDataView.getMemberNameTextBox().getText();
-        String numberPhone = callLogDataView.getNumberTextField().getText();
+        String memberName = getCallLogDataView().getMemberNameTextBox().getText();
+        String numberPhone = getCallLogDataView().getNumberTextField().getText();
         String duration = getFormattedDuration();
 
-
         boolean isValidFields = !isEmptyFields(memberName, numberPhone, duration);
-
         String message;
-
         if (isValidFields) {
 
             if (isValidHour()) {
-                CallLog callLog = callLogManager.createCalloLog(memberName, numberPhone, duration);
+                CallLogManager callLogManager = CallLogManager.GetInstance();
+                CallLog callLog = callLogManager.createCallLog( memberName, numberPhone, duration );
+
                 callLogManager.addLog(callLog);
                 windowUpdate(callLog);
             } else {
                 message = "Introduzca una duración valida";
-                notifier.showFailMessage(message);
+                getNotifier().showFailMessage( message );
             }
 
         } else {
             message = "Rellene todos los campos";
-            notifier.showFailMessage(message);
+            getNotifier().showFailMessage( message );
         }
     }
 
     private String getFormattedDuration() {
-        String duration = callLogDataView.getHourField().getText() +
-                callLogDataView.getFirstSeparateLabel().getText() +
-                callLogDataView.getMinuteField().getText() +
-                callLogDataView.getSecondSeparateLabel().getText() +
-                callLogDataView.getSecondField().getText();
+        String duration = getCallLogDataView().getHourField().getText() +
+                getCallLogDataView().getFirstSeparateLabel().getText() +
+                getCallLogDataView().getMinuteField().getText() +
+                getCallLogDataView().getSecondSeparateLabel().getText() +
+                getCallLogDataView().getSecondField().getText();
         return duration;
     }
 
     private boolean isValidHour() {
         boolean validHour = false;
         try {
-            int hour = Integer.parseInt(callLogDataView.getHourField().getText());
-            int minute = Integer.parseInt(callLogDataView.getMinuteField().getText());
-            int second = Integer.parseInt(callLogDataView.getSecondField().getText());
+            int hour = Integer.parseInt( getCallLogDataView().getHourField().getText() );
+            int minute = Integer.parseInt( getCallLogDataView().getMinuteField().getText() );
+            int second = Integer.parseInt( getCallLogDataView().getSecondField().getText() );
 
             if (hour < 60 && minute < 60 && second < 60) {
                 validHour = true;
@@ -86,33 +92,38 @@ public class CallLogDataController extends AbstractViewController {
     }
 
     private void windowUpdate(CallLog callLog) {
-        callLogController.addMemberToTable(callLog);
+        getCallLogController().addMemberToTable( callLog );
         resetFields();
     }
 
     private void resetFields() {
         String whiteSpace = "";
-        callLogDataView.getMemberNameTextBox().setText(whiteSpace);
-        callLogDataView.getHourField().setText(whiteSpace);
-        callLogDataView.getMinuteField().setText(whiteSpace);
-        callLogDataView.getSecondField().setText(whiteSpace);
-        callLogDataView.getNumberTextField().setText(whiteSpace);
-
+        getCallLogDataView().getMemberNameTextBox().setText( whiteSpace );
+        getCallLogDataView().getHourField().setText( whiteSpace );
+        getCallLogDataView().getMinuteField().setText( whiteSpace );
+        getCallLogDataView().getSecondField().setText( whiteSpace );
+        getCallLogDataView().getNumberTextField().setText( whiteSpace );
     }
 
     private void closeWindow() {
-        callLogDataView.dispose();
+        getCallLogDataView().dispose();
     }
 
-    @Override
-    protected void initializeView() {
-        configureWindow(callLogDataView);
-        setEvents();
+    private void setCallLogDataView(CallLogDataView callLogDataView) {
+        this.callLogDataView = callLogDataView;
+    }
+
+    private void setCallLogController(CallLogController callLogController) {
+        this.callLogController = callLogController;
+    }
+
+    private CallLogDataView getCallLogDataView() {
+        return callLogDataView;
+    }
+
+    private CallLogController getCallLogController() {
+        return callLogController;
     }
 
 
-    protected void setEvents() {
-        callLogDataView.getRegisterButton().addActionListener(actionEvent -> registerCall());
-        callLogDataView.getCancelButton().addActionListener(actionEvent -> closeWindow());
-    }
 }

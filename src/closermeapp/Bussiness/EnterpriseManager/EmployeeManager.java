@@ -7,17 +7,14 @@ import closermeapp.Bussiness.Entities.Enterprise;
  * Created by André on 05/12/2015.
  */
 public class EmployeeManager {
-    private static EmployeeManager employeeManager;
+    private static final EmployeeManager employeeManager = new EmployeeManager();
     private EnterpriseManager enterpriseManager;
 
     private EmployeeManager() {
-        enterpriseManager = EnterpriseManager.getEnterpriseManager();
+        enterpriseManager = EnterpriseManager.GetInstance();
     }
 
-    public static EmployeeManager getEmployeeManager() {
-        if (employeeManager == null) {
-            employeeManager = new EmployeeManager();
-        }
+    public static EmployeeManager GetInstance() {
         return employeeManager;
     }
 

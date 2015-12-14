@@ -14,19 +14,16 @@ import java.time.format.DateTimeFormatter;
  * Created by André on 28/11/2015.
  */
 public class MembershipManager {
-    private static MembershipManager membershipManager;
+    private static final MembershipManager membershipManager = new MembershipManager();
     private MembershipDAO membershipDAO;
     private Member member;
     private Enterprise enterprise;
 
     private MembershipManager() {
-        membershipDAO = MembershipDAO.getMembershipDAO();
+        membershipDAO = MembershipDAO.GetInstance();
     }
 
-    public static MembershipManager getMembershipManager() {
-        if (membershipManager == null) {
-            membershipManager = new MembershipManager();
-        }
+    public static MembershipManager GetInstance() {
         return membershipManager;
     }
 

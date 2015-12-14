@@ -8,7 +8,7 @@ import closermeapp.Bussiness.Entities.Member;
  * Created by André on 12/12/2015.
  */
 public class Cashier {
-    private static Cashier cashier;
+    private static final Cashier cashier = new Cashier();
     private ChargesRegisterGenerator chargesRegisterGenerator;
 
 
@@ -17,9 +17,6 @@ public class Cashier {
     }
 
     public static Cashier getInstance() {
-        if (cashier == null) {
-            cashier = new Cashier();
-        }
         return cashier;
     }
 

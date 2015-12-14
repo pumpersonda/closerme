@@ -9,16 +9,14 @@ import java.util.ArrayList;
  * Created by André on 05/12/2015.
  */
 public class EnterpriseDAO extends AbstractDAO<Enterprise> {
-    private static EnterpriseDAO enterpriseDAO;
+    private static final EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
 
     private EnterpriseDAO() {
 
     }
 
-    public static EnterpriseDAO getEnterpriseDAO() {
-        if (enterpriseDAO == null) {
-            enterpriseDAO = new EnterpriseDAO();
-        }
+    public static EnterpriseDAO GetInstance() {
+
         return enterpriseDAO;
     }
 

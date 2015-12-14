@@ -11,19 +11,19 @@ public class ChargeController extends AbstractViewController {
     private ChargeView chargeView;
 
     public ChargeController() {
-        this.chargeView = new ChargeView();
+        this.setChargeView( new ChargeView() );
         initializeView();
     }
 
 
     public void openWindow() {
-        chargeView.setVisible(true);
+        getChargeView().setVisible( true );
     }
 
 
     public void setTotalChargeMessage(double totalCharge) {
         String totalChargeText = getTotalChargeText(totalCharge);
-        chargeView.getTotalTextField().setText(totalChargeText);
+        getChargeView().getTotalTextField().setText( totalChargeText );
     }
 
     private String getTotalChargeText(double totalCharge) {
@@ -32,17 +32,30 @@ public class ChargeController extends AbstractViewController {
     }
 
     private void charge() {
-        chargeView.dispose();
+        String title = "Cobrado";
+        String message = "Miembro cobrado";
+        getNotifier().showSuccessMessage( title, message );
+        getChargeView().dispose();
     }
 
     @Override
     protected void initializeView() {
-        configureWindow(chargeView);
+        configureWindow( getChargeView() );
         setEvents();
     }
 
     @Override
     protected void setEvents() {
-        chargeView.getChargeButton().addActionListener(actionEvent -> charge());
+        getChargeView().getChargeButton().addActionListener( actionEvent -> charge() );
     }
+
+    private void setChargeView(ChargeView chargeView) {
+        this.chargeView = chargeView;
+    }
+
+    private ChargeView getChargeView() {
+        return chargeView;
+    }
+
+
 }

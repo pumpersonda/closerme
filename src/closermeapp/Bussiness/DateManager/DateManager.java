@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Created by André on 12/12/2015.
  */
 public class DateManager {
-    private static DateManager dateManager;
+    private static final DateManager dateManager = new DateManager();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
@@ -16,9 +16,6 @@ public class DateManager {
     }
 
     public static DateManager getInstance() {
-        if (dateManager == null) {
-            dateManager = new DateManager();
-        }
         return dateManager;
     }
 

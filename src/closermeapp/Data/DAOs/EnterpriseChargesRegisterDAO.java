@@ -11,16 +11,13 @@ import java.util.List;
  * Created by André on 12/12/2015.
  */
 public class EnterpriseChargesRegisterDAO extends AbstractDAO<EnterpriseChargesRegister> {
-    private static EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO;
+    private static final EnterpriseChargesRegisterDAO enterpriseChargesRegisterDAO = new EnterpriseChargesRegisterDAO();
 
     private EnterpriseChargesRegisterDAO() {
 
     }
 
-    public static EnterpriseChargesRegisterDAO getInstance() {
-        if (enterpriseChargesRegisterDAO == null) {
-            enterpriseChargesRegisterDAO = new EnterpriseChargesRegisterDAO();
-        }
+    public static EnterpriseChargesRegisterDAO GetInstance() {
         return enterpriseChargesRegisterDAO;
     }
 
