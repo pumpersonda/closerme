@@ -49,20 +49,12 @@ public class Cashier {
         String start = event.getStartDate();
         String end = event.getEndDate();
 
-        String[] splitedStart = start.split(",");
-        LocalDate startDate = DateFormater.getParsedDate(splitedStart[0]);
-        LocalTime startTime = DateFormater.getParsedTime(splitedStart[1]);
-        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
-
-        String[] splitedEnd = end.split(",");
-        LocalDate endDate = DateFormater.getParsedDate(splitedEnd[0]);
-        LocalTime endTime = DateFormater.getParsedTime(splitedEnd[1]);
-        LocalDateTime endDateTime = LocalDateTime.of(endDate,endTime);
+        LocalDateTime startDateTime = DateFormater.getParsedDateTime(start);
+        LocalDateTime endDateTime = DateFormater.getParsedDateTime(end);
 
         long hours = ChronoUnit.HOURS.between(startDateTime, endDateTime);
 
         double totalCost = (float)hours * EventManager.getEventManager().COST_PER_HOUR;
-
         totalCost = Math.abs(totalCost);
 
         getChargesRegisterGenerator().addEventChargeRegister(event,totalCost);

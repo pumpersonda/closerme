@@ -8,21 +8,21 @@ import closermeapp.Bussiness.Util.DateFormater;
  */
 public class EventChargeRegister {
 
-    int eventRegisterId;
-    String eventName;
-    String eventStartDate;
-    String clientName;
-    String clientPhone;
-    double totalCost;
+    private int eventRegisterId;
+    private String eventName;
+    private String eventStartDate;
+    private String clientName;
+    private String clientPhone;
+    private double totalCost;
 
 
     public  EventChargeRegister(Event event, double totalCost){
-        eventRegisterId = event.getEventID();
-        eventName = event.getName();
-        eventStartDate = event.getStartDate();
-        clientName = event.getClientName();
-        clientPhone = event.getClientPhone();
-        this.totalCost = totalCost;
+        setEventRegisterId(event.getEventID());
+        setEventName(event.getName());
+        setEventStartDate(DateFormater.formatDateYYYYMMDD(event.getStartDate()));
+        setClientName(event.getClientName());
+        setClientPhone(event.getClientPhone());
+        this.setTotalCost(totalCost);
     }
 
     public EventChargeRegister() {
@@ -76,18 +76,14 @@ public class EventChargeRegister {
         this.clientPhone = clientPhone;
     }
 
-    public String getFormatedDate(){
-        return DateFormater.formatDateYYYYMMDD(eventStartDate);
-    }
-
     @Override
     public String toString() {
         return "EventChargeRegister{" +
-                "eventRegisterId=" + eventRegisterId +
-                ", eventName='" + eventName + '\'' +
-                ", eventStartDate='" + eventStartDate + '\'' +
-                ", clientName='" + clientName + '\'' +
-                ", clientPhone='" + clientPhone + '\'' +
+                "eventRegisterId=" + getEventRegisterId() +
+                ", eventName='" + getEventName() + '\'' +
+                ", eventStartDate='" + getEventStartDate() + '\'' +
+                ", clientName='" + getClientName() + '\'' +
+                ", clientPhone='" + getClientPhone() + '\'' +
                 '}';
     }
 }

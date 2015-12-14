@@ -9,6 +9,8 @@ public class eventManagerTest {
 
     public static void main(String[] args) {
         EventMenuController eventViewerController = new EventMenuController();
+        eventViewerController.openWindow();
+
     }
 
 }

@@ -1,6 +1,7 @@
 package closermeapp.Bussiness.Util;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -36,13 +37,22 @@ public class DateFormater {
         return parsedTime;
     }
 
-    public static String formatDateYYYYMMDD(String date){
+    public static String formatDateYYYYMMDD(String dateTime){
+        String date = dateTime.split(",")[0];
         String[] values = date.split("/");
         String day = values[0];
         String month = values[1];
         String year = "20" + values[2];
 
         return year+"-"+month+"-"+day;
+    }
+
+    public static LocalDateTime getParsedDateTime(String date){
+        String[] splitedDate = date.split(",");
+        LocalDate localDate = DateFormater.getParsedDate(splitedDate[0]);
+        LocalTime localTime = DateFormater.getParsedTime(splitedDate[1]);
+        LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+        return localDateTime;
     }
 
 }

@@ -43,7 +43,6 @@ public class EventMenuController extends  AbstractViewController {
     public void initializeView(){
         configureWindow();
         setEvents();
-        openWindow();
     }
 
     public void configureWindow(){
@@ -69,11 +68,11 @@ public class EventMenuController extends  AbstractViewController {
     }
 
     private void prepareEditionWindow(){
-        Event seletedEvent = getSelectedEvent();
-        if(seletedEvent == null){
+        Event selectedEvent = getSelectedEvent();
+        if(selectedEvent == null){
             getNotifier().showWarningMessage("No se ha seleccionado ningun evento");
         }else {
-            openEventEditionWindow(seletedEvent);
+            openEventEditionWindow(selectedEvent);
         }
     }
 
@@ -159,15 +158,9 @@ public class EventMenuController extends  AbstractViewController {
             notifier.showWarningMessage("No se ha sekeccionado ningun evento");
         }
         else{
-
-
             if(confirmIfEventSucceded()){
-                double totalCost = Cashier.getInstance().chargeThEvent(event);
-                getChargeController().setTotalChargeMessage(totalCost);
-                getChargeController().openWindow();
-
+                chargeForEvent(event);
                 removeEvent(event);
-
             }
             else {
                 if(confirmEventDeletion()) {
@@ -175,6 +168,12 @@ public class EventMenuController extends  AbstractViewController {
                 }
             }
         }
+    }
+
+    private void chargeForEvent(Event event) {
+        double totalCost = Cashier.getInstance().chargeThEvent(event);
+        getChargeController().setTotalChargeMessage(totalCost);
+        getChargeController().openWindow();
     }
 
     private void removeEvent(Event event) {
