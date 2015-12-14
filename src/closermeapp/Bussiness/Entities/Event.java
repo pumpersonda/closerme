@@ -24,8 +24,8 @@ public class Event {
             String name, 
             String startDate, 
             String endDate, 
-            String visitorName, 
-            String visitorPhone
+            String clientName,
+            String clientPhone
     ) {
         this.name = name;
         this.startDate = startDate;

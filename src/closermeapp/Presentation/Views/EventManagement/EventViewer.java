@@ -32,8 +32,8 @@ public class EventViewer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
+        scrollPanel = new javax.swing.JScrollPane();
         eventsCalendarTable = new javax.swing.JTable();
         addEventButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class EventViewer extends javax.swing.JFrame {
                         "Nombre", "Fecha de Inicio", "Fecha de Terminacion", "Organizador"
                 }
         ));
-        jScrollPane1.setViewportView(eventsCalendarTable);
+        scrollPanel.setViewportView(eventsCalendarTable);
 
         addEventButton.setText("Agregar Evento");
 
@@ -60,14 +60,14 @@ public class EventViewer extends javax.swing.JFrame {
 
         deleteButton.setText("Eliminar Evento");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                                        .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -81,7 +81,7 @@ public class EventViewer extends javax.swing.JFrame {
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(addEventButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
@@ -95,14 +95,14 @@ public class EventViewer extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
         );
 
@@ -133,28 +133,28 @@ public class EventViewer extends javax.swing.JFrame {
         this.eventsCalendarTable = eventsCalendarTable;
     }
 
-    public JButton getjButton2() {
+    public JButton getDeleteButton() {
         return deleteButton;
     }
 
-    public void setjButton2(JButton jButton2) {
-        this.deleteButton = jButton2;
+    public void setDeleteButton(JButton deleteButton) {
+        this.deleteButton = deleteButton;
     }
 
-    public JPanel getjPanel1() {
-        return jPanel1;
+    public JPanel getPanel() {
+        return panel;
     }
 
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
     }
 
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
+    public JScrollPane getScrollPanel() {
+        return scrollPanel;
     }
 
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
+    public void setScrollPanel(JScrollPane scrollPanel) {
+        this.scrollPanel = scrollPanel;
     }
 
     /**
@@ -197,8 +197,8 @@ public class EventViewer extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTable eventsCalendarTable;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panel;
+    private javax.swing.JScrollPane scrollPanel;
     // End of variables declaration
 }
 

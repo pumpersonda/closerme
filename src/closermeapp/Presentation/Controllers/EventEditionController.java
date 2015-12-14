@@ -10,31 +10,33 @@ import java.awt.event.ActionEvent;
 /**
  * Created by JoseJulio on 07/12/2015.
  */
-public class EventEditionController {
+public class EventEditionController extends  AbstractViewController {
 
     EventEditionView eventEditionView;
     Event eventToEdit;
+    EventViewerViewController eventViewerViewController;
 
-    public EventEditionController(Event eventToEdit){
+    public EventEditionController(EventViewerViewController eventViewerViewController ,Event eventToEdit){
+
+        this.eventToEdit = eventToEdit;
+        this.eventViewerViewController = eventViewerViewController;
 
         eventEditionView = new EventEditionView();
         initializeView();
-
-        this.eventToEdit = eventToEdit;
-
     }
 
     public void initializeView(){
         configureWindow();
         setEvents();
+        setFieldsValue();
         openWindow();
     }
 
-    private void openWindow() {
+    public void openWindow() {
         eventEditionView.setVisible(true);
     }
 
-    private void setEvents() {
+    protected void setEvents() {
        eventEditionView.getConfirmButton().addActionListener(ActionEvent -> editEvent());
        eventEditionView.getCancelButton().addActionListener(ActionEvent -> closeWindow());
     }
@@ -54,16 +56,30 @@ public class EventEditionController {
         String newEndTime = eventEditionView.getEventEndTimeTextBox().getText();
 
         eventToEdit.setName(newName);
-        eventToEdit.setStartDate(newStartDate + newStartTime);
-        eventToEdit.setEndDate(newEndDate + newEndTime);
+        eventToEdit.setStartDate(newStartDate + "," + newStartTime);
+        eventToEdit.setEndDate(newEndDate + "," + newEndTime);
 
         EventManager.getEventManager().updateEvent(eventToEdit);
+
+        eventViewerViewController.updateView();
 
         closeWindow();
     }
 
     private void closeWindow(){
         eventEditionView.setVisible(false);
+    }
+
+    private void setFieldsValue(){
+
+        String[] startTimeValues = eventToEdit.getStartDate().split(",");
+        String[] endTimeValues = eventToEdit.getEndDate().split(",");
+
+        eventEditionView.getEventNameTextBox().setText(eventToEdit.getName());
+        eventEditionView.getEventStartDateTextBox().setText(startTimeValues[0]);
+        eventEditionView.getEventStartTimeTextBox().setText(startTimeValues[1]);
+        eventEditionView.getEventEndDateTextBox().setText(endTimeValues[0]);
+        eventEditionView.getEventEndTimeTextBox().setText(endTimeValues[1]);
     }
 
 }
