@@ -69,8 +69,6 @@ public class ReportGenerator {
         enterpriseListOfMonth = getEnterpriseListOfMonth(yesterday, today);
 
         double totalGain = getTotalGain(memberListOfMonth, enterpriseListOfMonth);
-
-
         excelFileHandle.saveActivityLog(memberListOfMonth, enterpriseListOfMonth, totalGain, today);
     }
 
