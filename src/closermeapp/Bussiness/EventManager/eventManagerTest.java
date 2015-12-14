@@ -8,7 +8,9 @@ import closermeapp.Presentation.Controllers.EventViewerViewController;
 public class eventManagerTest {
 
     public static void main(String[] args) {
+
         EventViewerViewController eventViewerController = new EventViewerViewController();
+
     }
 
 }

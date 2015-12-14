@@ -29,9 +29,11 @@ public class main {
         principalMenuController.openWindow();
     }
 
-    public static void createEvent() {
+    public static void createEventViewer(){
         EventViewerViewController eventViewerViewController = new EventViewerViewController();
         eventViewerViewController.openWindow();
     }
+
+
 }
 

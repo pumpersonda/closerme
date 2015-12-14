@@ -19,20 +19,23 @@ import javax.swing.*;
 public class EventRegistrationViewController extends AbstractViewController {
     private EventRegistrationView eventRegistrationView;
     private EventViewerViewController eventViewerController;
+    private final Notifier notifier;
 
     public EventRegistrationViewController(EventViewerViewController eventViewerController) {
         initializeView();
         this.eventViewerController = eventViewerController;
+        notifier = new Notifier();
     }
 
-    public void registerEvent(Event newEvent) {
+    public void registerEvent(Event newEvent){
         EventManager.getEventManager().reserveEvent(newEvent);
     }
 
-    protected void initializeView() {
+    protected void initializeView(){
         configureWindow();
         setEvents();
     }
+
 
     private void configureWindow() {
         this.eventRegistrationView = new EventRegistrationView();
@@ -62,14 +65,20 @@ public class EventRegistrationViewController extends AbstractViewController {
 
         boolean isValid = isValid(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
         if(isValid) {
-            Event newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
+            Event newEvent;
+            newEvent = EventManager.getEventManager().createEvent(eventName, eventStartDate, eventStartTime, eventEndDate, eventEndTime, clientName, clientPhone);
             registerEvent(newEvent);
+            eventViewerController.updateView();
+            notifier.showSuccessMessage("Evento Creado","El evento se ha creado exitosamente");
             closeWindow();
         }
         else{
-            Notifier notifier = new Notifier();
-            notifier.showFailMessage("Los campos ingresados no son validos");
+
+            notifier.showWarningMessage("Porfavor llene todos los campos");
+
         }
+
+
     }
 
     private boolean isValid(String eventName, String eventStartDate, String eventStartTime, String eventEndDate, String eventEndTime, String clientName, String clientPhone) {
