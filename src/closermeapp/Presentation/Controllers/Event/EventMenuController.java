@@ -1,8 +1,9 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.Event;
 
 import closermeapp.Bussiness.Cashier.Cashier;
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Controllers.Charge.ChargeController;
 import closermeapp.Presentation.Util.Notifier;
 import closermeapp.Presentation.Util.TableModel;
@@ -18,7 +19,7 @@ import static java.lang.String.valueOf;
 /**
  * Created by JoseJulio on 30/11/2015.
  */
-public class EventMenuController extends  AbstractViewController {
+public class EventMenuController extends AbstractViewController {
 
     private EventViewer eventViewer;
     private EventRegistrationViewController eventRegistrationController;

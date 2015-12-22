@@ -133,7 +133,6 @@ public class ExcelFileHandle {
             List<MemberChargesRegister> memberList
     ) throws WriteException {
 
-        if (isValidList( memberList )) {
             int column = 0;
             int row = 11;
 
@@ -142,15 +141,13 @@ public class ExcelFileHandle {
                 sheet.addCell( label );
                 row++;
             }
-        }
+
     }
 
     private void saveEnterpriseList(
             WritableSheet sheet,
             List<EnterpriseChargesRegister> enterpriseList
     ) throws WriteException {
-
-        if (isValidList( enterpriseList )) {
 
             int column = 12;
             int row = 11;
@@ -160,7 +157,7 @@ public class ExcelFileHandle {
                 sheet.addCell( label );
                 row++;
             }
-        }
+
     }
 
     private void saveEventList(
@@ -168,21 +165,16 @@ public class ExcelFileHandle {
             List<EventChargeRegister> eventList
     ) throws WriteException {
 
-        if (isValidList( eventList )) {
 
-            int column = 25;
-            int row = 11;
+        int column = 25;
+        int row = 11;
 
-            for (int index = 0; index < eventList.size(); index++) {
-                Label label = new Label( column, row, eventList.get( index ).toString() );
-                sheet.addCell( label );
-                row++;
-            }
+        for (int index = 0; index < eventList.size(); index++) {
+            Label label = new Label( column, row, eventList.get( index ).toString() );
+            sheet.addCell( label );
+            row++;
         }
-    }
 
-    private boolean isValidList(List list) {
-        return list.size() > 0;
     }
 
 

@@ -4,12 +4,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.Event;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Views.EventManagement.EventRegistrationView;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
 
 /**
  *

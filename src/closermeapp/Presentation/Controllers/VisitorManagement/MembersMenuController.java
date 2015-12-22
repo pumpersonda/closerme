@@ -58,7 +58,7 @@ public class MembersMenuController extends AbstractViewController {
     }
 
     private void updateMemberList() {
-        MembersManager membersManager = MembersManager.getMembersManager();
+        MembersManager membersManager = MembersManager.GetInstance();
         setMemberList( membersManager.getMemberList() );
     }
 
@@ -158,7 +158,7 @@ public class MembersMenuController extends AbstractViewController {
             int memberListPosition = Integer.parseInt(tablePosition) - 1;
 
             Member member = getMemberList().get( memberListPosition );
-            MembersManager membersManager = MembersManager.getMembersManager();
+            MembersManager membersManager = MembersManager.GetInstance();
             membersManager.deleteMember(member);
             getMemberList().remove( memberListPosition );
 

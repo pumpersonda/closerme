@@ -75,7 +75,7 @@ public class MemberRegistrationController extends AbstractViewController {
             String membershipType,
             double discount
     ) {
-        MembersManager membersManager = MembersManager.getMembersManager();
+        MembersManager membersManager = MembersManager.GetInstance();
         Member member = membersManager.createMember( name, phone, address, cellphone, membershipType );
         membersManager.addMember(member);
 

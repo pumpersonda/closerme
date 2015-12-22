@@ -1,7 +1,8 @@
-package closermeapp.Presentation.Controllers;
+package closermeapp.Presentation.Controllers.Event;
 
 import closermeapp.Bussiness.Entities.Event;
 import closermeapp.Bussiness.EventManager.EventManager;
+import closermeapp.Presentation.Controllers.AbstractViewController;
 import closermeapp.Presentation.Views.EventManagement.EventEditionView;
 
 import javax.swing.*;
@@ -9,8 +10,7 @@ import javax.swing.*;
 /**
  * Created by JoseJulio on 07/12/2015.
  */
-public class EventEditionController extends  AbstractViewController {
-
+public class EventEditionController extends AbstractViewController {
     EventEditionView eventEditionView;
     Event eventToEdit;
     EventMenuController eventMenuController;

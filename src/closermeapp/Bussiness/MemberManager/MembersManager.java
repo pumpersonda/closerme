@@ -20,7 +20,7 @@ public class MembersManager {
         this.membersDAO = MembersDAO.GetInstance();
     }
 
-    public static MembersManager getMembersManager() {
+    public static MembersManager GetInstance() {
         return membersManager;
     }
 
